@@ -1,65 +1,102 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Simulation CSS – 1re NSI PAZAPA</title>
+  <meta charset="UTF-8" />
+  <title>Simulation CSS – 1re NSI PAZAPA</title>
 
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #1e1e1e;
-    color: #ddd;
-  }
+  <style>
+    /* ===== BASE ===== */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0A1F44;
+      color: #fff;
+    }
 
-  header {
-    background: #111;
-    padding: 14px;
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-  }
+    header {
+      background: #06162f;
+      padding: 16px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
 
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    height: calc(100vh - 60px);
-  }
+    /* ===== LAYOUT ===== */
+    .main {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      height: calc(100vh - 64px);
+    }
 
-  .panel {
-    display: flex;
-    flex-direction: column;
-    border-right: 1px solid #333;
-  }
+    .panel {
+      padding: 12px;
+      overflow: auto;
+    }
 
-  .panel:last-child {
-    border-right: none;
-  }
+    .panel h3 {
+      margin-top: 0;
+      font-size: 16px;
+      color: #9fd3ff;
+      border-bottom: 1px solid #2e4d7a;
+      padding-bottom: 6px;
+    }
 
-  .panel-title {
-    background: #252526;
-    padding: 8px 12px;
-    font-weight: bold;
-    font-size: 14px;
-  }
+    /* ===== PANELS ===== */
+    .html-panel {
+      background: #111;
+    }
 
-  textarea {
-    flex: 1;
-    background: #1e1e1e;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    font-family: monospace;
-    font-size: 14px;
-    resize: none;
-  }
+    .css-panel {
+      background: #181818;
+    }
 
-  iframe {
-    flex: 1;
-    border: none;
-    background: white;
-  }
-</style>
+    .result-panel {
+      background: #ffffff;
+      color: #000;
+      padding: 16px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 90%;
+      background: #0f0f0f;
+      color: #eaeaea;
+      border: none;
+      resize: none;
+      font-family: monospace;
+      font-size: 14px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    /* ===== RESULT STYLE ===== */
+    .result-info {
+      background: #e9f3ff;
+      border-left: 5px solid #2a7fff;
+      padding: 10px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    iframe {
+      width: 100%;
+      height: calc(100% - 80px);
+      border: 1px solid #ccc;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .main {
+        grid-template-columns: 1fr;
+      }
+      textarea {
+        height: 200px;
+      }
+      iframe {
+        height: 300px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -68,12 +105,12 @@
   🧩 Simulation CSS – 1re NSI PAZAPA
 </header>
 
-<div class="grid">
+<div class="main">
 
   <!-- HTML -->
-  <div class="panel">
-    <div class="panel-title">HTML</div>
-    <textarea id="htmlCode">
+  <div class="panel html-panel">
+    <h3>HTML</h3>
+<textarea id="htmlCode">
 <p>This viewport size is currently:
   <span id="viewport-size"></span>
   <span id="breakpointName"></span>
@@ -98,33 +135,38 @@
     <div class="col">Nine</div>
   </div>
 </div>
-    </textarea>
+</textarea>
   </div>
 
   <!-- CSS -->
-  <div class="panel">
-    <div class="panel-title">CSS</div>
-    <textarea id="cssCode">
+  <div class="panel css-panel">
+    <h3>CSS</h3>
+<textarea id="cssCode">
 .row div {
-  border: solid lightgreen;
+  border: 2px solid lightgreen;
+  padding: 6px;
 }
 
 #viewport-size {
   background: lightgreen;
-  padding: 5px;
+  padding: 4px;
 }
 
 body {
   margin: 10px;
   font-family: Arial, sans-serif;
 }
-    </textarea>
+</textarea>
   </div>
 
   <!-- RESULT -->
-  <div class="panel">
-    <div class="panel-title">Résultat</div>
-    <iframe id="preview"></iframe>
+  <div class="panel result-panel">
+    <div class="result-info">
+      👋 <strong>Chers élèves de 1re NSI – PAZAPA</strong><br>
+      Modifiez le HTML ou le CSS à gauche et observez le résultat ici.
+    </div>
+
+    <iframe id="result"></iframe>
   </div>
 
 </div>
@@ -132,9 +174,9 @@ body {
 <script>
   const htmlArea = document.getElementById("htmlCode");
   const cssArea = document.getElementById("cssCode");
-  const iframe = document.getElementById("preview");
+  const iframe = document.getElementById("result");
 
-  function updatePreview() {
+  function update() {
     const html = htmlArea.value;
     const css = cssArea.value;
 
@@ -142,37 +184,40 @@ body {
 <!DOCTYPE html>
 <html>
 <head>
-<style>${css}</style>
+<meta charset="UTF-8">
+<style>
+${css}
+</style>
 </head>
 <body>
-
 ${html}
 
 <script>
-  const viewportSizeSpan = document.getElementById("viewport-size");
-  const breakpointNameSpan = document.getElementById("breakpointName");
+const viewportSizeSpan = document.getElementById("viewport-size");
+const breakpointNameSpan = document.getElementById("breakpointName");
 
-  function updateViewport() {
-    viewportSizeSpan.textContent = window.innerWidth;
-    let bp = "(XS)";
-    if (window.innerWidth >= 1200) bp = "(XL)";
-    else if (window.innerWidth >= 992) bp = "(LG)";
-    else if (window.innerWidth >= 768) bp = "(MD)";
-    else if (window.innerWidth >= 576) bp = "(SM)";
-    breakpointNameSpan.textContent = bp;
-  }
+function updateViewport() {
+  viewportSizeSpan.textContent = window.innerWidth;
+  let bp = "(XS)";
+  if (window.innerWidth >= 1200) bp = "(XL)";
+  else if (window.innerWidth >= 992) bp = "(LG)";
+  else if (window.innerWidth >= 768) bp = "(MD)";
+  else if (window.innerWidth >= 576) bp = "(SM)";
+  breakpointNameSpan.textContent = bp;
+}
 
-  window.addEventListener("resize", updateViewport);
-  updateViewport();
+window.addEventListener("resize", updateViewport);
+updateViewport();
 <\/script>
 
 </body>
-</html>`;
+</html>
+    `;
   }
 
-  htmlArea.addEventListener("input", updatePreview);
-  cssArea.addEventListener("input", updatePreview);
-  updatePreview();
+  htmlArea.addEventListener("input", update);
+  cssArea.addEventListener("input", update);
+  update();
 </script>
 
 </body>
