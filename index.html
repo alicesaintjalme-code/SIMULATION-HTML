@@ -2,38 +2,63 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>🕹️ Séance 1 – Codage HTML | PAZAPA</title>
+  <title>🕹️ Séance 1 – Codage HTML | 1re NSI PAZAPA</title>
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f4f6fa;
+      background-color: #eef2f7;
     }
 
     h1 {
-      text-align: center;
-      padding: 15px;
+      margin: 0;
+      padding: 16px;
       background-color: #0A1F44;
       color: white;
-      margin: 0;
+      text-align: center;
     }
 
     .container {
       display: flex;
-      height: calc(100vh - 60px);
+      height: calc(100vh - 70px);
+    }
+
+    /* ====== ZONE CODE (GAUCHE) ====== */
+    .editor {
+      width: 50%;
+      padding: 15px;
+      background-color: #f4f6fa;
+      box-sizing: border-box;
+    }
+
+    .editor-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .editor-title small {
+      display: block;
+      font-weight: normal;
+      font-size: 12px;
+      color: #666;
     }
 
     textarea {
-      width: 50%;
+      width: 100%;
+      height: calc(100% - 40px);
       padding: 15px;
       font-family: monospace;
       font-size: 14px;
       border: none;
       outline: none;
       resize: none;
+      box-sizing: border-box;
+      background-color: #ffffff;
     }
 
+    /* ====== ZONE RÉSULTAT (DROITE) ====== */
     iframe {
       width: 50%;
       border: none;
@@ -44,26 +69,37 @@
 
 <body>
 
-<h1>🕹️ Séance 1 – Codage HTML | 1ʳᵉ NSI PAZAPA</h1>
+  <h1>🕹️ Séance 1 – Codage HTML | 1re NSI PAZAPA</h1>
 
-<div class="container">
-  <!-- ÉDITEUR -->
-  <textarea id="code">
+  <div class="container">
+
+    <!-- ZONE CODE -->
+    <div class="editor">
+      <div class="editor-title">
+        ✍️ Zone de code HTML
+        <small>Écris ici → le résultat s’affiche à droite</small>
+      </div>
+
+<textarea id="code">
 <h1>Hello HTML!</h1>
 <p>Ceci est ma première page web.</p>
 <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" width="150">
-  </textarea>
+</textarea>
+    </div>
 
-  <!-- RENDU -->
-  <iframe id="preview"></iframe>
-</div>
+    <!-- ZONE RÉSULTAT -->
+    <iframe id="preview"></iframe>
 
-<script>
-  const textarea = document.getElementById("code");
-  const iframe = document.getElementById("preview");
+  </div>
 
-  function updatePreview() {
-    iframe.srcdoc = `
+  <script>
+    const textarea = document.getElementById("code");
+    const iframe = document.getElementById("preview");
+
+    function updatePreview() {
+      const userCode = textarea.value;
+
+      const fullPage = `
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -76,39 +112,48 @@
       padding: 20px;
     }
 
-    .welcome {
+    .welcome-box {
       background-color: #163A6B;
-      padding: 20px;
       border-radius: 12px;
-      margin-bottom: 20px;
+      padding: 20px;
+      margin-bottom: 25px;
       text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    .welcome-box h2 {
+      margin-top: 0;
+      color: #FFD966;
     }
 
     img {
       display: block;
-      margin: 20px auto;
+      margin: 15px auto;
+      opacity: 0.9;
     }
   </style>
 </head>
 
 <body>
 
-<div class="welcome">
-  <h2>👋 Chers élèves de 1ʳᵉ NSI – PAZAPA</h2>
-  <p>Bienvenue dans l’espace de rendu HTML.</p>
-  <p><strong>À toi de jouer :</strong> modifie le code à gauche et observe le résultat ici 🚀</p>
-</div>
+  <div class="welcome-box">
+    <h2>👋 Chers élèves de 1re NSI – PAZAPA</h2>
+    <p>Bienvenue dans l’espace de rendu HTML.</p>
+    <p><strong>À toi de jouer :</strong> modifie le code à gauche et observe le résultat ici 🚀</p>
+  </div>
 
-${textarea.value}
+  ${userCode}
 
 </body>
 </html>
-    `;
-  }
+      `;
 
-  textarea.addEventListener("input", updatePreview);
-  updatePreview();
-</script>
+      iframe.srcdoc = fullPage;
+    }
+
+    textarea.addEventListener("input", updatePreview);
+    updatePreview();
+  </script>
 
 </body>
 </html>
