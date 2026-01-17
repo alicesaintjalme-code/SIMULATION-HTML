@@ -2,120 +2,271 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Simulation CSS – 1re NSI PAZAPA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simulation CSS — 1re NSI PAZAPA</title>
 
   <style>
-    /* ===== BASE ===== */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0A1F44;
-      color: #fff;
+    /* ===========================
+       STYLE PAGE (type CodePen)
+       =========================== */
+    :root{
+      --bg:#0A1F44;
+      --panel:#111318;
+      --panel2:#0F1116;
+      --text:#EDEFF6;
+      --muted:#B8C0D4;
+      --accent:#7CFF7C;
+      --line:rgba(255,255,255,.08);
+      --warn:#FFD966;
+      --danger:#FF6B6B;
     }
 
-    header {
-      background: #06162f;
-      padding: 16px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background: linear-gradient(180deg, #06142E 0%, var(--bg) 60%, #06142E 100%);
     }
 
-    /* ===== LAYOUT ===== */
-    .main {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      height: calc(100vh - 64px);
+    header{
+      position: sticky;
+      top:0;
+      z-index: 10;
+      background: rgba(8, 12, 22, .9);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+    }
+    header h1{
+      margin:0;
+      font-size: 20px;
+      letter-spacing:.2px;
+      font-weight: 800;
+    }
+    header .badge{
+      color:#0a0;
+      background: rgba(124,255,124,.12);
+      border:1px solid rgba(124,255,124,.35);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
     }
 
-    .panel {
+    /* Bande consigne compacte */
+    .intro{
+      max-width: 1250px;
+      margin: 14px auto 0;
+      padding: 0 16px;
+    }
+    .intro .box{
+      background: rgba(17,19,24,.78);
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      line-height:1.35;
+    }
+    .intro .box b{color: var(--warn)}
+    .intro .box .small{color: var(--muted); font-size: 13px; margin-top:6px}
+    .intro code{
+      background: rgba(255,255,255,.08);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+    }
+
+    /* Layout 3 colonnes */
+    .grid{
+      max-width: 1250px;
+      margin: 12px auto 22px;
+      padding: 0 16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr 1.1fr;
+      gap: 12px;
+    }
+
+    .panel{
+      background: rgba(17,19,24,.85);
+      border:1px solid var(--line);
+      border-radius: 14px;
+      overflow:hidden;
+      min-height: 520px;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .panel .titlebar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 10px 12px;
+      border-bottom:1px solid var(--line);
+      background: rgba(15,17,22,.85);
+      font-weight: 800;
+      letter-spacing:.2px;
+    }
+    .panel .titlebar .hint{
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    textarea{
+      flex:1;
+      width:100%;
+      border:0;
+      outline:none;
+      resize:none;
+      background: var(--panel);
+      color: var(--text);
       padding: 12px;
-      overflow: auto;
+      font-size: 13px;
+      line-height: 1.35;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
-    .panel h3 {
-      margin-top: 0;
-      font-size: 16px;
-      color: #9fd3ff;
-      border-bottom: 1px solid #2e4d7a;
-      padding-bottom: 6px;
-    }
-
-    /* ===== PANELS ===== */
-    .html-panel {
-      background: #111;
-    }
-
-    .css-panel {
-      background: #181818;
-    }
-
-    .result-panel {
+    /* Zone Résultat */
+    .resultWrap{
+      flex:1;
       background: #ffffff;
-      color: #000;
-      padding: 16px;
+      padding: 12px;
+      overflow:auto;
     }
 
-    textarea {
-      width: 100%;
-      height: 90%;
-      background: #0f0f0f;
-      color: #eaeaea;
-      border: none;
-      resize: none;
-      font-family: monospace;
-      font-size: 14px;
-      padding: 10px;
-      box-sizing: border-box;
+    .resultHeader{
+      font-weight: 800;
+      color:#111;
+      margin-bottom: 8px;
+    }
+    .resultHeader span{
+      display:inline-block;
+      background: rgba(124,255,124,.25);
+      border: 1px solid rgba(124,255,124,.7);
+      padding: 2px 8px;
+      border-radius: 8px;
+      margin-left: 6px;
+      font-weight: 900;
     }
 
-    /* ===== RESULT STYLE ===== */
-    .result-info {
-      background: #e9f3ff;
-      border-left: 5px solid #2a7fff;
-      padding: 10px;
-      margin-bottom: 12px;
-      font-size: 14px;
+    /* Responsive */
+    @media (max-width: 1100px){
+      .grid{grid-template-columns: 1fr}
+      .panel{min-height: 420px}
     }
 
-    iframe {
-      width: 100%;
-      height: calc(100% - 80px);
-      border: 1px solid #ccc;
+    /* Boutons (facultatif) */
+    .actions{
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      padding: 10px 12px;
+      border-top:1px solid var(--line);
+      background: rgba(15,17,22,.85);
     }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 900px) {
-      .main {
-        grid-template-columns: 1fr;
-      }
-      textarea {
-        height: 200px;
-      }
-      iframe {
-        height: 300px;
-      }
+    .btn{
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 12px;
     }
+    .btn:hover{background: rgba(255,255,255,.10)}
+    .btn.danger{
+      border-color: rgba(255,107,107,.35);
+      background: rgba(255,107,107,.10);
+    }
+    .btn.danger:hover{background: rgba(255,107,107,.16)}
   </style>
 </head>
 
 <body>
+  <header>
+    <h1>🧩 Simulation CSS — 1re NSI PAZAPA</h1>
+    <span class="badge">Style type CodePen</span>
+  </header>
 
-<header>
-  🧩 Simulation CSS – 1re NSI PAZAPA
-</header>
+  <div class="intro">
+    <div class="box">
+      <div><b>Objectif :</b> modifier le style en CSS et observer l’impact immédiat.</div>
+      <div class="small">
+        1) Change couleur / taille / alignement. 2) Ajoute une <code>class</code> dans HTML et style-la dans CSS.
+        3) Teste aussi un <code>id</code> unique. 4) Redimensionne la fenêtre pour voir <b>XS / SM / MD / LG / XL</b>.
+      </div>
+    </div>
+  </div>
 
-<div class="main">
+  <div class="grid">
+    <!-- HTML -->
+    <section class="panel">
+      <div class="titlebar">
+        <div>HTML</div>
+        <div class="hint">Édite ici</div>
+      </div>
+      <textarea id="htmlCode" spellcheck="false"></textarea>
+      <div class="actions">
+        <button class="btn" onclick="resetHTML()">Reset HTML</button>
+      </div>
+    </section>
 
-  <!-- HTML -->
-  <div class="panel html-panel">
-    <h3>HTML</h3>
-<textarea id="htmlCode">
-<p>This viewport size is currently:
-  <span id="viewport-size"></span>
-  <span id="breakpointName"></span>
-</p>
+    <!-- CSS -->
+    <section class="panel">
+      <div class="titlebar">
+        <div>CSS</div>
+        <div class="hint">Édite ici</div>
+      </div>
+      <textarea id="cssCode" spellcheck="false"></textarea>
+      <div class="actions">
+        <button class="btn" onclick="resetCSS()">Reset CSS</button>
+      </div>
+    </section>
 
+    <!-- RESULT -->
+    <section class="panel">
+      <div class="titlebar">
+        <div>Résultat</div>
+        <div class="hint">Aperçu</div>
+      </div>
+
+      <div class="resultWrap">
+        <div class="resultHeader">
+          This viewport size is currently:
+          <span id="viewport-size">—</span>
+          <span id="breakpointName">—</span>
+        </div>
+
+        <div id="mount"></div>
+
+        <hr style="margin:14px 0;border:none;border-top:1px solid #e8e8e8;" />
+
+        <div style="color:#111; font-size:13px; line-height:1.35;">
+          <b>Breakpoints :</b> XS &lt; 576 • SM ≥ 576 • MD ≥ 768 • LG ≥ 992 • XL ≥ 1200
+          <br><br>
+          <b>Consigne (résumé) :</b> ajoute une <code>class</code> / un <code>id</code>, puis change le style dans l’onglet CSS.
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" onclick="run()">Run</button>
+        <button class="btn danger" onclick="resetAll()">Reset tout</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    /* ===========================
+       CONTENU PAR DÉFAUT (élèves)
+       =========================== */
+
+    const DEFAULT_HTML = `
 <div class="container">
   <div class="row">
     <div class="col">One</div>
@@ -125,7 +276,7 @@
 
   <div class="row">
     <div class="col">Four</div>
-    <div class="col">Five</div>
+    <div class="col highlight" id="target">Five</div>
     <div class="col">Six</div>
   </div>
 
@@ -135,90 +286,98 @@
     <div class="col">Nine</div>
   </div>
 </div>
-</textarea>
-  </div>
+`.trim();
 
-  <!-- CSS -->
-  <div class="panel css-panel">
-    <h3>CSS</h3>
-<textarea id="cssCode">
-.row div {
+    const DEFAULT_CSS = `
+/* AIDE VISUELLE (comme sur CodePen) */
+.row .col{
   border: 2px solid lightgreen;
   padding: 6px;
+  margin: 4px 0;
+  background: #fff;
+  color: #111;
 }
 
-#viewport-size {
-  background: lightgreen;
-  padding: 4px;
+/* Petite mise en page type “grille” */
+.container{
+  max-width: 820px;
+  margin: 10px auto;
 }
 
-body {
-  margin: 10px;
-  font-family: Arial, sans-serif;
-}
-</textarea>
-  </div>
-
-  <!-- RESULT -->
-  <div class="panel result-panel">
-    <div class="result-info">
-      👋 <strong>Chers élèves de 1re NSI – PAZAPA</strong><br>
-      Modifiez le HTML ou le CSS à gauche et observez le résultat ici.
-    </div>
-
-    <iframe id="result"></iframe>
-  </div>
-
-</div>
-
-<script>
-  const htmlArea = document.getElementById("htmlCode");
-  const cssArea = document.getElementById("cssCode");
-  const iframe = document.getElementById("result");
-
-  function update() {
-    const html = htmlArea.value;
-    const css = cssArea.value;
-
-    iframe.srcdoc = `
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<style>
-${css}
-</style>
-</head>
-<body>
-${html}
-
-<script>
-const viewportSizeSpan = document.getElementById("viewport-size");
-const breakpointNameSpan = document.getElementById("breakpointName");
-
-function updateViewport() {
-  viewportSizeSpan.textContent = window.innerWidth;
-  let bp = "(XS)";
-  if (window.innerWidth >= 1200) bp = "(XL)";
-  else if (window.innerWidth >= 992) bp = "(LG)";
-  else if (window.innerWidth >= 768) bp = "(MD)";
-  else if (window.innerWidth >= 576) bp = "(SM)";
-  breakpointNameSpan.textContent = bp;
+.row{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-window.addEventListener("resize", updateViewport);
-updateViewport();
-<\/script>
+/* Exemple class + id */
+.highlight{
+  background: rgba(124,255,124,.35);
+  font-weight: 800;
+}
+#target{
+  text-align: center;
+}
 
-</body>
-</html>
-    `;
-  }
+/* CHALLENGE (responsive) :
+   - Essaie de faire varier la grille selon la taille (XS/SM/MD/LG/XL)
+   - Exemple: en XS, empiler en 1 colonne
+*/
+@media (max-width: 575px){
+  .row{ grid-template-columns: 1fr; }
+}
+`.trim();
 
-  htmlArea.addEventListener("input", update);
-  cssArea.addEventListener("input", update);
-  update();
-</script>
+    /* ===========================
+       LOGIQUE “JS” (comme CodePen)
+       =========================== */
+    const htmlTA = document.getElementById("htmlCode");
+    const cssTA  = document.getElementById("cssCode");
+    const mount  = document.getElementById("mount");
 
+    function updateViewportBreakpointDisplay(){
+      const w = window.innerWidth;
+      document.getElementById("viewport-size").textContent = w;
+
+      let bp = "";
+      if (w >= 1200) bp = "(XL)";
+      else if (w >= 992) bp = "(LG)";
+      else if (w >= 768) bp = "(MD)";
+      else if (w >= 576) bp = "(SM)";
+      else bp = "(XS)";
+
+      document.getElementById("breakpointName").textContent = bp;
+    }
+    window.addEventListener("resize", updateViewportBreakpointDisplay);
+
+    function run(){
+      // inject HTML
+      mount.innerHTML = htmlTA.value;
+
+      // (re)inject CSS
+      let styleEl = document.getElementById("liveStyle");
+      if(!styleEl){
+        styleEl = document.createElement("style");
+        styleEl.id = "liveStyle";
+        document.head.appendChild(styleEl);
+      }
+      styleEl.textContent = cssTA.value;
+
+      updateViewportBreakpointDisplay();
+    }
+
+    // Reset helpers
+    function resetHTML(){ htmlTA.value = DEFAULT_HTML; run(); }
+    function resetCSS(){ cssTA.value  = DEFAULT_CSS;  run(); }
+    function resetAll(){ htmlTA.value = DEFAULT_HTML; cssTA.value = DEFAULT_CSS; run(); }
+
+    // Live update
+    htmlTA.addEventListener("input", run);
+    cssTA.addEventListener("input", run);
+
+    // init
+    resetAll();
+  </script>
 </body>
 </html>
