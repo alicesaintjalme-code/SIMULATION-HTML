@@ -1,67 +1,66 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>🕹️ Séance 1 – Codage HTML</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 10px;
-    }
-    h2 {
-      text-align: center;
-    }
-    .container {
-      display: flex;
-      height: 90vh;
-    }
-    textarea {
-      width: 50%;
-      padding: 10px;
-      font-family: monospace;
-      font-size: 14px;
-    }
-    iframe {
-      width: 50%;
-      border: 1px solid #ccc;
-    }
-  </style>
-</head>
-<body>
-
-<h2>🕹️ Séance 1 – Codage HTML</h2>
-
-<div class="container">
-  <textarea id="code">
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Ma première page</title>
-</head>
-<body>
-
-<h1>Hello HTML!</h1>
-<p>Ceci est ma première page web.</p>
-
-</body>
-</html>
-  </textarea>
-
-  <iframe id="preview"></iframe>
-</div>
-
 <script>
   const textarea = document.getElementById("code");
   const iframe = document.getElementById("preview");
 
   function updatePreview() {
-    iframe.srcdoc = textarea.value;
+    const userCode = textarea.value;
+
+    const styledCode = `
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      background-color: #0A1F44; /* bleu foncé */
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .welcome-box {
+      background-color: #163A6B; /* bleu différent */
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    .welcome-box h2 {
+      margin-top: 0;
+      color: #FFD966;
+    }
+
+    .welcome-box p {
+      margin: 8px 0;
+      font-size: 16px;
+    }
+
+    img {
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="welcome-box">
+    <h2>👋 Chers élèves de 1re NSI – PAZAPA</h2>
+    <p>Bienvenue dans l’espace de rendu HTML.</p>
+    <p><strong>À toi de jouer :</strong> modifie le code à gauche et observe le résultat ici 🚀</p>
+  </div>
+
+  ${userCode}
+
+</body>
+</html>
+    `;
+
+    iframe.srcdoc = styledCode;
   }
 
   textarea.addEventListener("input", updatePreview);
   updatePreview();
 </script>
-
-</body>
-</html>
