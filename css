@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simulation CSS – 1re NSI PAZAPA</title>
+
+  <!-- Bootstrap CDN -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0a1f44;
+      color: white;
+    }
+
+    header {
+      background: #081a36;
+      padding: 16px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .container-main {
+      display: flex;
+      height: calc(100vh - 70px);
+    }
+
+    /* ZONES ÉDITEUR */
+    .editor {
+      width: 50%;
+      padding: 15px;
+      background: #ffffff;
+      color: #000;
+      overflow: auto;
+    }
+
+    textarea {
+      width: 100%;
+      height: 45%;
+      margin-bottom: 10px;
+      font-family: monospace;
+      font-size: 14px;
+      padding: 10px;
+    }
+
+    /* RENDU */
+    iframe {
+      width: 50%;
+      border: none;
+      background: white;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  🧩 Simulation CSS – 1re NSI PAZAPA
+</header>
+
+<div class="container-main">
+
+  <!-- ZONE CODE -->
+  <div class="editor">
+
+    <strong>HTML</strong>
+    <textarea id="htmlCode">
+<p>This viewport size is currently:
+  <span id="viewport-size"></span>
+  <span id="breakpointName"></span>
+</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col">One</div>
+    <div class="col">Two</div>
+    <div class="col">Three</div>
+  </div>
+
+  <div class="row">
+    <div class="col">Four</div>
+    <div class="col">Five</div>
+    <div class="col">Six</div>
+  </div>
+
+  <div class="row">
+    <div class="col">Seven</div>
+    <div class="col">Eight</div>
+    <div class="col">Nine</div>
+  </div>
+</div>
+    </textarea>
+
+    <strong>CSS</strong>
+    <textarea id="cssCode">
+.row div {
+  border: solid lightgreen;
+}
+
+#viewport-size {
+  background: lightgreen;
+  padding: 5px;
+}
+
+body {
+  margin: 10px;
+}
+    </textarea>
+
+  </div>
+
+  <!-- RENDU -->
+  <iframe id="preview"></iframe>
+
+</div>
+
+<script>
+  const htmlInput = document.getElementById("htmlCode");
+  const cssInput = document.getElementById("cssCode");
+  const iframe = document.getElementById("preview");
+
+  function updatePreview() {
+    const fullPage = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>${cssInput.value}</style>
+</head>
+<body>
+${htmlInput.value}
+
+<script>
+const viewportSizeSpan = document.getElementById("viewport-size");
+const breakpointNameSpan = document.getElementById("breakpointName");
+
+function updateViewport() {
+  viewportSizeSpan.textContent = window.innerWidth;
+  let bp = "";
+  if (window.innerWidth >= 1200) bp = "(XL)";
+  else if (window.innerWidth >= 992) bp = "(LG)";
+  else if (window.innerWidth >= 768) bp = "(MD)";
+  else if (window.innerWidth >= 576) bp = "(SM)";
+  else bp = "(Extra small)";
+  breakpointNameSpan.textContent = bp;
+}
+
+window.addEventListener("resize", updateViewport);
+updateViewport();
+<\/script>
+
+</body>
+</html>
+    `;
+    iframe.srcdoc = fullPage;
+  }
+
+  htmlInput.addEventListener("input", updatePreview);
+  cssInput.addEventListener("input", updatePreview);
+  updatePreview();
+</script>
+
+</body>
+</html>
