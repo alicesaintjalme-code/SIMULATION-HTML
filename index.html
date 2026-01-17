@@ -1,3 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>🕹️ Séance 1 – Codage HTML | PAZAPA</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fb;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 15px;
+      margin: 0;
+      background-color: #0A1F44;
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      height: calc(100vh - 70px);
+    }
+
+    /* ZONE CODE */
+    .editor {
+      width: 50%;
+      padding: 15px;
+      box-sizing: border-box;
+      background-color: #ffffff;
+      border-right: 2px solid #ddd;
+    }
+
+    .editor h3 {
+      margin-top: 0;
+    }
+
+    textarea {
+      width: 100%;
+      height: 90%;
+      font-family: monospace;
+      font-size: 14px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    /* ZONE RESULTAT */
+    .preview {
+      width: 50%;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🕹️ Séance 1 – Codage HTML (1ʳᵉ NSI – PAZAPA)</h1>
+
+<div class="container">
+
+  <!-- ÉDITEUR -->
+  <div class="editor">
+    <h3>✍️ Code HTML (à modifier)</h3>
+
+    <textarea id="code">
+<h1>Hello HTML!</h1>
+<p>Ceci est ma première page web.</p>
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+     alt="Avatar"
+     width="150">
+    </textarea>
+  </div>
+
+  <!-- RENDU -->
+  <iframe id="preview" class="preview"></iframe>
+
+</div>
+
 <script>
   const textarea = document.getElementById("code");
   const iframe = document.getElementById("preview");
@@ -5,21 +86,21 @@
   function updatePreview() {
     const userCode = textarea.value;
 
-    const styledCode = `
+    const fullPage = `
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <style>
     body {
-      background-color: #0A1F44; /* bleu foncé */
+      background-color: #0A1F44;
       color: white;
       font-family: Arial, sans-serif;
       padding: 20px;
     }
 
     .welcome-box {
-      background-color: #163A6B; /* bleu différent */
+      background-color: #163A6B;
       border-radius: 12px;
       padding: 20px;
       margin-bottom: 25px;
@@ -32,11 +113,6 @@
       color: #FFD966;
     }
 
-    .welcome-box p {
-      margin: 8px 0;
-      font-size: 16px;
-    }
-
     img {
       display: block;
       margin: 20px auto;
@@ -47,9 +123,10 @@
 <body>
 
   <div class="welcome-box">
-    <h2>👋 Chers élèves de 1re NSI – PAZAPA</h2>
-    <p>Bienvenue dans l’espace de rendu HTML.</p>
-    <p><strong>À toi de jouer :</strong> modifie le code à gauche et observe le résultat ici 🚀</p>
+    <h2>👋 Chers élèves de 1ʳᵉ NSI – PAZAPA</h2>
+    <p>Bienvenue dans votre espace de test HTML.</p>
+    <p>Ici, vous pouvez <strong>tester</strong>, <strong>modifier</strong> et <strong>comprendre</strong>.</p>
+    <p><strong>À vous de jouer :</strong> le code est à gauche, le résultat s’affiche ici 🚀</p>
   </div>
 
   ${userCode}
@@ -58,9 +135,12 @@
 </html>
     `;
 
-    iframe.srcdoc = styledCode;
+    iframe.srcdoc = fullPage;
   }
 
   textarea.addEventListener("input", updatePreview);
   updatePreview();
 </script>
+
+</body>
+</html>
