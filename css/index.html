@@ -1,61 +1,65 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Simulation CSS – 1re NSI PAZAPA</title>
+<meta charset="UTF-8">
+<title>Simulation CSS – 1re NSI PAZAPA</title>
 
-  <!-- Bootstrap CDN -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #1e1e1e;
+    color: #ddd;
+  }
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0a1f44;
-      color: white;
-    }
+  header {
+    background: #111;
+    padding: 14px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+  }
 
-    header {
-      background: #081a36;
-      padding: 16px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-    }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: calc(100vh - 60px);
+  }
 
-    .container-main {
-      display: flex;
-      height: calc(100vh - 70px);
-    }
+  .panel {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #333;
+  }
 
-    /* ZONES ÉDITEUR */
-    .editor {
-      width: 50%;
-      padding: 15px;
-      background: #ffffff;
-      color: #000;
-      overflow: auto;
-    }
+  .panel:last-child {
+    border-right: none;
+  }
 
-    textarea {
-      width: 100%;
-      height: 45%;
-      margin-bottom: 10px;
-      font-family: monospace;
-      font-size: 14px;
-      padding: 10px;
-    }
+  .panel-title {
+    background: #252526;
+    padding: 8px 12px;
+    font-weight: bold;
+    font-size: 14px;
+  }
 
-    /* RENDU */
-    iframe {
-      width: 50%;
-      border: none;
-      background: white;
-    }
-  </style>
+  textarea {
+    flex: 1;
+    background: #1e1e1e;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-family: monospace;
+    font-size: 14px;
+    resize: none;
+  }
+
+  iframe {
+    flex: 1;
+    border: none;
+    background: white;
+  }
+</style>
 </head>
 
 <body>
@@ -64,12 +68,11 @@
   🧩 Simulation CSS – 1re NSI PAZAPA
 </header>
 
-<div class="container-main">
+<div class="grid">
 
-  <!-- ZONE CODE -->
-  <div class="editor">
-
-    <strong>HTML</strong>
+  <!-- HTML -->
+  <div class="panel">
+    <div class="panel-title">HTML</div>
     <textarea id="htmlCode">
 <p>This viewport size is currently:
   <span id="viewport-size"></span>
@@ -96,8 +99,11 @@
   </div>
 </div>
     </textarea>
+  </div>
 
-    <strong>CSS</strong>
+  <!-- CSS -->
+  <div class="panel">
+    <div class="panel-title">CSS</div>
     <textarea id="cssCode">
 .row div {
   border: solid lightgreen;
@@ -110,60 +116,62 @@
 
 body {
   margin: 10px;
+  font-family: Arial, sans-serif;
 }
     </textarea>
-
   </div>
 
-  <!-- RENDU -->
-  <iframe id="preview"></iframe>
+  <!-- RESULT -->
+  <div class="panel">
+    <div class="panel-title">Résultat</div>
+    <iframe id="preview"></iframe>
+  </div>
 
 </div>
 
 <script>
-  const htmlInput = document.getElementById("htmlCode");
-  const cssInput = document.getElementById("cssCode");
+  const htmlArea = document.getElementById("htmlCode");
+  const cssArea = document.getElementById("cssCode");
   const iframe = document.getElementById("preview");
 
   function updatePreview() {
-    const fullPage = `
+    const html = htmlArea.value;
+    const css = cssArea.value;
+
+    iframe.srcdoc = `
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>${cssInput.value}</style>
+<style>${css}</style>
 </head>
 <body>
-${htmlInput.value}
+
+${html}
 
 <script>
-const viewportSizeSpan = document.getElementById("viewport-size");
-const breakpointNameSpan = document.getElementById("breakpointName");
+  const viewportSizeSpan = document.getElementById("viewport-size");
+  const breakpointNameSpan = document.getElementById("breakpointName");
 
-function updateViewport() {
-  viewportSizeSpan.textContent = window.innerWidth;
-  let bp = "";
-  if (window.innerWidth >= 1200) bp = "(XL)";
-  else if (window.innerWidth >= 992) bp = "(LG)";
-  else if (window.innerWidth >= 768) bp = "(MD)";
-  else if (window.innerWidth >= 576) bp = "(SM)";
-  else bp = "(Extra small)";
-  breakpointNameSpan.textContent = bp;
-}
+  function updateViewport() {
+    viewportSizeSpan.textContent = window.innerWidth;
+    let bp = "(XS)";
+    if (window.innerWidth >= 1200) bp = "(XL)";
+    else if (window.innerWidth >= 992) bp = "(LG)";
+    else if (window.innerWidth >= 768) bp = "(MD)";
+    else if (window.innerWidth >= 576) bp = "(SM)";
+    breakpointNameSpan.textContent = bp;
+  }
 
-window.addEventListener("resize", updateViewport);
-updateViewport();
+  window.addEventListener("resize", updateViewport);
+  updateViewport();
 <\/script>
 
 </body>
-</html>
-    `;
-    iframe.srcdoc = fullPage;
+</html>`;
   }
 
-  htmlInput.addEventListener("input", updatePreview);
-  cssInput.addEventListener("input", updatePreview);
+  htmlArea.addEventListener("input", updatePreview);
+  cssArea.addEventListener("input", updatePreview);
   updatePreview();
 </script>
 
