@@ -5,7 +5,6 @@
 <title>Entraînement dictée</title>
 
 <style>
-
 body {
   font-family: Arial;
   max-width: 900px;
@@ -58,7 +57,6 @@ button {
   color:#555;
   margin-top:10px;
 }
-
 </style>
 </head>
 
@@ -85,7 +83,7 @@ button {
 // 🔥 TEXTE OFFICIEL
 let texteOfficiel = `Au temps de ma petite enfance, dans les années 1960, les villageois de mon âge avaient encore un air farouche et sauvage. Ils vivaient dans ces fermes perdues et fréquentaient la classe unique de l’école communale où, l’hiver, ils se rendaient à pied dans la neige. Au cours des années suivantes, en pleine période de croissance, les routes se sont élargies, les supermarchés se sont implantés, le téléphone et la télévision sont arrivés dans la vallée. Les enfants ont grandi et trouvé des emplois en ville. Certains sont devenus ouvriers, d’autres ingénieurs. Les exploitations agricoles ont dépéri avec leurs vieux parents. Benoît Duteurtre, Livre pour adultes, 2016`;
 
-// 🔹 noms clairs élèves
+// 🔹 noms lisibles
 let nomsTypes = {
   C: "🔴 Conjugaison",
   A: "🔵 Accord",
@@ -109,14 +107,13 @@ function estNomPropre(mot) {
   return /^[A-ZÀ-Ü]/.test(mot);
 }
 
-// 🔹 normalisation
+// 🔹 normaliser
 function normaliser(t) {
   return t.toLowerCase().replace(/[.,;:!?]/g,"").replace(/\s+/g," ").trim();
 }
 
 // 🔹 comparaison fiable
 function comparer(texteEleve, texteCorrect) {
-
   let eleve = normaliser(texteEleve).split(" ");
   let correct = normaliser(texteCorrect).split(" ");
   let original = texteCorrect.split(" ");
@@ -134,6 +131,39 @@ function comparer(texteEleve, texteCorrect) {
   return resultat;
 }
 
+// 🔥 analyse ponctuation fiable
+function analyserPonctuation(texteEleve, texteCorrect) {
+
+  let erreurs = [];
+
+  for (let i = 0; i < texteCorrect.length; i++) {
+
+    let attendu = texteCorrect[i];
+    let eleve = texteEleve[i] || "";
+
+    if ([".", ",", ";", ":", "!", "?"].includes(attendu)) {
+      if (eleve !== attendu) {
+        erreurs.push({
+          texte: texteEleve.substring(Math.max(0, i-10), i+10),
+          message: `Ponctuation incorrecte (attendu "${attendu}")`
+        });
+      }
+    }
+
+    // majuscule après point
+    if (i > 0 && texteCorrect[i-1] === ".") {
+      if (texteEleve[i] && texteEleve[i] === texteEleve[i].toLowerCase()) {
+        erreurs.push({
+          texte: texteEleve.substring(i, i+15),
+          message: "Majuscule attendue après un point"
+        });
+      }
+    }
+  }
+
+  return erreurs;
+}
+
 async function analyser() {
 
   let texte = document.getElementById("texte").value;
@@ -149,10 +179,10 @@ async function analyser() {
 
   let groupes = {C:[], A:[], H:[], L:[], P:[]};
 
+  // 🔹 erreurs IA
   erreurs.forEach(e => {
 
     let texteErreur = e.context.text;
-
     let mots = texteErreur.split(" ");
     let mot = mots.find(m => m.length>2) || "";
 
@@ -164,8 +194,11 @@ async function analyser() {
       texte: texteErreur,
       message: e.message
     });
-
   });
+
+  // 🔥 erreurs ponctuation fiables
+  let erreursP = analyserPonctuation(texte, texteOfficiel);
+  erreursP.forEach(e => groupes["P"].push(e));
 
   let html = "<h3>📊 Analyse des erreurs</h3>";
 
