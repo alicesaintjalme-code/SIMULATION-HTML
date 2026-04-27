@@ -5,7 +5,6 @@
 <title>Entraînement dictée</title>
 
 <style>
-
 body {
   font-family: Arial;
   max-width: 900px;
@@ -58,7 +57,6 @@ button {
   color:#555;
   margin-top:10px;
 }
-
 </style>
 </head>
 
@@ -134,47 +132,38 @@ function comparer(texteEleve, texteCorrect) {
   return resultat;
 }
 
-// 🔥 NOUVELLE VERSION STABLE ponctuation
-function analyserPonctuation(texteEleve, texteCorrect) {
+// 🔥 ponctuation simple et fiable
+function analyserPonctuation(texteEleve) {
 
   let erreurs = [];
 
-  let phrasesEleve = texteEleve.split(/[.!?]/);
-  let phrasesCorrect = texteCorrect.split(/[.!?]/);
+  // majuscule début
+  if (texteEleve.length > 0 && texteEleve[0] === texteEleve[0].toLowerCase()) {
+    erreurs.push({
+      texte: texteEleve.slice(0, 20),
+      message: "La phrase doit commencer par une majuscule"
+    });
+  }
 
-  for (let i = 0; i < phrasesCorrect.length; i++) {
-
-    let pCorrect = phrasesCorrect[i]?.trim();
-    let pEleve = phrasesEleve[i]?.trim();
-
-    if (!pCorrect) continue;
-
-    if (!pEleve) {
+  // majuscule après point
+  let phrases = texteEleve.split(".");
+  phrases.forEach(p => {
+    let phrase = p.trim();
+    if (phrase && phrase[0] === phrase[0].toLowerCase()) {
       erreurs.push({
-        texte: "...",
-        message: "Phrase manquante ou incomplète"
-      });
-      continue;
-    }
-
-    // majuscule
-    if (pEleve[0] !== pEleve[0]?.toUpperCase()) {
-      erreurs.push({
-        texte: pEleve,
-        message: "La phrase doit commencer par une majuscule"
+        texte: phrase.slice(0, 20),
+        message: "Majuscule attendue après un point"
       });
     }
+  });
 
-    // ponctuation finale
-    let finCorrect = texteCorrect.match(/[.!?]/g)?.[i] || ".";
-    let finEleve = texteEleve.match(/[.!?]/g)?.[i] || "";
-
-    if (finCorrect !== finEleve) {
-      erreurs.push({
-        texte: pEleve,
-        message: `Ponctuation finale incorrecte (attendu "${finCorrect}")`
-      });
-    }
+  // ponctuation globale
+  let nbPoints = (texteEleve.match(/\./g) || []).length;
+  if (nbPoints < 3) {
+    erreurs.push({
+      texte: texteEleve.slice(0, 30),
+      message: "Il manque de la ponctuation (phrases non séparées)"
+    });
   }
 
   return erreurs;
@@ -213,8 +202,8 @@ async function analyser() {
 
   });
 
-  // 🔥 ponctuation stable
-  let erreursP = analyserPonctuation(texte, texteOfficiel);
+  // 🔥 ponctuation fiable
+  let erreursP = analyserPonctuation(texte);
   erreursP.forEach(e => groupes["P"].push(e));
 
   let html = "<h3>📊 Analyse des erreurs</h3>";
