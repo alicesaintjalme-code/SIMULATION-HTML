@@ -69,14 +69,14 @@ button {
 
 <script>
 
-// 🔥 TEXTE OFFICIEL
-let texteOfficiel = "Au temps de ma petite enfance, dans les années 1960, les villageois de mon âge avaient encore un air farouche et sauvage. Ils vivaient dans ces fermes perdues et fréquentaient la classe unique de l’école communale où, l’hiver, ils se rendaient à pied dans la neige. Au cours des années suivantes, en pleine période de croissance, les routes se sont élargies, les supermarchés se sont implantés, le téléphone et la télévision sont arrivés dans la vallée. Les enfants ont grandi et trouvé des emplois en ville. Certains sont devenus ouvriers, d’autres ingénieurs. Les exploitations agricoles ont dépéri avec leurs vieux parents. 
-Benoît Duteurtre, Livre pour adultes, 2016";
+// 🔥 TEXTE OFFICIEL (format propre avec saut de ligne)
+let texteOfficiel = `Au temps de ma petite enfance, dans les années 1960, les villageois de mon âge avaient encore un air farouche et sauvage. Ils vivaient dans ces fermes perdues et fréquentaient la classe unique de l’école communale où, l’hiver, ils se rendaient à pied dans la neige. Au cours des années suivantes, en pleine période de croissance, les routes se sont élargies, les supermarchés se sont implantés, le téléphone et la télévision sont arrivés dans la vallée. Les enfants ont grandi et trouvé des emplois en ville. Certains sont devenus ouvriers, d’autres ingénieurs. Les exploitations agricoles ont dépéri avec leurs vieux parents.
+Benoît Duteurtre, Livre pour adultes, 2016`;
 
 // 🔥 REGEX (accents + apostrophes)
 const REGEX = /[\p{L}]+(?:['’][\p{L}]+)?|[.,;:!?]/gu;
 
-// 🔥 comparaison stable sans clic
+// 🔥 comparaison stable
 function comparer(texteEleve, texteCorrect) {
 
   const tokensCorrect = texteCorrect.match(REGEX) || [];
@@ -92,14 +92,13 @@ function comparer(texteEleve, texteCorrect) {
     let tC = tokensCorrect[i];
     let tE = tokensEleve[j];
 
-    // 🔴 ponctuation
+    // ponctuation
     if (/[.,;:!?]/.test(tC)) {
 
       if (tE === tC) {
         resultat += `<span class="correct">${tC}</span> `;
         j++;
       } else {
-        // virgule / point manquant → affiché au bon endroit
         resultat += `<span class="wrong">${tC}</span> `;
       }
 
@@ -107,7 +106,7 @@ function comparer(texteEleve, texteCorrect) {
       continue;
     }
 
-    // 🔴 mots
+    // mots
     if (tE && tE.toLowerCase() === tC.toLowerCase()) {
       resultat += `<span class="correct">${tC}</span> `;
       i++;
@@ -136,7 +135,7 @@ function analyser() {
 
   document.getElementById("resultat").innerHTML = `
     <h3>🔁 Correction :</h3>
-    ${correction}
+    <p style="line-height:1.8;">${correction}</p>
   `;
 }
 
