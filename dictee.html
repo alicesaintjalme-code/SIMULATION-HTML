@@ -48,7 +48,7 @@ button {
   color:white;
   padding:2px 4px;
   border-radius:4px;
-  cursor:pointer;
+  font-weight:bold;
 }
 </style>
 </head>
@@ -69,62 +69,52 @@ button {
 
 <script>
 
+// 🔥 TEXTE OFFICIEL
 let texteOfficiel = "Au temps de ma petite enfance, dans les années 1960, les villageois de mon âge avaient encore un air farouche et sauvage. Ils vivaient dans ces fermes perdues et fréquentaient la classe unique de l’école communale où, l’hiver, ils se rendaient à pied dans la neige.";
 
-let tokensEleveGlobal = [];
-
-// 🔥 regex PRO (accents + apostrophes)
+// 🔥 REGEX (accents + apostrophes)
 const REGEX = /[\p{L}]+(?:['’][\p{L}]+)?|[.,;:!?]/gu;
 
-// 🔥 remplacement fiable
-function remplacerMot(index, motCorrect) {
-
-  tokensEleveGlobal[index] = motCorrect;
-
-  let texte = "";
-  tokensEleveGlobal.forEach((t,i)=>{
-    if(i>0 && !/[.,;:!?]/.test(t)) texte+=" ";
-    texte+=t;
-  });
-
-  document.getElementById("texte").value = texte;
-}
-
-// 🔥 comparaison stable
+// 🔥 comparaison stable sans clic
 function comparer(texteEleve, texteCorrect) {
 
   const tokensCorrect = texteCorrect.match(REGEX) || [];
-  tokensEleveGlobal = texteEleve.match(REGEX) || [];
+  const tokensEleve = texteEleve.match(REGEX) || [];
 
   let resultat = "";
 
-  let i=0, j=0;
+  let i = 0;
+  let j = 0;
 
-  while(i < tokensCorrect.length){
+  while (i < tokensCorrect.length) {
 
     let tC = tokensCorrect[i];
-    let tE = tokensEleveGlobal[j];
+    let tE = tokensEleve[j];
 
-    // ponctuation
-    if(/[.,;:!?]/.test(tC)){
-      if(tE===tC){
-        resultat+=`<span class="correct">${tC}</span> `;
+    // 🔴 ponctuation
+    if (/[.,;:!?]/.test(tC)) {
+
+      if (tE === tC) {
+        resultat += `<span class="correct">${tC}</span> `;
         j++;
-      }else{
-        resultat+=`<span class="wrong" onclick="remplacerMot(${j}, '${tC}')">${tC}</span> `;
+      } else {
+        // virgule / point manquant → affiché au bon endroit
+        resultat += `<span class="wrong">${tC}</span> `;
       }
+
       i++;
       continue;
     }
 
-    // mots
-    if(tE && tE.toLowerCase()===tC.toLowerCase()){
-      resultat+=`<span class="correct">${tC}</span> `;
-      i++; j++;
-    }else{
-      resultat+=`<span class="wrong" onclick="remplacerMot(${j}, '${tC.replace(/'/g,"\\'")}')">${tC}</span> `;
+    // 🔴 mots
+    if (tE && tE.toLowerCase() === tC.toLowerCase()) {
+      resultat += `<span class="correct">${tC}</span> `;
       i++;
-      if(tE) j++;
+      j++;
+    } else {
+      resultat += `<span class="wrong">${tC}</span> `;
+      i++;
+      if (tE) j++;
     }
   }
 
@@ -132,19 +122,19 @@ function comparer(texteEleve, texteCorrect) {
 }
 
 // 🔥 analyse
-function analyser(){
+function analyser() {
 
   let texte = document.getElementById("texte").value;
 
-  if(!texte.trim()){
-    document.getElementById("resultat").innerHTML="⚠️ Écris un texte";
+  if (!texte.trim()) {
+    document.getElementById("resultat").innerHTML = "⚠️ Écris un texte avant d’analyser.";
     return;
   }
 
   let correction = comparer(texte, texteOfficiel);
 
   document.getElementById("resultat").innerHTML = `
-    <h3>🔁 Clique pour corriger :</h3>
+    <h3>🔁 Correction :</h3>
     ${correction}
   `;
 }
