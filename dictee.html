@@ -145,8 +145,8 @@ function analyserPonctuation(texteEleve) {
     });
   }
 
-  // majuscule après point
-  let phrases = texteEleve.split(".");
+  // majuscule après point (corrigé)
+  let phrases = texteEleve.split(".").filter(p => p.trim() !== "");
   phrases.forEach(p => {
     let phrase = p.trim();
     if (phrase && phrase[0] === phrase[0].toLowerCase()) {
@@ -157,9 +157,9 @@ function analyserPonctuation(texteEleve) {
     }
   });
 
-  // ponctuation globale
+  // ponctuation globale (corrigé)
   let nbPoints = (texteEleve.match(/\./g) || []).length;
-  if (nbPoints < 3) {
+  if (nbPoints < 1) {
     erreurs.push({
       texte: texteEleve.slice(0, 30),
       message: "Il manque de la ponctuation (phrases non séparées)"
@@ -172,6 +172,12 @@ function analyserPonctuation(texteEleve) {
 async function analyser() {
 
   let texte = document.getElementById("texte").value;
+
+  // 🔥 sécurité champ vide
+  if (!texte.trim()) {
+    document.getElementById("resultat").innerHTML = "⚠️ Écris un texte avant d’analyser.";
+    return;
+  }
 
   let response = await fetch("https://api.languagetool.org/v2/check", {
     method: "POST",
