@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Dictée - Correction complète</title>
+<title>Entraînement dictée</title>
 
 <style>
 
@@ -20,7 +20,6 @@ body {
   border-radius: 12px;
 }
 
-/* zone texte */
 textarea {
   width: 100%;
   height: 200px;
@@ -29,7 +28,6 @@ textarea {
   border: 1px solid #ccc;
 }
 
-/* bouton */
 button {
   margin-top: 10px;
   padding: 10px 15px;
@@ -37,9 +35,9 @@ button {
   color: white;
   border: none;
   border-radius: 6px;
+  cursor: pointer;
 }
 
-/* catégories */
 .categorie {
   border-radius: 10px;
   padding: 10px;
@@ -52,9 +50,14 @@ button {
 .L { background: #f0e5ff; }
 .P { background: #e5fff2; }
 
-/* correction fiable */
 .correct { background:#2ecc71; color:white; padding:2px 4px; border-radius:4px; }
 .wrong { background:#e74c3c; color:white; padding:2px 4px; border-radius:4px; }
+
+.info {
+  font-size:14px;
+  color:#555;
+  margin-top:10px;
+}
 
 </style>
 </head>
@@ -71,12 +74,25 @@ button {
 
 <div id="resultat"></div>
 
+<p class="info">
+💡 Cet outil t’aide à repérer tes erreurs. Certaines corrections sont des suggestions.
+</p>
+
 </div>
 
 <script>
 
 // 🔥 TEXTE OFFICIEL
 let texteOfficiel = `Au temps de ma petite enfance, dans les années 1960, les villageois de mon âge avaient encore un air farouche et sauvage. Ils vivaient dans ces fermes perdues et fréquentaient la classe unique de l’école communale où, l’hiver, ils se rendaient à pied dans la neige. Au cours des années suivantes, en pleine période de croissance, les routes se sont élargies, les supermarchés se sont implantés, le téléphone et la télévision sont arrivés dans la vallée. Les enfants ont grandi et trouvé des emplois en ville. Certains sont devenus ouvriers, d’autres ingénieurs. Les exploitations agricoles ont dépéri avec leurs vieux parents. Benoît Duteurtre, Livre pour adultes, 2016`;
+
+// 🔹 noms clairs élèves
+let nomsTypes = {
+  C: "🔴 Conjugaison",
+  A: "🔵 Accord",
+  H: "🟠 Homonymes",
+  L: "🟣 Mots mal écrits",
+  P: "🟢 Ponctuation"
+};
 
 // 🔹 classification
 function classerErreur(message) {
@@ -93,7 +109,7 @@ function estNomPropre(mot) {
   return /^[A-ZÀ-Ü]/.test(mot);
 }
 
-// 🔹 normaliser texte
+// 🔹 normalisation
 function normaliser(t) {
   return t.toLowerCase().replace(/[.,;:!?]/g,"").replace(/\s+/g," ").trim();
 }
@@ -151,15 +167,14 @@ async function analyser() {
 
   });
 
-  // 🔥 AFFICHAGE ERREURS
-  let html = "<h3>📊 Analyse des fautes</h3>";
+  let html = "<h3>📊 Analyse des erreurs</h3>";
 
   for (let type in groupes) {
 
     if (groupes[type].length === 0) continue;
 
     html += `<div class="categorie ${type}">
-    <b>${type}</b> - ${groupes[type].length} faute(s)<br>`;
+    <b>${nomsTypes[type]}</b> – ${groupes[type].length} erreur(s)<br><br>`;
 
     groupes[type].forEach(e => {
       html += `❌ ${e.texte}<br>➡️ ${e.message}<br><br>`;
@@ -168,7 +183,6 @@ async function analyser() {
     html += "</div>";
   }
 
-  // 🔥 CORRECTION FIABLE
   let correction = comparer(texte, texteOfficiel);
 
   html += `
