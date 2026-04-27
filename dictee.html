@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Correction Dictée</title>
+
+<style>
+
+body {
+  font-family: Arial;
+  max-width: 800px;
+  margin: auto;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+}
+
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+
+.categorie {
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.C { background: #ffe5e5; }
+.A { background: #e5f0ff; }
+.H { background: #fff4e5; }
+.L { background: #f0e5ff; }
+.P { background: #e5fff2; }
+
+.erreur {
+  margin: 5px 0;
+  padding-left: 10px;
+}
+
+.feedback {
+  font-style: italic;
+  margin-top: 5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>✏️ Correction de dictée</h2>
+
+<textarea id="texte" placeholder="Colle ta dictée ici..."></textarea>
+<br>
+<button onclick="analyser()">Analyser</button>
+
+<h3>Résultats :</h3>
+<div id="resultat"></div>
+
+<h3 id="note"></h3>
+
+<script>
+
+let bareme = {
+  C: 1,
+  A: 1,
+  H: 0.5,
+  L: 0.5,
+  P: 0.25
+};
+
+let labels = {
+  C: "Fautes de conjugaison",
+  A: "Fautes d’accord",
+  H: "Fautes d’homonymes",
+  L: "Fautes lexicales / orthographe",
+  P: "Fautes de ponctuation"
+};
+
+let feedbacks = {
+  C: "👉 Pense à vérifier le sujet et le temps du verbe.",
+  A: "👉 Attention aux accords (genre et nombre).",
+  H: "👉 Vérifie les mots qui se prononcent pareil.",
+  L: "👉 Relis l’orthographe des mots.",
+  P: "👉 Attention à la ponctuation."
+};
+
+// 🔹 Ignorer erreurs inutiles
+function ignorerErreur(message) {
+  message = message.toLowerCase();
+
+  if (message.includes("virgule conseillée")) return true;
+  if (message.includes("ponctuation conseillée")) return true;
+  if (message.includes("style")) return true;
+  if (message.includes("reformulation")) return true;
+
+  return false;
+}
+
+// 🔹 Classification
+function classerErreur(message) {
+  message = message.toLowerCase();
+
+  if (message.includes("verbe") || message.includes("participe")) return "C";
+  if (message.includes("accord")) return "A";
+  if (message.includes("ponctuation") || message.includes("virgule")) return "P";
+  if (message.includes("homonyme") || message.includes("leur")) return "H";
+
+  return "L";
+}
+
+// 🔹 Niveau + badge
+function evaluerNiveau(note) {
+
+  if (note >= 17) {
+    return {
+      niveau: "Excellent",
+      badge: "🌟🌟🌟",
+      couleur: "#2ecc71",
+      message: "Excellent travail, presque aucune erreur."
+    };
+  }
+
+  if (note >= 14) {
+    return {
+      niveau: "Très bien",
+      badge: "🌟🌟",
+      couleur: "#27ae60",
+      message: "Très bon travail, quelques petites erreurs."
+    };
+  }
+
+  if (note >= 11) {
+    return {
+      niveau: "Bien",
+      badge: "🌟",
+      couleur: "#f1c40f",
+      message: "Bon travail, mais encore des points à renforcer."
+    };
+  }
+
+  if (note >= 8) {
+    return {
+      niveau: "À renforcer",
+      badge: "",
+      couleur: "#e67e22",
+      message: "Attention, certaines notions doivent être revues."
+    };
+  }
+
+  return {
+    niveau: "À revoir",
+    badge: "",
+    couleur: "#e74c3c",
+    message: "Des difficultés importantes, il faut retravailler la dictée."
+  };
+}
+
+async function analyser() {
+
+  let texte = document.getElementById("texte").value;
+
+  let response = await fetch("https://api.languagetool.org/v2/check", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: `text=${encodeURIComponent(texte)}&language=fr`
+  });
+
+  let data = await response.json();
+  let erreurs = data.matches;
+
+  let total = 20;
+  let penalitePonctuation = 0;
+  let dejaCompte = new Set();
+
+  let groupes = {
+    C: [],
+    A: [],
+    H: [],
+    L: [],
+    P: []
+  };
+
+  erreurs.forEach(e => {
+
+    if (ignorerErreur(e.message)) return;
+
+    let position = e.offset;
+    if (dejaCompte.has(position)) return;
+    dejaCompte.add(position);
+
+    let type = classerErreur(e.message);
+
+    if (type === "P") {
+      if (penalitePonctuation >= 1) return;
+      penalitePonctuation += 0.25;
+    }
+
+    total -= bareme[type];
+
+    groupes[type].push({
+      texte: e.context.text,
+      message: e.message
+    });
+  });
+
+  total = Math.max(total, 5);
+
+  let html = "";
+
+  for (let type in groupes) {
+
+    if (groupes[type].length === 0) continue;
+
+    let nb = groupes[type].length;
+    let penalite = nb * bareme[type];
+
+    html += `<div class="categorie ${type}">
+      <h4>📌 ${labels[type]}</h4>
+      <b>Nombre d’erreurs :</b> ${nb} <br>
+      <b>Pénalité :</b> -${penalite.toFixed(2)} pt
+    `;
+
+    groupes[type].forEach(e => {
+      html += `<div class="erreur">
+        ❌ ${e.texte}<br>
+        ➜ ${e.message}
+      </div>`;
+    });
+
+    html += `<div class="feedback">${feedbacks[type]}</div>`;
+    html += `</div>`;
+  }
+
+  let evaluation = evaluerNiveau(total);
+
+  document.getElementById("resultat").innerHTML = html;
+
+  document.getElementById("note").innerHTML = `
+    <div style="
+      border-radius:12px;
+      padding:15px;
+      background:${evaluation.couleur}20;
+      border-left:6px solid ${evaluation.couleur};
+      margin-top:15px;
+    ">
+      <h3>📝 Note : ${total.toFixed(2)}/20</h3>
+      <h4>${evaluation.badge} ${evaluation.niveau}</h4>
+      <p>${evaluation.message}</p>
+    </div>
+  `;
+}
+
+</script>
+
+</body>
+</html>
