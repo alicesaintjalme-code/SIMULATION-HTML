@@ -37,18 +37,6 @@ button {
   cursor: pointer;
 }
 
-.categorie {
-  border-radius: 10px;
-  padding: 10px;
-  margin-top: 15px;
-}
-
-.C { background: #ffe5e5; }
-.A { background: #e5f0ff; }
-.H { background: #fff4e5; }
-.L { background: #f0e5ff; }
-.P { background: #e5fff2; }
-
 .correct {
   background:#2ecc71;
   color:white;
@@ -93,20 +81,34 @@ button {
 
 <script>
 
+// 🔥 TEXTE OFFICIEL
 let texteOfficiel = "Au temps de ma petite enfance, dans les années 1960, les villageois de mon âge avaient encore un air farouche et sauvage. Ils vivaient dans ces fermes perdues et fréquentaient la classe unique de l’école communale où, l’hiver, ils se rendaient à pied dans la neige. Au cours des années suivantes, en pleine période de croissance, les routes se sont élargies, les supermarchés se sont implantés, le téléphone et la télévision sont arrivés dans la vallée. Les enfants ont grandi et trouvé des emplois en ville. Certains sont devenus ouvriers, d’autres ingénieurs. Les exploitations agricoles ont dépéri avec leurs vieux parents. Benoît Duteurtre, Livre pour adultes, 2016";
 
-// 🔥 fonction remplacement
+// 🔥 remplacement fiable
 function remplacerMot(index, motCorrect) {
 
-  let texte = document.getElementById("texte").value;
+  let textarea = document.getElementById("texte");
+  let texte = textarea.value;
+
   let tokens = texte.match(/\w+|[.,;:!?]/g) || [];
+
+  if (index >= tokens.length) return;
 
   tokens[index] = motCorrect;
 
-  document.getElementById("texte").value = tokens.join(" ");
+  // reconstruction propre
+  let nouveauTexte = "";
+  tokens.forEach((t, i) => {
+    if (i > 0 && !/[.,;:!?]/.test(t)) {
+      nouveauTexte += " ";
+    }
+    nouveauTexte += t;
+  });
+
+  textarea.value = nouveauTexte;
 }
 
-// 🔥 comparaison interactive
+// 🔥 comparaison robuste
 function comparer(texteEleve, texteCorrect) {
 
   const tokensCorrect = texteCorrect.match(/\w+|[.,;:!?]/g) || [];
@@ -156,7 +158,8 @@ function comparer(texteEleve, texteCorrect) {
   return resultat;
 }
 
-async function analyser() {
+// 🔥 analyse
+function analyser() {
 
   let texte = document.getElementById("texte").value;
 
