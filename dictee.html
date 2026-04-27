@@ -50,6 +50,18 @@ button {
   border-radius:4px;
   font-weight:bold;
 }
+
+.categorie {
+  margin-top:10px;
+  padding:10px;
+  border-radius:8px;
+}
+
+.C { background:#ffe5e5; }
+.A { background:#e5f0ff; }
+.H { background:#fff4e5; }
+.L { background:#f0e5ff; }
+.P { background:#e5fff2; }
 </style>
 </head>
 
@@ -69,15 +81,30 @@ button {
 
 <script>
 
-// 🔥 TEXTE OFFICIEL (format propre avec saut de ligne)
+// 🔥 TEXTE OFFICIEL EXACT
 let texteOfficiel = `Au temps de ma petite enfance, dans les années 1960, les villageois de mon âge avaient encore un air farouche et sauvage. Ils vivaient dans ces fermes perdues et fréquentaient la classe unique de l’école communale où, l’hiver, ils se rendaient à pied dans la neige. Au cours des années suivantes, en pleine période de croissance, les routes se sont élargies, les supermarchés se sont implantés, le téléphone et la télévision sont arrivés dans la vallée. Les enfants ont grandi et trouvé des emplois en ville. Certains sont devenus ouvriers, d’autres ingénieurs. Les exploitations agricoles ont dépéri avec leurs vieux parents.
 Benoît Duteurtre, Livre pour adultes, 2016`;
 
-// 🔥 REGEX (accents + apostrophes)
+// 🔥 REGEX accents + apostrophes
 const REGEX = /[\p{L}]+(?:['’][\p{L}]+)?|[.,;:!?]/gu;
 
-// 🔥 comparaison stable
-function comparer(texteEleve, texteCorrect) {
+// 🔹 catégories
+let nomsTypes = {
+  C: "Conjugaison",
+  A: "Accord",
+  H: "Homonymes",
+  L: "Orthographe",
+  P: "Ponctuation"
+};
+
+// 🔹 classification simple
+function classerErreur(tC) {
+  if (/[.,;:!?]/.test(tC)) return "P";
+  return "L";
+}
+
+// 🔥 comparaison + détection
+function comparer(texteEleve, texteCorrect, groupes) {
 
   const tokensCorrect = texteCorrect.match(REGEX) || [];
   const tokensEleve = texteEleve.match(REGEX) || [];
@@ -100,6 +127,10 @@ function comparer(texteEleve, texteCorrect) {
         j++;
       } else {
         resultat += `<span class="wrong">${tC}</span> `;
+        groupes["P"].push({
+          texte: tC,
+          message: "Ponctuation manquante ou incorrecte"
+        });
       }
 
       i++;
@@ -113,6 +144,11 @@ function comparer(texteEleve, texteCorrect) {
       j++;
     } else {
       resultat += `<span class="wrong">${tC}</span> `;
+      groupes["L"].push({
+        texte: tC,
+        message: "Mot incorrect ou manquant"
+      });
+
       i++;
       if (tE) j++;
     }
@@ -121,7 +157,7 @@ function comparer(texteEleve, texteCorrect) {
   return resultat;
 }
 
-// 🔥 analyse
+// 🔥 analyse complète
 function analyser() {
 
   let texte = document.getElementById("texte").value;
@@ -131,12 +167,32 @@ function analyser() {
     return;
   }
 
-  let correction = comparer(texte, texteOfficiel);
+  let groupes = {C:[], A:[], H:[], L:[], P:[]};
 
-  document.getElementById("resultat").innerHTML = `
-    <h3>🔁 Correction :</h3>
-    <p style="line-height:1.8;">${correction}</p>
+  let correction = comparer(texte, texteOfficiel, groupes);
+
+  let html = "<h3>📊 Détail des erreurs</h3>";
+
+  for (let type in groupes) {
+
+    if (groupes[type].length === 0) continue;
+
+    html += `<div class="categorie ${type}">
+    <b>${nomsTypes[type]}</b> (${groupes[type].length})<br><br>`;
+
+    groupes[type].forEach(e => {
+      html += `❌ ${e.texte} → ${e.message}<br>`;
+    });
+
+    html += "</div>";
+  }
+
+  html += `
+  <h3>🔁 Correction</h3>
+  <p style="line-height:1.8;">${correction}</p>
   `;
+
+  document.getElementById("resultat").innerHTML = html;
 }
 
 </script>
