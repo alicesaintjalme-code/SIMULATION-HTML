@@ -88,7 +88,7 @@ Benoît Duteurtre, Livre pour adultes, 2016`;
 // 🔥 REGEX accents + apostrophes
 const REGEX = /[\p{L}]+(?:['’][\p{L}]+)?|[.,;:!?]/gu;
 
-// 🔹 labels demandés
+// 🔹 labels
 let labels = {
   C: "Fautes de conjugaison",
   A: "Fautes d’accord",
@@ -97,7 +97,7 @@ let labels = {
   P: "Fautes de ponctuation"
 };
 
-// 🔹 classification via message
+// 🔹 classification intelligente
 function classerErreurMessage(message) {
   message = message.toLowerCase();
 
@@ -124,6 +124,7 @@ function comparer(texteEleve, texteCorrect) {
     let tC = tokensCorrect[i];
     let tE = tokensEleve[j];
 
+    // ponctuation
     if (/[.,;:!?]/.test(tC)) {
       if (tE === tC) {
         resultat += `<span class="correct">${tC}</span> `;
@@ -135,9 +136,11 @@ function comparer(texteEleve, texteCorrect) {
       continue;
     }
 
+    // mots
     if (tE && tE.toLowerCase() === tC.toLowerCase()) {
       resultat += `<span class="correct">${tC}</span> `;
-      i++; j++;
+      i++;
+      j++;
     } else {
       resultat += `<span class="wrong">${tC}</span> `;
       i++;
@@ -189,7 +192,7 @@ function analyser() {
 
   let groupes = {C:[], A:[], H:[], L:[], P:[]};
 
-  // 🔥 appel LanguageTool
+  // 🔥 LanguageTool
   fetch("https://api.languagetool.org/v2/check", {
     method: "POST",
     headers: {"Content-Type":"application/x-www-form-urlencoded"},
@@ -200,10 +203,19 @@ function analyser() {
 
     data.matches.forEach(e => {
 
+      let extrait = e.context.text;
+
+      // 🔥 IGNORER FAUX POSITIFS (fin du texte)
+      if (
+        extrait.includes("Duteurtre") ||
+        extrait.includes("Livre") ||
+        extrait.includes("2016")
+      ) return;
+
       let type = classerErreurMessage(e.message);
 
       groupes[type].push({
-        texte: e.context.text,
+        texte: extrait,
         message: e.message
       });
 
