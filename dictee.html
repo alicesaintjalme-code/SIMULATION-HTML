@@ -88,29 +88,34 @@ Benoît Duteurtre, Livre pour adultes, 2016`;
 // 🔥 REGEX accents + apostrophes
 const REGEX = /[\p{L}]+(?:['’][\p{L}]+)?|[.,;:!?]/gu;
 
-// 🔹 catégories
-let nomsTypes = {
-  C: "Conjugaison",
-  A: "Accord",
-  H: "Homonymes",
-  L: "Orthographe",
-  P: "Ponctuation"
+// 🔹 labels demandés
+let labels = {
+  C: "Fautes de conjugaison",
+  A: "Fautes d’accord",
+  H: "Fautes d’homonymes",
+  L: "Fautes lexicales / orthographe",
+  P: "Fautes de ponctuation"
 };
 
-// 🔹 classification simple
-function classerErreur(tC) {
-  if (/[.,;:!?]/.test(tC)) return "P";
+// 🔹 classification via message
+function classerErreurMessage(message) {
+  message = message.toLowerCase();
+
+  if (message.includes("verbe") || message.includes("participe")) return "C";
+  if (message.includes("accord")) return "A";
+  if (message.includes("homonyme")) return "H";
+  if (message.includes("ponctuation")) return "P";
+
   return "L";
 }
 
-// 🔥 comparaison + détection
-function comparer(texteEleve, texteCorrect, groupes) {
+// 🔥 comparaison (NE PAS TOUCHER)
+function comparer(texteEleve, texteCorrect) {
 
   const tokensCorrect = texteCorrect.match(REGEX) || [];
   const tokensEleve = texteEleve.match(REGEX) || [];
 
   let resultat = "";
-
   let i = 0;
   let j = 0;
 
@@ -119,36 +124,22 @@ function comparer(texteEleve, texteCorrect, groupes) {
     let tC = tokensCorrect[i];
     let tE = tokensEleve[j];
 
-    // ponctuation
     if (/[.,;:!?]/.test(tC)) {
-
       if (tE === tC) {
         resultat += `<span class="correct">${tC}</span> `;
         j++;
       } else {
         resultat += `<span class="wrong">${tC}</span> `;
-        groupes["P"].push({
-          texte: tC,
-          message: "Ponctuation manquante ou incorrecte"
-        });
       }
-
       i++;
       continue;
     }
 
-    // mots
     if (tE && tE.toLowerCase() === tC.toLowerCase()) {
       resultat += `<span class="correct">${tC}</span> `;
-      i++;
-      j++;
+      i++; j++;
     } else {
       resultat += `<span class="wrong">${tC}</span> `;
-      groupes["L"].push({
-        texte: tC,
-        message: "Mot incorrect ou manquant"
-      });
-
       i++;
       if (tE) j++;
     }
@@ -157,19 +148,8 @@ function comparer(texteEleve, texteCorrect, groupes) {
   return resultat;
 }
 
-// 🔥 analyse complète
-function analyser() {
-
-  let texte = document.getElementById("texte").value;
-
-  if (!texte.trim()) {
-    document.getElementById("resultat").innerHTML = "⚠️ Écris un texte avant d’analyser.";
-    return;
-  }
-
-  let groupes = {C:[], A:[], H:[], L:[], P:[]};
-
-  let correction = comparer(texte, texteOfficiel, groupes);
+// 🔥 affichage final
+function afficherResultat(groupes, correction) {
 
   let html = "<h3>📊 Détail des erreurs</h3>";
 
@@ -178,10 +158,10 @@ function analyser() {
     if (groupes[type].length === 0) continue;
 
     html += `<div class="categorie ${type}">
-    <b>${nomsTypes[type]}</b> (${groupes[type].length})<br><br>`;
+    <b>${labels[type]}</b> (${groupes[type].length})<br><br>`;
 
     groupes[type].forEach(e => {
-      html += `❌ ${e.texte} → ${e.message}<br>`;
+      html += `❌ ${e.texte}<br>➡️ ${e.message}<br><br>`;
     });
 
     html += "</div>";
@@ -193,6 +173,45 @@ function analyser() {
   `;
 
   document.getElementById("resultat").innerHTML = html;
+}
+
+// 🔥 analyse principale
+function analyser() {
+
+  let texte = document.getElementById("texte").value;
+
+  if (!texte.trim()) {
+    document.getElementById("resultat").innerHTML = "⚠️ Écris un texte avant d’analyser.";
+    return;
+  }
+
+  let correction = comparer(texte, texteOfficiel);
+
+  let groupes = {C:[], A:[], H:[], L:[], P:[]};
+
+  // 🔥 appel LanguageTool
+  fetch("https://api.languagetool.org/v2/check", {
+    method: "POST",
+    headers: {"Content-Type":"application/x-www-form-urlencoded"},
+    body: `text=${encodeURIComponent(texte)}&language=fr`
+  })
+  .then(res => res.json())
+  .then(data => {
+
+    data.matches.forEach(e => {
+
+      let type = classerErreurMessage(e.message);
+
+      groupes[type].push({
+        texte: e.context.text,
+        message: e.message
+      });
+
+    });
+
+    afficherResultat(groupes, correction);
+
+  });
 }
 
 </script>
