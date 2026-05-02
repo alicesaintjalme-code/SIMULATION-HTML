@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SVT Exercices</title>
+
+<style>
+
+body {
+  font-family: Arial;
+  background: linear-gradient(135deg, #eef2f7, #f8fbff);
+  padding:20px;
+}
+
+.container {
+  max-width:1000px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.exo {
+  margin-bottom:35px;
+  padding:20px;
+  border-radius:12px;
+  background:#f9fbfd;
+  border-left:6px solid #4CAF50;
+}
+
+h3 {
+  background:#e8f5e9;
+  padding:6px 12px;
+  border-radius:8px;
+  display:inline-block;
+}
+
+.question {
+  font-weight:bold;
+  color:#2c3e50;
+  margin-top:15px;
+}
+
+.ligne {
+  margin:12px 0;
+  padding:12px;
+  border-radius:10px;
+  transition:0.2s;
+}
+
+.ligne:hover {
+  background:#eef7ff;
+}
+
+label {
+  display:inline-block;
+  margin:5px 10px 5px 0;
+  padding:6px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+label:hover {
+  background:#eef7ff;
+}
+
+.correct {
+  background:#eaf7ea;
+  border:2px solid #4CAF50;
+}
+
+.incorrect {
+  background:#fdeaea;
+  border:2px solid #e74c3c;
+}
+
+button {
+  margin-top:15px;
+  padding:10px 18px;
+  background:linear-gradient(135deg,#4CAF50,#43a047);
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.2s;
+}
+
+button:hover {
+  transform:scale(1.05);
+}
+
+.correction {
+  display:none;
+  margin-top:15px;
+  background:#f1f1f1;
+  padding:15px;
+  border-radius:10px;
+  border-left:5px solid #4CAF50;
+}
+
+.correction span {
+  font-weight:600;
+}
+
+.drag {
+  display:inline-block;
+  padding:6px 10px;
+  margin:5px;
+  border:2px solid #4CAF50;
+  border-radius:6px;
+  cursor:grab;
+  background:#eaf7ea;
+}
+
+.zone {
+  display:inline-block;
+  min-width:140px;
+  min-height:30px;
+  border:2px dashed #aaa;
+  margin:5px;
+  border-radius:6px;
+}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- EXERCICE 1 -->
+<div class="exo" id="exo1">
+<h3>Exercice n°1</h3>
+
+<p class="question">Complète le trajet des spermatozoïdes dans l'appareil reproducteur masculin lors de l'éjaculation.</p>
+<p>Faites glisser les étiquettes dans les zones prévues à cet effet.</p>
+
+<div>
+<span class="drag" draggable="true">canal déférent</span>
+<span class="drag" draggable="true">épididyme</span>
+<span class="drag" draggable="true">urètre</span>
+<span class="drag" draggable="true">tubes séminifères</span>
+</div>
+
+<p>
+<span class="zone" data="tubes séminifères"></span> →
+<span class="zone" data="épididyme"></span> →
+<span class="zone" data="canal déférent"></span> →
+<span class="zone" data="urètre"></span> →
+sortie des spermatozoïdes et du liquide séminal par le pénis
+</p>
+
+<button onclick="corrigerDrag()">Valider</button>
+
+<div class="correction">
+
+<p><strong>Correction :</strong></p>
+
+<div style="display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-top:10px;">
+
+<span class="correct">① tubes séminifères</span>
+<span>➡️</span>
+
+<span class="correct">② épididyme</span>
+<span>➡️</span>
+
+<span class="correct">③ canal déférent</span>
+<span>➡️</span>
+
+<span class="correct">④ urètre</span>
+<span>➡️</span>
+
+<span class="correct">⑤ sortie des spermatozoïdes et du liquide séminal par le pénis</span>
+
+</div>
+
+</div>
+</div>
+
+<!-- EXERCICE 2 -->
+<div class="exo" id="exo2">
+<h3>Exercice n°2</h3>
+
+<p class="question">Vrai ou faux ?</p>
+
+<div class="ligne">
+1. Une hormone est toujours produite par le cerveau.<br>
+<label><input type="radio" name="q1" value="true"> Vrai</label>
+<label><input type="radio" name="q1" value="false"> Faux</label>
+</div>
+
+<div class="ligne">
+2. Une hormone est une substance chimique qui circule dans le sang.<br>
+<label><input type="radio" name="q2" value="true"> Vrai</label>
+<label><input type="radio" name="q2" value="false"> Faux</label>
+</div>
+
+<div class="ligne">
+3. Le testicule fonctionne sans l'action d'hormones.<br>
+<label><input type="radio" name="q3" value="true"> Vrai</label>
+<label><input type="radio" name="q3" value="false"> Faux</label>
+</div>
+
+<div class="ligne">
+4. Le testicule synthétise une hormone.<br>
+<label><input type="radio" name="q4" value="true"> Vrai</label>
+<label><input type="radio" name="q4" value="false"> Faux</label>
+</div>
+
+<button onclick="corrigerVF()">Valider</button>
+
+<div class="correction">
+1. Faux<br>
+2. Vrai<br>
+3. Faux<br>
+4. Vrai<br><br>
+Une hormone est une substance chimique circulant dans le sang et sécrétée par une glande. On parle de neurohormone lorsqu'elle est produite par des neurones.
+</div>
+</div>
+
+<!-- EXERCICE 3 -->
+<div class="exo" id="exo3">
+<h3>Exercice n°3</h3>
+
+<p class="question">1. Est produite par le cerveau.</p>
+<label><input type="radio" name="q5"> hormone cérébrale</label>
+<label><input type="radio" name="q5"> testostérone</label>
+
+<p class="question">2. Est produite par le testicule.</p>
+<label><input type="radio" name="q6"> hormone cérébrale</label>
+<label><input type="radio" name="q6"> testostérone</label>
+
+<p class="question">3. Est responsable de l'apparition des caractères sexuels secondaires.</p>
+<label><input type="radio" name="q7"> hormone cérébrale</label>
+<label><input type="radio" name="q7"> testostérone</label>
+
+<p class="question">4. Agit sur le testicule.</p>
+<label><input type="radio" name="q8"> hormone cérébrale</label>
+<label><input type="radio" name="q8"> testostérone</label>
+
+<button onclick="corrigerQCM()">Valider</button>
+
+<div class="correction">
+hormone cérébrale<br>
+testostérone<br>
+testostérone<br>
+hormone cérébrale<br><br>
+Les hormones cérébrales agissent sur les testicules et stimulent (ou inhibent) la production de testostérone par ces derniers.
+</div>
+</div>
+
+</div>
+
+<script>
+
+let dragged;
+
+document.querySelectorAll(".drag").forEach(el=>{
+  el.addEventListener("dragstart",()=> dragged=el);
+});
+
+document.querySelectorAll(".zone").forEach(zone=>{
+  zone.addEventListener("dragover",e=>e.preventDefault());
+  zone.addEventListener("drop",function(){
+    if(this.firstChild){
+      this.parentElement.appendChild(this.firstChild);
+    }
+    this.appendChild(dragged);
+  });
+});
+
+function corrigerDrag(){
+document.querySelectorAll("#exo1 .zone").forEach(z=>{
+  z.classList.remove("correct","incorrect");
+  if(z.firstChild && z.firstChild.textContent===z.dataset){
+    z.classList.add("correct");
+  } else {
+    z.classList.add("incorrect");
+  }
+});
+document.querySelector("#exo1 .correction").style.display="block";
+}
+
+function corrigerVF(){
+const exo=document.getElementById("exo2");
+
+const bonnes = {
+  q1:"false",
+  q2:"true",
+  q3:"false",
+  q4:"true"
+};
+
+Object.keys(bonnes).forEach(q=>{
+  let radios = exo.querySelectorAll("input[name='"+q+"']");
+  let ligne = radios[0].closest(".ligne");
+
+  ligne.classList.remove("correct","incorrect");
+
+  let checked = Array.from(radios).find(r=>r.checked);
+
+  if(!checked){
+    ligne.classList.add("incorrect");
+    return;
+  }
+
+  if(checked.value === bonnes[q]){
+    ligne.classList.add("correct");
+  } else {
+    ligne.classList.add("incorrect");
+  }
+});
+
+exo.querySelector(".correction").style.display="block";
+}
+
+function corrigerQCM(){
+const bonnes = ["1","2","2","1"];
+
+["q5","q6","q7","q8"].forEach((q,i)=>{
+  let radios=document.querySelectorAll("input[name='"+q+"']");
+  radios.forEach((r,index)=>{
+    r.parentElement.classList.remove("correct","incorrect");
+    if(index+1==bonnes[i]) r.parentElement.classList.add("correct");
+    else if(r.checked) r.parentElement.classList.add("incorrect");
+  });
+});
+
+document.querySelector("#exo3 .correction").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
