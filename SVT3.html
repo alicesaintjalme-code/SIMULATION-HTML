@@ -59,8 +59,15 @@ h3{
   display:block;
   width:100%;
   margin:8px 0;
-  padding:8px;
+  padding:10px;
   border-radius:8px;
+  border:1px solid #e0e0e0;
+  background:#ffffff;
+  transition:0.2s;
+}
+
+.choix:hover{
+  background:#eef7ff;
 }
 
 .correct{
@@ -80,6 +87,11 @@ input[type="text"]{
   margin:0 5px;
   border-radius:6px;
   border:2px solid #ccc;
+}
+
+input[type="text"]:focus{
+  border-color:#4CAF50;
+  outline:none;
 }
 
 textarea{
@@ -193,14 +205,17 @@ g. Hausse de la température de surface
 <button onclick="corriger2()">Valider</button>
 
 <div class="correction" id="cor2">
+
 <p><strong>Correction :</strong></p>
-✔ 1. beaucoup de dioxyde de carbone<br>
-✔ 2. le dioxygène<br>
-✔ 3. des dépôts rocheux caractéristiques des glaciers
+
+<p>1. beaucoup de dioxyde de carbone — Un climat chaud est associé à une forte concentration de gaz à effet de serre comme le CO₂.</p>
+<p>2. le dioxygène — Le dioxygène n’absorbe pas le rayonnement infrarouge, contrairement aux gaz à effet de serre.</p>
+<p>3. des dépôts rocheux caractéristiques des glaciers — Les moraines sont des accumulations de roches transportées par les glaciers.</p>
 
 <div class="bilan">
-✔ À retenir : Les gaz à effet de serre et les indices géologiques permettent d’étudier les climats.
+✔ À retenir : Les gaz à effet de serre influencent le climat et les indices géologiques permettent de reconstituer les climats passés.
 </div>
+
 </div>
 
 </div>
@@ -289,30 +304,36 @@ el.classList.add("incorrect");
 document.getElementById("cor1").style.display="block";
 }
 
-// EXO2
+// EXO2 CORRIGÉ SELON PROMPT
 function corriger2(){
-const bonnes={
+const exo = document.getElementById("exo2");
+
+const bonnes = {
 q1:"4",
 q2:"3",
 q3:"2"
 };
 
 Object.keys(bonnes).forEach(q=>{
-let radios=document.querySelectorAll("input[name='"+q+"']");
+
+let radios = exo.querySelectorAll("input[name='"+q+"']");
 
 radios.forEach(r=>{
-r.parentElement.classList.remove("correct","incorrect");
+let label = r.parentElement;
+label.classList.remove("correct","incorrect");
+
+// ✅ toujours afficher bonne réponse en vert
+if(r.value === bonnes[q]){
+label.classList.add("correct");
+}
+
+// ❌ mauvaise cochée en rouge
+if(r.checked && r.value !== bonnes[q]){
+label.classList.add("incorrect");
+}
+
 });
 
-let checked=Array.from(radios).find(r=>r.checked);
-
-if(checked){
-if(checked.value===bonnes[q]){
-checked.parentElement.classList.add("correct");
-}else{
-checked.parentElement.classList.add("incorrect");
-}
-}
 });
 
 document.getElementById("cor2").style.display="block";
