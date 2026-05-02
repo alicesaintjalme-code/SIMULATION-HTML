@@ -1,4 +1,62 @@
+<style>
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  font-family: Arial;
+}
+
+.exo { margin-bottom: 30px; }
+
+h3 { color: #2c3e50; }
+
+ul { padding-left: 20px; }
+
+li { margin: 8px 0; }
+
+input[type="text"] {
+  width: 220px;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.choix {
+  display: block;
+  margin: 5px 0;
+}
+
+button {
+  margin-top: 15px;
+  padding: 8px 12px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.correction {
+  display: none;
+  margin-top: 15px;
+}
+
+.mots {
+  background:#f1f1f1;
+  padding:10px;
+  border-radius:8px;
+  margin-bottom:10px;
+}
+</style>
+
 <div class="container">
+
+<!-- ================= EXERCICE 1 ================= -->
+
+<div class="exo">
+
+<h3>🟦 Exercice n°1 — Effet de serre</h3>
 
 <p><strong>Mots proposés :</strong></p>
 
@@ -9,19 +67,18 @@ Atmosphère — Rayonnement solaire reçu — Une partie du rayonnement est renv
 <p><strong>Associez (écris la lettre correspondante du schéma) :</strong></p>
 
 <ul>
-<li>Hausse de la température de surface : <input id="e1"></li>
-<li>Rayonnement solaire reçu : <input id="e2"></li>
-<li>Atmosphère : <input id="e3"></li>
-<li>Conversion en énergie thermique : <input id="e4"></li>
-<li>Rayonnement émis par la surface de la Terre : <input id="e5"></li>
-<li>Une partie du rayonnement est renvoyé : <input id="e6"></li>
-<li>Absorption par les gaz à effet de serre : <input id="e7"></li>
+<li>Hausse de la température de surface : <input type="text"></li>
+<li>Rayonnement solaire reçu : <input type="text"></li>
+<li>Atmosphère : <input type="text"></li>
+<li>Conversion en énergie thermique : <input type="text"></li>
+<li>Rayonnement émis par la surface de la Terre : <input type="text"></li>
+<li>Une partie du rayonnement est renvoyé : <input type="text"></li>
+<li>Absorption par les gaz à effet de serre : <input type="text"></li>
 </ul>
 
-<button onclick="corrigerMelange()">Valider</button>
+<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
 
-<div id="corMelange" class="correction">
-<hr>
+<div class="correction">
 <p><strong>Correction :</strong></p>
 a. Atmosphère<br>
 b. Rayonnement solaire reçu<br>
@@ -32,45 +89,49 @@ f. Conversion en énergie thermique<br>
 g. Hausse de la température de surface
 </div>
 
+</div>
+
 <hr>
 
 <!-- ================= EXERCICE 2 ================= -->
 
+<div class="exo">
+
 <h3>🟩 Exercice n°2 — QCM</h3>
 
-<form id="exo2">
-
 <p>1. Quel indice témoigne d'un climat chaud ?</p>
-<label><input type="radio" name="qcm1" value="1"> peu de dioxyde de carbone.</label>
-<label><input type="radio" name="qcm1" value="2"> la présence de fossiles de mammouths.</label>
-<label><input type="radio" name="qcm1" value="3"> la présence de moraines.</label>
-<label><input type="radio" name="qcm1" value="4"> beaucoup de dioxyde de carbone.</label>
+<label class="choix"><input type="radio" name="q1"> peu de dioxyde de carbone.</label>
+<label class="choix"><input type="radio" name="q1"> la présence de fossiles de mammouths.</label>
+<label class="choix"><input type="radio" name="q1"> la présence de moraines.</label>
+<label class="choix"><input type="radio" name="q1"> beaucoup de dioxyde de carbone.</label>
 
 <p>2. Lequel de ces gaz n'est pas un gaz à effet de serre ?</p>
-<label><input type="radio" name="qcm2" value="1"> le protoxyde d'azote.</label>
-<label><input type="radio" name="qcm2" value="2"> le méthane.</label>
-<label><input type="radio" name="qcm2" value="3"> le dioxygène.</label>
-<label><input type="radio" name="qcm2" value="4"> le dioxyde de carbone.</label>
+<label class="choix"><input type="radio" name="q2"> le protoxyde d'azote.</label>
+<label class="choix"><input type="radio" name="q2"> le méthane.</label>
+<label class="choix"><input type="radio" name="q2"> le dioxygène.</label>
+<label class="choix"><input type="radio" name="q2"> le dioxyde de carbone.</label>
 
 <p>3. Les moraines sont :</p>
-<label><input type="radio" name="qcm3" value="1"> une espèce de fossile.</label>
-<label><input type="radio" name="qcm3" value="2"> des dépôts rocheux caractéristiques des glaciers.</label>
-<label><input type="radio" name="qcm3" value="3"> des blocs de glace déposés par les glaciers.</label>
-<label><input type="radio" name="qcm3" value="4"> un impact du réchauffement climatique actuel.</label>
+<label class="choix"><input type="radio" name="q3"> une espèce de fossile.</label>
+<label class="choix"><input type="radio" name="q3"> des dépôts rocheux caractéristiques des glaciers.</label>
+<label class="choix"><input type="radio" name="q3"> des blocs de glace déposés par les glaciers.</label>
+<label class="choix"><input type="radio" name="q3"> un impact du réchauffement climatique actuel.</label>
 
-</form>
+<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
 
-<button onclick="corriger2()">Valider</button>
-
-<div id="cor2" class="correction">
+<div class="correction">
 ✔ 1. beaucoup de dioxyde de carbone<br>
 ✔ 2. le dioxygène<br>
 ✔ 3. des dépôts rocheux caractéristiques des glaciers
 </div>
 
+</div>
+
 <hr>
 
 <!-- ================= EXERCICE 3 ================= -->
+
+<div class="exo">
 
 <h3>🟨 Exercice n°3 — Complétez</h3>
 
@@ -79,20 +140,24 @@ Mots : activités — gaz — réchauffement — dioxyde de carbone — effet de
 </div>
 
 <p>
-Les <input> humaines libèrent des <input> à effet de serre qui engendrent un <input> climatique.  
-Les COP visent à réduire les émissions de <input> afin de réduire l’<input>.
+Les <input type="text"> humaines libèrent des <input type="text"> à effet de serre qui engendrent un <input type="text"> climatique.  
+Les COP visent à réduire les émissions de <input type="text"> afin de réduire l’<input type="text">.
 </p>
 
-<button onclick="corriger3()">Valider</button>
+<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
 
-<div id="cor3" class="correction">
+<div class="correction">
 Les activités humaines libèrent des gaz à effet de serre qui engendrent un réchauffement climatique.  
 Les COP visent à réduire les émissions de dioxyde de carbone afin de réduire l’effet de serre.
+</div>
+
 </div>
 
 <hr>
 
 <!-- ================= EXERCICE 4 ================= -->
+
+<div class="exo">
 
 <h3>🟥 Exercice n°4 — Rédaction</h3>
 
@@ -104,32 +169,16 @@ Les COP visent à réduire les émissions de dioxyde de carbone afin de réduire
 <p>2. Effet de serre, phénomène naturel, activités humaines, amplification du réchauffement.</p>
 <textarea rows="3" style="width:100%;"></textarea>
 
-<button onclick="corriger4()">Valider</button>
+<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
 
-<div id="cor4" class="correction">
+<div class="correction">
 <p><strong>Correction :</strong></p>
+
 1. Les activités humaines entraînent un réchauffement climatique en modifiant la composition de l'atmosphère.<br><br>
+
 2. L'effet de serre est un phénomène naturel réchauffant l'atmosphère mais les activités humaines entraînent une amplification du réchauffement.
 </div>
 
 </div>
 
-<script>
-
-function corrigerMelange(){
-  document.getElementById("corMelange").style.display="block";
-}
-
-function corriger2(){
-  document.getElementById("cor2").style.display="block";
-}
-
-function corriger3(){
-  document.getElementById("cor3").style.display="block";
-}
-
-function corriger4(){
-  document.getElementById("cor4").style.display="block";
-}
-
-</script>
+</div>
