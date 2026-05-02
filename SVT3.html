@@ -1,46 +1,10 @@
-<style>
-.container {
-  max-width: 900px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  font-family: Arial;
-}
-
-h3 { color: #2c3e50; }
-
-button {
-  margin-top: 15px;
-  padding: 8px 12px;
-  background: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.correction { display:none; margin-top:15px; }
-
-input, textarea {
-  padding:5px;
-  margin:5px;
-}
-
-.correct { background:#eaf7ea; border:2px solid green; }
-.incorrect { background:#ffe5e5; }
-
-.mots {
-  background:#f1f1f1;
-  padding:10px;
-  border-radius:8px;
-  margin-bottom:10px;
-}
-</style>
-
 <div class="container">
 
-<!-- ================= EXERCICE 1 ================= -->
+<p><strong>Mots proposés :</strong></p>
+
+<div class="mots">
+Atmosphère — Rayonnement solaire reçu — Une partie du rayonnement est renvoyé — Rayonnement émis par la surface de la Terre — Absorption par les gaz à effet de serre — Conversion en énergie thermique — Hausse de la température de surface
+</div>
 
 <p><strong>Associez (écris la lettre correspondante du schéma) :</strong></p>
 
@@ -57,7 +21,15 @@ input, textarea {
 <button onclick="corrigerMelange()">Valider</button>
 
 <div id="corMelange" class="correction">
-✔ Corrigé affiché
+<hr>
+<p><strong>Correction :</strong></p>
+a. Atmosphère<br>
+b. Rayonnement solaire reçu<br>
+c. Une partie du rayonnement est renvoyé<br>
+d. Rayonnement émis par la surface de la Terre<br>
+e. Absorption par les gaz à effet de serre<br>
+f. Conversion en énergie thermique<br>
+g. Hausse de la température de surface
 </div>
 
 <hr>
@@ -69,23 +41,31 @@ input, textarea {
 <form id="exo2">
 
 <p>1. Quel indice témoigne d'un climat chaud ?</p>
+<label><input type="radio" name="qcm1" value="1"> peu de dioxyde de carbone.</label>
+<label><input type="radio" name="qcm1" value="2"> la présence de fossiles de mammouths.</label>
+<label><input type="radio" name="qcm1" value="3"> la présence de moraines.</label>
 <label><input type="radio" name="qcm1" value="4"> beaucoup de dioxyde de carbone.</label>
-<label><input type="radio" name="qcm1" value="0"> peu de dioxyde de carbone.</label>
 
-<p>2. Gaz NON à effet de serre :</p>
-<label><input type="radio" name="qcm2" value="3"> dioxygène.</label>
-<label><input type="radio" name="qcm2" value="0"> méthane.</label>
+<p>2. Lequel de ces gaz n'est pas un gaz à effet de serre ?</p>
+<label><input type="radio" name="qcm2" value="1"> le protoxyde d'azote.</label>
+<label><input type="radio" name="qcm2" value="2"> le méthane.</label>
+<label><input type="radio" name="qcm2" value="3"> le dioxygène.</label>
+<label><input type="radio" name="qcm2" value="4"> le dioxyde de carbone.</label>
 
 <p>3. Les moraines sont :</p>
-<label><input type="radio" name="qcm3" value="2"> dépôts rocheux.</label>
-<label><input type="radio" name="qcm3" value="0"> blocs de glace.</label>
+<label><input type="radio" name="qcm3" value="1"> une espèce de fossile.</label>
+<label><input type="radio" name="qcm3" value="2"> des dépôts rocheux caractéristiques des glaciers.</label>
+<label><input type="radio" name="qcm3" value="3"> des blocs de glace déposés par les glaciers.</label>
+<label><input type="radio" name="qcm3" value="4"> un impact du réchauffement climatique actuel.</label>
 
 </form>
 
 <button onclick="corriger2()">Valider</button>
 
 <div id="cor2" class="correction">
-✔ Correction affichée
+✔ 1. beaucoup de dioxyde de carbone<br>
+✔ 2. le dioxygène<br>
+✔ 3. des dépôts rocheux caractéristiques des glaciers
 </div>
 
 <hr>
@@ -106,7 +86,8 @@ Les COP visent à réduire les émissions de <input> afin de réduire l’<input
 <button onclick="corriger3()">Valider</button>
 
 <div id="cor3" class="correction">
-Correction affichée
+Les activités humaines libèrent des gaz à effet de serre qui engendrent un réchauffement climatique.  
+Les COP visent à réduire les émissions de dioxyde de carbone afin de réduire l’effet de serre.
 </div>
 
 <hr>
@@ -115,12 +96,20 @@ Correction affichée
 
 <h3>🟥 Exercice n°4 — Rédaction</h3>
 
-<textarea rows="4" style="width:100%;"></textarea>
+<p><strong>Construisez des phrases avec les mots suivants :</strong></p>
+
+<p>1. Activités humaines, réchauffement climatique, composition de l'atmosphère.</p>
+<textarea rows="3" style="width:100%;"></textarea>
+
+<p>2. Effet de serre, phénomène naturel, activités humaines, amplification du réchauffement.</p>
+<textarea rows="3" style="width:100%;"></textarea>
 
 <button onclick="corriger4()">Valider</button>
 
 <div id="cor4" class="correction">
-Correction affichée
+<p><strong>Correction :</strong></p>
+1. Les activités humaines entraînent un réchauffement climatique en modifiant la composition de l'atmosphère.<br><br>
+2. L'effet de serre est un phénomène naturel réchauffant l'atmosphère mais les activités humaines entraînent une amplification du réchauffement.
 </div>
 
 </div>
@@ -128,23 +117,6 @@ Correction affichée
 <script>
 
 function corrigerMelange(){
-
-  let bonnes = ["g","b","a","f","d","c","e"];
-  let ids = ["e1","e2","e3","e4","e5","e6","e7"];
-
-  ids.forEach((id,index)=>{
-    let input = document.getElementById(id);
-    let val = input.value.toLowerCase().trim();
-
-    input.classList.remove("correct","incorrect");
-
-    if(val === bonnes[index]){
-      input.classList.add("correct");
-    } else {
-      input.classList.add("incorrect");
-    }
-  });
-
   document.getElementById("corMelange").style.display="block";
 }
 
