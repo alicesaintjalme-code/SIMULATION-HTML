@@ -42,7 +42,6 @@ h3 {
   margin-top:15px;
 }
 
-/* lignes réponses */
 .ligne {
   display:block;
   width:100%;
@@ -57,8 +56,8 @@ h3 {
 }
 
 label {
-  cursor:pointer;
   display:block;
+  cursor:pointer;
 }
 
 label input {
@@ -107,7 +106,6 @@ button:hover {
   border-radius:8px;
 }
 
-/* input inline */
 input[type="text"] {
   display:inline-block;
   width:120px;
@@ -115,7 +113,6 @@ input[type="text"] {
   margin:5px;
   border-radius:8px;
   border:2px solid #ddd;
-  transition:0.2s;
 }
 
 input[type="text"]:focus {
@@ -130,9 +127,9 @@ input[type="text"]:focus {
 
 <!-- EXERCICE 1 -->
 <div class="exo" id="exo1">
-<h3>1.</h3>
+<h3>Exercice n°1</h3>
 
-<p class="question">Pour respirer les cellules végétales ont toujours besoin :</p>
+<p class="question">1. Pour respirer les cellules végétales ont toujours besoin :</p>
 
 <div class="ligne"><label><input type="radio" name="q1" value="1"> de lumière.</label></div>
 <div class="ligne"><label><input type="radio" name="q1" value="2"> de dioxyde de carbone.</label></div>
@@ -153,24 +150,32 @@ input[type="text"]:focus {
 <div class="ligne"><label><input type="radio" name="q3" value="3"> de dioxyde de carbone.</label></div>
 <div class="ligne"><label><input type="radio" name="q3" value="4"> d'urée.</label></div>
 
+<p class="question">4. La respiration cellulaire :</p>
+
+<div class="ligne"><label><input type="radio" name="q4" value="1"> produit du dioxygène.</label></div>
+<div class="ligne"><label><input type="radio" name="q4" value="2"> consomme du dioxygène.</label></div>
+<div class="ligne"><label><input type="radio" name="q4" value="3"> produit de la lumière.</label></div>
+<div class="ligne"><label><input type="radio" name="q4" value="4"> consomme du glucose uniquement.</label></div>
+
 <button onclick="corriger1()">Valider</button>
 
 <div class="correction">
 <p><strong>Correction :</strong></p>
 
-<p>1. de dioxygène — Les cellules utilisent le dioxygène pour respirer et produire de l’énergie.</p>
-<p>2. ont un rôle positif dans la nutrition des êtres vivants — Ils participent à la digestion et aux échanges utiles.</p>
-<p>3. de matière organique — La photosynthèse fabrique du sucre à partir de matière minérale.</p>
+<p>1. de dioxygène — Les cellules respirent grâce au dioxygène.</p>
+<p>2. rôle positif — Ils participent à la nutrition de nombreux êtres vivants.</p>
+<p>3. matière organique — La photosynthèse fabrique des sucres.</p>
+<p>4. consomme du dioxygène — La respiration utilise le dioxygène pour produire de l’énergie.</p>
 
 <div class="bilan">
-✔ À retenir : La respiration consomme du dioxygène et la photosynthèse produit de la matière organique.
+✔ À retenir : La respiration consomme du dioxygène et produit de l’énergie, contrairement à la photosynthèse.
 </div>
 </div>
 </div>
 
 <!-- EXERCICE 2 -->
 <div class="exo" id="exo2">
-<h3>2</h3>
+<h3>Exercice n°2</h3>
 
 <p class="question">Construisez une phrase avec les mots suivants</p>
 
@@ -190,7 +195,7 @@ input[type="text"]:focus {
 <p>3. L'association d'un champignon avec une racine forme une mycorhize qui favorise la nutrition des végétaux.</p>
 
 <div class="bilan">
-✔ À retenir : Une phrase correcte doit contenir tous les mots-clés importants du mécanisme.
+✔ À retenir : Une phrase scientifique doit contenir tous les mots-clés importants.
 </div>
 </div>
 </div>
@@ -202,12 +207,11 @@ input[type="text"]:focus {
 function corriger1(){
 const exo=document.getElementById("exo1");
 
-let bonnes={q1:"3", q2:"3", q3:"1"};
+let bonnes={q1:"3", q2:"3", q3:"1", q4:"2"};
 
 Object.keys(bonnes).forEach(q=>{
 let radios=exo.querySelectorAll("input[name='"+q+"']");
 let checked=[...radios].find(r=>r.checked);
-let ligneParent;
 
 radios.forEach(r=>{
 r.closest(".ligne").classList.remove("correct","incorrect");
@@ -217,12 +221,11 @@ r.closest(".ligne").classList.add("correct");
 }
 });
 
-if(checked){
-ligneParent=checked.closest(".ligne");
-if(checked.value!==bonnes[q]){
-ligneParent.classList.add("incorrect");
+if(checked && checked.value!==bonnes[q]){
+checked.closest(".ligne").classList.add("incorrect");
 }
-}else{
+
+if(!checked){
 radios[0].closest(".ligne").classList.add("incorrect");
 }
 });
