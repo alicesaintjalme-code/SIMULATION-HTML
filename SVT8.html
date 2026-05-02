@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SVT Exercices</title>
+
+<style>
+
+body {
+  font-family: Arial;
+  background: linear-gradient(135deg, #eef2f7, #f8fbff);
+  padding:20px;
+}
+
+.container {
+  max-width:1000px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.exo {
+  margin-bottom:35px;
+  padding:20px;
+  border-radius:12px;
+  background:#f9fbfd;
+  border-left:6px solid #4CAF50;
+}
+
+h3 {
+  background:#e8f5e9;
+  padding:6px 12px;
+  border-radius:8px;
+  display:inline-block;
+}
+
+.question {
+  font-weight:bold;
+  margin-top:15px;
+}
+
+label {
+  display:block;
+  padding:6px;
+  margin:4px 0;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+label:hover {
+  background:#eef7ff;
+}
+
+.correct {
+  background:#eaf7ea;
+  border:2px solid #4CAF50;
+}
+
+.incorrect {
+  background:#fdeaea;
+  border:2px solid #e74c3c;
+}
+
+button {
+  margin-top:15px;
+  padding:8px 16px;
+  background:#4CAF50;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.correction {
+  display:none;
+  margin-top:15px;
+  background:#f1f1f1;
+  padding:15px;
+  border-radius:10px;
+}
+
+.drag {
+  display:inline-block;
+  padding:6px 10px;
+  margin:5px;
+  border:2px solid #4CAF50;
+  border-radius:6px;
+  cursor:grab;
+  background:#eaf7ea;
+}
+
+.zone {
+  display:inline-block;
+  min-width:120px;
+  min-height:30px;
+  border:2px dashed #aaa;
+  margin:5px;
+  vertical-align:middle;
+}
+
+#exo4 input {
+  width:120px;
+  display:inline-block;
+  margin:0 5px;
+}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- EXO 1 DRAG -->
+<div class="exo" id="exo1">
+<h3>Exercice n°1</h3>
+
+<p class="question">Décris le trajet du dioxygène des poumons jusqu'aux organes et du dioxyde de carbone des organes jusqu'aux poumons.</p>
+<p>Faites glisser les étiquettes dans les zones prévues à cet effet.</p>
+
+<div>
+<span class="drag" draggable="true">artère aorte</span>
+<span class="drag" draggable="true">veine cave</span>
+<span class="drag" draggable="true">cœur gauche</span>
+<span class="drag" draggable="true">artère pulmonaire</span>
+<span class="drag" draggable="true">veine pulmonaire</span>
+</div>
+
+<p>
+passage du dioxygène des poumons au sang →
+<span class="zone" data="veine pulmonaire"></span> →
+<span class="zone" data="cœur gauche"></span> →
+<span class="zone" data="artère aorte"></span> →
+organes →
+<span class="zone" data="veine cave"></span> →
+cœur droit →
+<span class="zone" data="artère pulmonaire"></span> →
+passage du dioxyde de carbone du sang aux poumons
+</p>
+
+<button onclick="corrigerDrag()">Valider</button>
+
+<div class="correction">
+passage du dioxygène des poumons au sang → veine pulmonaire → cœur gauche → artère aorte → organes → veine cave → cœur droit → artère pulmonaire → passage du dioxyde de carbone du sang aux poumons
+</div>
+</div>
+
+<!-- EXO 2 V/F -->
+<div class="exo" id="exo2">
+<h3>Exercice n°2</h3>
+
+<p class="question">Vrai ou faux ?</p>
+
+<label><input type="radio" name="q1"> 1. Le sang oxygéné arrive au cœur droit.</label>
+<label><input type="radio" name="q2"> 2. Le sang rentre dans le cœur par une veine.</label>
+<label><input type="radio" name="q3"> 3. Le sang arrive directement dans le ventricule.</label>
+<label><input type="radio" name="q4"> 4. L'oreillette et le ventricule sont séparés par une valvule.</label>
+<label><input type="radio" name="q5"> 5. Les sons des battements du cœur correspondent à la fermeture des valvules.</label>
+
+<button onclick="corrigerVF()">Valider</button>
+
+<div class="correction">
+1. Faux<br>
+2. Vrai<br>
+3. Faux<br>
+4. Vrai<br>
+5. Vrai
+</div>
+</div>
+
+<!-- EXO 3 CHECKBOX -->
+<div class="exo" id="exo3">
+<h3>Exercice n°3</h3>
+
+<p class="question">1. À l'effort physique :</p>
+
+<label><input type="checkbox"> la fréquence cardiaque diminue.</label>
+<label><input type="checkbox"> la fréquence respiratoire augmente.</label>
+<label><input type="checkbox"> les muscles reçoivent moins de nutriments.</label>
+
+<p class="question">2. L'EPO :</p>
+
+<label><input type="checkbox"> améliore les performances physiques</label>
+<label><input type="checkbox"> diminue le nombre de globules rouges</label>
+<label><input type="checkbox"> permet un plus grand apport de dioxygène aux muscles</label>
+<label><input type="checkbox"> augmente le risque d'accident cardiovasculaire</label>
+
+<button onclick="corrigerCheck()">Valider</button>
+
+<div class="correction">
+la fréquence respiratoire augmente.<br>
+améliore les performances physiques<br>
+permet un plus grand apport de dioxygène aux muscles<br>
+augmente le risque d'accident cardiovasculaire
+</div>
+</div>
+
+<!-- EXO 4 TEXTE -->
+<div class="exo" id="exo4">
+<h3>Exercice n°4</h3>
+
+<p class="question">Complète la phrase suivante.</p>
+
+<p>
+Lors d'une activité physique, la fréquence cardiaque 
+<input id="c1"> 
+pour apporter une quantité plus 
+<input id="c2"> 
+de dioxygène et de nutriments présents dans le sang et répondre aux besoins accrus des 
+<input id="c3">.
+</p>
+
+<button onclick="corriger4()">Valider</button>
+
+<div class="correction">
+augmente – grande – muscles
+</div>
+</div>
+
+</div>
+
+<script>
+
+let dragged;
+
+document.querySelectorAll(".drag").forEach(el=>{
+  el.addEventListener("dragstart",()=> dragged=el);
+});
+
+document.querySelectorAll(".zone").forEach(zone=>{
+  zone.addEventListener("dragover",e=>e.preventDefault());
+  zone.addEventListener("drop",function(){
+    if(this.firstChild){
+      this.parentElement.appendChild(this.firstChild);
+    }
+    this.appendChild(dragged);
+  });
+});
+
+function corrigerDrag(){
+document.querySelectorAll("#exo1 .zone").forEach(z=>{
+  z.classList.remove("correct","incorrect");
+  if(z.firstChild && z.firstChild.textContent===z.dataset){
+    z.classList.add("correct");
+  } else {
+    z.classList.add("incorrect");
+  }
+});
+document.querySelector("#exo1 .correction").style.display="block";
+}
+
+function corrigerVF(){
+const bonnes=[false,true,false,true,true];
+let i=0;
+document.querySelectorAll("#exo2 input").forEach((el)=>{
+  el.parentElement.classList.remove("correct","incorrect");
+  if(el.checked){
+    if(bonnes[i]) el.parentElement.classList.add("correct");
+    else el.parentElement.classList.add("incorrect");
+  }
+  i++;
+});
+document.querySelector("#exo2 .correction").style.display="block";
+}
+
+function corrigerCheck(){
+const bonnes=[false,true,false,true,false,true,true];
+let i=0;
+document.querySelectorAll("#exo3 input").forEach(el=>{
+  el.parentElement.classList.remove("correct","incorrect");
+  if(el.checked===bonnes[i]) el.parentElement.classList.add("correct");
+  else if(el.checked) el.parentElement.classList.add("incorrect");
+  i++;
+});
+document.querySelector("#exo3 .correction").style.display="block";
+}
+
+function corriger4(){
+const bonnes=["augmente","grande","muscles"];
+
+["c1","c2","c3"].forEach((id,i)=>{
+  let el=document.getElementById(id);
+  el.classList.remove("correct","incorrect");
+  if(el.value.toLowerCase()===bonnes[i]) el.classList.add("correct");
+  else el.classList.add("incorrect");
+});
+
+document.querySelector("#exo4 .correction").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
