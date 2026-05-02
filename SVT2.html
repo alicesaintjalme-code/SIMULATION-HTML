@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SVT - Tectonique</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+h3 {
+  color: #2c3e50;
+}
+
+.reponse {
+  display: block;
+  margin: 10px 0;
+}
+
+label {
+  margin-right: 15px;
+  padding: 5px;
+}
+
+.correct {
+  border: 2px solid #4CAF50;
+  background-color: #eaf7ea;
+  border-radius: 5px;
+}
+
+.incorrect {
+  opacity: 0.4;
+}
+
+button {
+  margin-top: 15px;
+  padding: 8px 12px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.correction {
+  margin-top: 20px;
+  display: none;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- ================= EXERCICE ================= -->
+
+<h3>🟦 Exercice — Choisissez la bonne réponse</h3>
+
+<p>Pour chaque proposition, choisissez la bonne réponse :</p>
+
+<form id="exo">
+
+<div class="reponse">
+<p>1. La lithosphère est :</p>
+
+<label><input type="radio" name="q1" value="1"> épaisse de 600 kilomètres.</label>
+<label><input type="radio" name="q1" value="2"> ductile.</label>
+<label><input type="radio" name="q1" value="3"> découpée en plaques.</label>
+<label><input type="radio" name="q1" value="4"> présente sous l'asthénosphère.</label>
+</div>
+
+<div class="reponse">
+<p>2. Au sein des plaques, l'activité tectonique (sismicité et volcanisme) est :</p>
+
+<label><input type="radio" name="q2" value="1"> intense contrairement à leurs limites.</label>
+<label><input type="radio" name="q2" value="2"> intense comme à leurs limites.</label>
+<label><input type="radio" name="q2" value="3"> presque nulle contrairement à leurs limites.</label>
+<label><input type="radio" name="q2" value="4"> absente comme à leurs limites.</label>
+</div>
+
+<div class="reponse">
+<p>3. Les éruptions effusives ont lieu au niveau :</p>
+
+<label><input type="radio" name="q3" value="1"> de toutes les frontières de plaques.</label>
+<label><input type="radio" name="q3" value="2"> des dorsales.</label>
+<label><input type="radio" name="q3" value="3"> des chaines de montagnes.</label>
+<label><input type="radio" name="q3" value="4"> des fosses océaniques.</label>
+</div>
+
+</form>
+
+<button onclick="corriger()">Valider</button>
+
+<div id="correction" class="correction">
+<hr>
+<p><strong>Correction :</strong></p>
+<p>
+1. ✔ découpée en plaques.<br>
+2. ✔ presque nulle contrairement à leurs limites.<br>
+3. ✔ des dorsales.
+</p>
+</div>
+
+</div>
+
+<script>
+
+function corriger() {
+
+  let bonnes = {
+    q1: "3",
+    q2: "3",
+    q3: "2"
+  };
+
+  for (let q in bonnes) {
+    let inputs = document.querySelectorAll(`input[name="${q}"]`);
+
+    inputs.forEach(input => {
+      let label = input.parentElement;
+      label.classList.remove("correct","incorrect");
+
+      if (input.value === bonnes[q]) {
+        label.classList.add("correct");
+      } else if (input.checked) {
+        label.classList.add("incorrect");
+      }
+    });
+  }
+
+  document.getElementById("correction").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
