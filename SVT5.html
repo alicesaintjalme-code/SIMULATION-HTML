@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SVT Exercices</title>
+
+<style>
+body {font-family: Arial; background:#f4f6f8; padding:20px;}
+.container {max-width:900px; margin:auto; background:white; padding:20px; border-radius:10px;}
+.exo {margin-bottom:30px; padding:15px; border:1px solid #ddd; border-radius:8px;}
+h3 {color:#2c3e50;}
+
+.header {background:#e5e5e5; padding:10px; margin-bottom:10px;}
+
+.zone {
+display:inline-block;
+min-width:150px;
+min-height:30px;
+border:2px dashed #666;
+border-radius:6px;
+margin:5px;
+padding:5px;
+background:#fafafa;
+vertical-align:middle;
+}
+
+.drag {
+display:inline-block;
+padding:6px 12px;
+margin:6px;
+background:#eaf7ea;
+border:2px solid #4CAF50;
+border-radius:6px;
+cursor:grab;
+}
+
+.correct {background:#eaf7ea; border:2px solid #4CAF50;}
+.incorrect {background:#fdeaea; border:2px solid #e74c3c;}
+
+button {margin-top:10px; padding:8px 12px; background:#4CAF50; color:white; border:none; border-radius:5px; cursor:pointer;}
+button:hover {background:#3e9442;}
+
+.correction {display:none; margin-top:15px; background:#f1f1f1; padding:10px; border-radius:8px;}
+
+label {display:block; margin:5px 0;}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- EXO 1 -->
+<div class="exo" id="exo1">
+<h3>Exercice n°1</h3>
+
+<div class="header">
+Reconstitue la réaction chimique permettant la libération de l'énergie dont les organes ont besoin pour fonctionner.
+</div>
+
+<p>Faites glisser les étiquettes dans les zones prévues à cet effet.</p>
+
+<div class="mots">
+<span class="drag" draggable="true" data-val="dioxyde de carbone">dioxyde de carbone</span>
+<span class="drag" draggable="true" data-val="dioxygène">dioxygène</span>
+</div>
+
+<p>
+nutriments + <span class="zone" data-expected="dioxygène"></span> → <span class="zone" data-expected="dioxyde de carbone"></span> + autres déchets
+<br>+ énergie
+</p>
+
+<h3>Exercice n°1</h3>
+
+<div class="header">
+Reconstitue la réaction chimique permettant la libération de l'énergie dont les organes ont besoin pour fonctionner.
+</div>
+
+<p>Faites glisser les étiquettes dans les zones prévues à cet effet.</p>
+
+<button onclick="corrigerDrag('exo1')">Valider</button>
+
+<div class="correction">
+nutriments + <span class="correct">dioxygène</span> → <span class="correct">dioxyde de carbone</span> + autres déchets
+<br>+ énergie
+</div>
+</div>
+
+<!-- EXO 2 -->
+<div class="exo" id="exo2">
+<h3>Exercice n°2</h3>
+
+<div class="header">
+Associe les systèmes avec les éléments de la réaction chimique permettant la libération d'énergie dont les organes ont besoin pour fonctionner.
+</div>
+
+<p>Faites glisser les étiquettes dans les zones prévues à cet effet.</p>
+
+<div class="mots">
+<span class="drag" draggable="true" data-val="système urinaire">système urinaire</span>
+<span class="drag" draggable="true" data-val="nutriments">nutriments</span>
+<span class="drag" draggable="true" data-val="dioxygène">dioxygène</span>
+</div>
+
+<div class="mots">
+<span class="drag" draggable="true" data-val="système respiratoire">système respiratoire</span>
+</div>
+
+<p><span class="zone" data-expected="nutriments"></span> système digestif</p>
+<p><span class="zone" data-expected="dioxygène"></span> système respiratoire</p>
+<p><span class="zone" data-expected="système respiratoire"></span> dioxyde de carbone</p>
+<p><span class="zone" data-expected="système urinaire"></span> urée</p>
+
+<div class="header">
+Associe les systèmes avec les éléments de la réaction chimique permettant la libération d'énergie dont les organes ont besoin pour fonctionner.
+</div>
+
+<p>Faites glisser les étiquettes dans les zones prévues à cet effet.</p>
+
+<button onclick="corrigerDrag('exo2')">Valider</button>
+
+<div class="correction">
+<p><span class="correct">nutriments</span> système digestif</p>
+<p><span class="correct">dioxygène</span> système respiratoire</p>
+<p><span class="correct">système respiratoire</span> dioxyde de carbone</p>
+<p><span class="correct">système urinaire</span> urée</p>
+
+<p>Les nutriments proviennent de l'alimentation.<br>
+Le dioxygène est présent dans l'air et rentre dans l'organisme lors de la respiration.</p>
+</div>
+</div>
+
+<!-- EXO 3 -->
+<div class="exo" id="exo3">
+<h3>Exercice n°3</h3>
+
+<p><strong>Vrai ou faux ?</strong></p>
+
+<p>1. Tous les êtres vivants sont constitués de plusieurs cellules.</p>
+<label><input type="radio" name="q1"> Vrai</label>
+<label><input type="radio" name="q1"> Faux</label>
+
+<p>2. La cellule humaine possède une paroi.</p>
+<label><input type="radio" name="q2"> Vrai</label>
+<label><input type="radio" name="q2"> Faux</label>
+
+<p>3. Le tissu correspond à un assemblage de cellules ayant la même fonction.</p>
+<label><input type="radio" name="q3"> Vrai</label>
+<label><input type="radio" name="q3"> Faux</label>
+
+<p>4. L'organe correspond à un assemblage de tissus ayant la même fonction.</p>
+<label><input type="radio" name="q4"> Vrai</label>
+<label><input type="radio" name="q4"> Faux</label>
+
+<p>5. Le muscle est un tissu.</p>
+<label><input type="radio" name="q5"> Vrai</label>
+<label><input type="radio" name="q5"> Faux</label>
+
+<button onclick="corriger3()">Valider</button>
+
+<div class="correction">
+1. Tous les êtres vivants sont constitués de plusieurs cellules. Faux<br>
+2. La cellule humaine possède une paroi. Faux<br>
+3. Le tissu correspond à un assemblage de cellules ayant la même fonction. Vrai<br>
+4. L'organe correspond à un assemblage de tissus ayant la même fonction. Vrai<br>
+5. Le muscle est un tissu. Faux
+</div>
+</div>
+
+</div>
+
+<script>
+
+function initDrag(exoId){
+const exo=document.getElementById(exoId);
+let dragged=null;
+
+exo.querySelectorAll('.drag').forEach(el=>{
+el.dataset.originId = Math.random().toString(36).substr(2,9);
+el.addEventListener('dragstart', ()=>dragged=el);
+});
+
+exo.querySelectorAll('.zone').forEach(zone=>{
+zone.addEventListener('dragover', e=>e.preventDefault());
+
+zone.addEventListener('drop', e=>{
+e.preventDefault();
+if(!dragged) return;
+
+const originParent = exo.querySelector('[data-origin-id="'+dragged.dataset.originId+'"]')?.parentElement || dragged.parentElement;
+
+if(zone.firstChild){
+const existing = zone.firstChild;
+const originalContainer = exo.querySelector('.mots');
+originalContainer.appendChild(existing);
+}
+
+zone.appendChild(dragged);
+});
+});
+}
+
+initDrag('exo1');
+initDrag('exo2');
+
+function corrigerDrag(id){
+const exo=document.getElementById(id);
+
+exo.querySelectorAll('.zone').forEach(z=>{
+z.classList.remove('correct','incorrect');
+const el=z.firstChild;
+
+if(el && el.dataset.val===z.dataset.expected){
+z.classList.add('correct');
+}else{
+z.classList.add('incorrect');
+}
+});
+
+exo.querySelector('.correction').style.display="block";
+}
+
+function corriger3(){
+let bonnes=["2","2","1","1","2"];
+
+["q1","q2","q3","q4","q5"].forEach((q,i)=>{
+document.querySelectorAll("#exo3 input[name='"+q+"']").forEach((r,index)=>{
+r.parentElement.classList.remove("correct","incorrect");
+
+if((index+1)==bonnes[i]) r.parentElement.classList.add("correct");
+else if(r.checked) r.parentElement.classList.add("incorrect");
+});
+});
+
+document.querySelector("#exo3 .correction").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
