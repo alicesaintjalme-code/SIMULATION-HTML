@@ -1,61 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SVT - Tectonique des plaques</title>
+
 <style>
-.container {
-  max-width: 900px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
+*{box-sizing:border-box}
+
+body{
   font-family: Arial;
+  background: linear-gradient(135deg,#eef2f7,#f8fbff);
+  padding:20px;
 }
 
-.exo { margin-bottom: 30px; }
-
-h3 { color: #2c3e50; }
-
-ul { padding-left: 20px; }
-
-li { margin: 8px 0; }
-
-input[type="text"] {
-  width: 220px;
-  padding: 5px;
-  margin-left: 10px;
+.container{
+  max-width:950px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-textarea { width:100%; }
+.exo{
+  margin-bottom:35px;
+  padding:20px;
+  border-radius:12px;
+  background:#f9fbfd;
+  border-left:6px solid #4CAF50;
+}
 
-.choix { display:block; margin:5px 0; }
+h3{
+  background:#e8f5e9;
+  padding:6px 12px;
+  border-radius:8px;
+  display:inline-block;
+}
 
-button {
+.question{
+  font-weight:bold;
   margin-top:15px;
-  padding:8px 12px;
-  background:#4CAF50;
+  color:#2c3e50;
+}
+
+.ligne{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:10px;
+  border-radius:8px;
+  transition:0.2s;
+}
+
+.ligne:hover{
+  background:#eef7ff;
+}
+
+.choix{
+  display:block;
+  width:100%;
+  margin:8px 0;
+  padding:8px;
+  border-radius:8px;
+}
+
+.correct{
+  background:#eaf7ea;
+  border:2px solid #4CAF50;
+}
+
+.incorrect{
+  background:#fdeaea;
+  border:2px solid #e74c3c;
+}
+
+input[type="text"]{
+  display:inline-block;
+  width:120px;
+  padding:6px;
+  margin:0 5px;
+  border-radius:6px;
+  border:2px solid #ccc;
+}
+
+textarea{
+  width:100%;
+  border-radius:8px;
+  padding:10px;
+  border:2px solid #ddd;
+}
+
+button{
+  margin-top:15px;
+  padding:10px 18px;
+  background:linear-gradient(135deg,#4CAF50,#43a047);
   color:white;
   border:none;
-  border-radius:5px;
+  border-radius:8px;
   cursor:pointer;
+  font-weight:bold;
+  transition:0.2s;
 }
 
-.correction { display:none; margin-top:15px; }
+button:hover{
+  transform:scale(1.05);
+}
 
-.correct {
-  background:#e6f7e6;
-  border:2px solid #4CAF50;
+.correction{
+  display:none;
+  margin-top:15px;
+  background:#f1f1f1;
+  padding:15px;
+  border-radius:10px;
+  border-left:5px solid #4CAF50;
+}
+
+.bilan{
+  margin-top:10px;
+  background:#e8f5e9;
+  padding:10px;
+  border-radius:8px;
 }
 </style>
 
+</head>
+
+<body>
+
 <div class="container">
 
-<p><strong>Associez (écris la lettre correspondante du schéma) :</strong></p>
+<!-- EXERCICE 1 -->
+<div class="exo" id="exo1">
 
-<ul>
-<li>Volcanisme : <input id="e1"></li>
-<li>Lithosphère : <input id="e2"></li>
-<li>Convergence : <input id="e3"></li>
-<li>Asthénosphère : <input id="e4"></li>
-<li>Séismes : <input id="e5"></li>
-<li>Fosse océanique : <input id="e6"></li>
-</ul>
+<p class="question"><strong>Associez (écris la lettre correspondante du schéma) :</strong></p>
+
+<div class="ligne">Volcanisme : <input id="e1"></div>
+<div class="ligne">Lithosphère : <input id="e2"></div>
+<div class="ligne">Convergence : <input id="e3"></div>
+<div class="ligne">Asthénosphère : <input id="e4"></div>
+<div class="ligne">Séismes : <input id="e5"></div>
+<div class="ligne">Fosse océanique : <input id="e6"></div>
 
 <button onclick="corriger1()">Valider</button>
 
@@ -67,81 +151,100 @@ c. Lithosphère<br>
 d. Séismes<br>
 e. Asthénosphère<br>
 f. Volcanisme
+
+<div class="bilan">
+✔ À retenir : Les phénomènes géologiques sont liés aux mouvements des plaques lithosphériques.
 </div>
 </div>
 
-<hr>
+</div>
 
 <!-- EXERCICE 2 -->
-<div class="exo">
+<div class="exo" id="exo2">
+
 <h3>🟩 Exercice n°2 — QCM</h3>
 
-<p><strong>Pour chaque proposition, choisissez la bonne réponse :</strong></p>
+<p class="question"><strong>Pour chaque proposition, choisissez la bonne réponse :</strong></p>
 
-<p>1. La lithosphère est :</p>
-<label class="choix"><input type="radio" name="q1"> épaisse de 600 kilomètres.</label>
-<label class="choix"><input type="radio" name="q1"> ductile.</label>
-<label class="choix"><input type="radio" name="q1"> découpée en plaques.</label>
-<label class="choix"><input type="radio" name="q1"> présente sous l'asthénosphère.</label>
+<p class="question">1. La lithosphère est :</p>
+<label class="choix"><input type="radio" name="q1" value="1"> épaisse de 600 kilomètres.</label>
+<label class="choix"><input type="radio" name="q1" value="2"> ductile.</label>
+<label class="choix"><input type="radio" name="q1" value="3"> découpée en plaques.</label>
+<label class="choix"><input type="radio" name="q1" value="4"> présente sous l'asthénosphère.</label>
 
-<p>2. Au sein des plaques, l'activité tectonique (sismicité et volcanisme) est :</p>
-<label class="choix"><input type="radio" name="q2"> intense contrairement à leurs limites.</label>
-<label class="choix"><input type="radio" name="q2"> intense comme à leurs limites.</label>
-<label class="choix"><input type="radio" name="q2"> presque nulle contrairement à leurs limites.</label>
-<label class="choix"><input type="radio" name="q2"> absente comme à leurs limites.</label>
+<p class="question">2. Au sein des plaques, l'activité tectonique (sismicité et volcanisme) est :</p>
+<label class="choix"><input type="radio" name="q2" value="1"> intense contrairement à leurs limites.</label>
+<label class="choix"><input type="radio" name="q2" value="2"> intense comme à leurs limites.</label>
+<label class="choix"><input type="radio" name="q2" value="3"> presque nulle contrairement à leurs limites.</label>
+<label class="choix"><input type="radio" name="q2" value="4"> absente comme à leurs limites.</label>
 
-<p>3. Les éruptions effusives ont lieu au niveau :</p>
-<label class="choix"><input type="radio" name="q3"> de toutes les frontières de plaques.</label>
-<label class="choix"><input type="radio" name="q3"> des dorsales.</label>
-<label class="choix"><input type="radio" name="q3"> des chaines de montagnes.</label>
-<label class="choix"><input type="radio" name="q3"> des fosses océaniques.</label>
+<p class="question">3. Les éruptions effusives ont lieu au niveau :</p>
+<label class="choix"><input type="radio" name="q3" value="1"> de toutes les frontières de plaques.</label>
+<label class="choix"><input type="radio" name="q3" value="2"> des dorsales.</label>
+<label class="choix"><input type="radio" name="q3" value="3"> des chaines de montagnes.</label>
+<label class="choix"><input type="radio" name="q3" value="4"> des fosses océaniques.</label>
 
 <button onclick="corriger2()">Valider</button>
 
 <div class="correction" id="cor2">
-✔ 1. découpée en plaques<br>
-✔ 2. presque nulle contrairement à leurs limites<br>
-✔ 3. des dorsales
+<p><strong>Correction :</strong></p>
+1. découpée en plaques<br>
+2. presque nulle contrairement à leurs limites<br>
+3. des dorsales
+
+<div class="bilan">
+✔ À retenir : L’activité tectonique se concentre aux limites des plaques.
 </div>
 </div>
 
-<hr>
+</div>
 
 <!-- EXERCICE 3 -->
-<div class="exo">
+<div class="exo" id="exo3">
+
 <h3>🟨 Exercice n°3 — Rédaction</h3>
 
-<p><strong>Construisez une phrase avec les mots suivants :</strong></p>
+<p class="question"><strong>Construisez une phrase avec les mots suivants :</strong></p>
 
 <p>1. Plaques lithosphériques, dorsales, fosses océaniques.</p>
-<textarea rows="3"></textarea>
+<textarea id="t1" rows="3"></textarea>
 
 <p>2. Dorsale, divergence, volcanisme effusif.</p>
-<textarea rows="3"></textarea>
+<textarea id="t2" rows="3"></textarea>
 
-<button onclick="document.getElementById('cor3').style.display='block'">Valider</button>
+<button onclick="corriger3()">Valider</button>
 
 <div class="correction" id="cor3">
 <p><strong>Correction :</strong></p>
 Les plaques lithosphériques convergent (se rapprochent) au niveau des fosses océaniques et divergent (s'écartent) au niveau des dorsales.<br><br>
 Les dorsales sont des frontières de divergence des plaques où le volcanisme est effusif.
+
+<div class="bilan">
+✔ À retenir : Les mouvements des plaques expliquent la formation des reliefs et le volcanisme.
 </div>
 </div>
 
-<hr>
+</div>
 
 <!-- EXERCICE 4 -->
-<div class="exo">
+<div class="exo" id="exo4">
+
 <h3>🟥 Exercice n°4 — Complétez</h3>
 
-<p><strong>Complétez les phrases suivantes avec les mots "lithosphère", "dorsales", "asthénosphère" :</strong></p>
+<p class="question"><strong>Complétez les phrases suivantes avec les mots "lithosphère", "dorsales", "asthénosphère" :</strong></p>
 
 <p>
-1. En Islande, la forte dissipation d'énergie thermique au niveau des <input id="f1"> permet l'utilisation de la géothermie comme source d'énergie propre.
+1. En Islande, la forte dissipation d'énergie thermique au niveau des 
+<input id="f1"> 
+permet l'utilisation de la géothermie comme source d'énergie propre.
 </p>
 
 <p>
-2. La <input id="f2"> se déplace sur l'<input id="f3"> grâce à des mouvements de convection.
+2. La 
+<input id="f2"> 
+se déplace sur l'
+<input id="f3"> 
+grâce à des mouvements de convection.
 </p>
 
 <button onclick="corriger4()">Valider</button>
@@ -157,61 +260,100 @@ Les dorsales sont des frontières de divergence des plaques où le volcanisme es
 2. La <strong>lithosphère</strong> se déplace sur l'<strong>asthénosphère</strong> grâce à des mouvements de convection.
 </p>
 
+<div class="bilan">
+✔ À retenir : La lithosphère repose sur l’asthénosphère et est en mouvement permanent.
 </div>
+
+</div>
+
 </div>
 
 </div>
 
 <script>
 
+function normalize(str){
+return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
+}
+
+// EXO1
 function corriger1(){
-  let bonnes=["f","c","a","e","d","b"];
-  let ids=["e1","e2","e3","e4","e5","e6"];
-  ids.forEach((id,i)=>{
-    let el=document.getElementById(id);
-    if(el.value.toLowerCase()==bonnes[i]){
-      el.classList.add("correct");
-    }
-  });
-  document.getElementById("cor1").style.display="block";
+let bonnes=["f","c","a","e","d","b"];
+let ids=["e1","e2","e3","e4","e5","e6"];
+
+ids.forEach((id,i)=>{
+let el=document.getElementById(id);
+el.classList.remove("correct","incorrect");
+
+if(normalize(el.value)===bonnes[i]){
+el.classList.add("correct");
+}else{
+el.classList.add("incorrect");
+}
+});
+
+document.getElementById("cor1").style.display="block";
 }
 
+// EXO2
 function corriger2(){
+const exo=document.getElementById("exo2");
 
-  let questions = ["q1","q2","q3"];
-  let bonnes = ["3","3","2"];
+const bonnes={
+q1:"3",
+q2:"3",
+q3:"2"
+};
 
-  questions.forEach((q,index)=>{
-    let radios = document.querySelectorAll("input[name='"+q+"']");
+Object.keys(bonnes).forEach(q=>{
+let radios=exo.querySelectorAll("input[name='"+q+"']");
+let ligne=radios[0].closest("p");
 
-    radios.forEach((r,i)=>{
-      let label = r.parentElement;
-      label.classList.remove("correct");
+radios.forEach(r=>{
+r.parentElement.classList.remove("correct","incorrect");
+});
 
-      if((i+1).toString() === bonnes[index]){
-        label.classList.add("correct");
-      }
-    });
-  });
+let checked=Array.from(radios).find(r=>r.checked);
 
-  document.getElementById("cor2").style.display="block";
+if(!checked){
+ligne.classList.add("incorrect");
+return;
 }
 
+if(checked.value===bonnes[q]){
+checked.parentElement.classList.add("correct");
+}else{
+checked.parentElement.classList.add("incorrect");
+}
+});
+
+document.getElementById("cor2").style.display="block";
+}
+
+// EXO3
+function corriger3(){
+document.getElementById("cor3").style.display="block";
+}
+
+// EXO4
 function corriger4(){
 
-  if(f1.value.toLowerCase()=="dorsales"){
-    f1.classList.add("correct");
-  }
+let f1=document.getElementById("f1");
+let f2=document.getElementById("f2");
+let f3=document.getElementById("f3");
 
-  if(f2.value.toLowerCase()=="lithosphère"){
-    f2.classList.add("correct");
-  }
+[f1,f2,f3].forEach(el=>{
+el.classList.remove("correct","incorrect");
+});
 
-  if(f3.value.toLowerCase()=="asthénosphère"){
-    f3.classList.add("correct");
-  }
+if(normalize(f1.value)==="dorsales"){f1.classList.add("correct");}else{f1.classList.add("incorrect");}
+if(normalize(f2.value)==="lithosphere"){f2.classList.add("correct");}else{f2.classList.add("incorrect");}
+if(normalize(f3.value)==="asthenosphere"){f3.classList.add("correct");}else{f3.classList.add("incorrect");}
 
-  document.getElementById("cor4").style.display="block";
+document.getElementById("cor4").style.display="block";
 }
 
 </script>
+
+</body>
+</html>
