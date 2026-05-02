@@ -1,48 +1,30 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>SVT - Tectonique</title>
-
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  padding: 20px;
-}
-
 .container {
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
   background: white;
   padding: 20px;
   border-radius: 10px;
+  font-family: Arial;
 }
 
-h3 {
-  color: #2c3e50;
-}
+.exo { margin-bottom: 30px; }
 
-.reponse {
-  display: block;
-  margin: 10px 0;
-}
+h3 { color: #2c3e50; }
 
-label {
-  margin-right: 15px;
+ul { padding-left: 20px; }
+
+li { margin: 8px 0; }
+
+input[type="text"] {
+  width: 220px;
   padding: 5px;
+  margin-left: 10px;
 }
 
-/* BONNES REPONSES */
-.correct {
-  border: 2px solid #4CAF50;
-  background-color: #eaf7ea;
-  border-radius: 5px;
-}
-
-/* mauvaises cochées */
-.incorrect {
-  opacity: 0.4;
+.choix {
+  display: block;
+  margin: 5px 0;
 }
 
 button {
@@ -56,97 +38,146 @@ button {
 }
 
 .correction {
-  margin-top: 20px;
   display: none;
+  margin-top: 15px;
+}
+
+.mots {
+  background:#f1f1f1;
+  padding:10px;
+  border-radius:8px;
+  margin-bottom:10px;
 }
 </style>
 
-</head>
-
-<body>
-
 <div class="container">
 
-<!-- ================= EXERCICE ================= -->
 
-<h3>🟦 Exercice n°1 — Choisissez la bonne réponse</h3>
+<p><strong>Associez (écris la lettre correspondante du schéma) :</strong></p>
+
+<ul>
+<li>Volcanisme : <input type="text"></li>
+<li>Lithosphère : <input type="text"></li>
+<li>Convergence : <input type="text"></li>
+<li>Asthénosphère : <input type="text"></li>
+<li>Séismes : <input type="text"></li>
+<li>Fosse océanique : <input type="text"></li>
+</ul>
+
+<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
+
+<div class="correction">
+<p><strong>Correction :</strong></p>
+a. Convergence<br>
+b. Fosse océanique<br>
+c. Lithosphère<br>
+d. Séismes<br>
+e. Asthénosphère<br>
+f. Volcanisme
+</div>
+
+</div>
+
+<hr>
+
+<!-- ================= EXERCICE 2 ================= -->
+
+<div class="exo">
+
+<h3>🟩 Exercice n°2 — QCM</h3>
 
 <p>Pour chaque proposition, choisissez la bonne réponse :</p>
 
-<form id="exo1">
-
-<div class="reponse">
 <p>1. La lithosphère est :</p>
+<label class="choix"><input type="radio" name="q1"> épaisse de 600 kilomètres.</label>
+<label class="choix"><input type="radio" name="q1"> ductile.</label>
+<label class="choix"><input type="radio" name="q1"> découpée en plaques.</label>
+<label class="choix"><input type="radio" name="q1"> présente sous l'asthénosphère.</label>
 
-<label><input type="radio" name="q1" value="1"> épaisse de 600 kilomètres.</label>
-<label><input type="radio" name="q1" value="2"> ductile.</label>
-<label><input type="radio" name="q1" value="3"> découpée en plaques.</label>
-<label><input type="radio" name="q1" value="4"> présente sous l'asthénosphère.</label>
-</div>
-
-<div class="reponse">
 <p>2. Au sein des plaques, l'activité tectonique (sismicité et volcanisme) est :</p>
+<label class="choix"><input type="radio" name="q2"> intense contrairement à leurs limites.</label>
+<label class="choix"><input type="radio" name="q2"> intense comme à leurs limites.</label>
+<label class="choix"><input type="radio" name="q2"> presque nulle contrairement à leurs limites.</label>
+<label class="choix"><input type="radio" name="q2"> absente comme à leurs limites.</label>
 
-<label><input type="radio" name="q2" value="1"> intense contrairement à leurs limites.</label>
-<label><input type="radio" name="q2" value="2"> intense comme à leurs limites.</label>
-<label><input type="radio" name="q2" value="3"> presque nulle contrairement à leurs limites.</label>
-<label><input type="radio" name="q2" value="4"> absente comme à leurs limites.</label>
-</div>
-
-<div class="reponse">
 <p>3. Les éruptions effusives ont lieu au niveau :</p>
+<label class="choix"><input type="radio" name="q3"> de toutes les frontières de plaques.</label>
+<label class="choix"><input type="radio" name="q3"> des dorsales.</label>
+<label class="choix"><input type="radio" name="q3"> des chaines de montagnes.</label>
+<label class="choix"><input type="radio" name="q3"> des fosses océaniques.</label>
 
-<label><input type="radio" name="q3" value="1"> de toutes les frontières de plaques.</label>
-<label><input type="radio" name="q3" value="2"> des dorsales.</label>
-<label><input type="radio" name="q3" value="3"> des chaines de montagnes.</label>
-<label><input type="radio" name="q3" value="4"> des fosses océaniques.</label>
+<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
+
+<div class="correction">
+✔ 1. découpée en plaques<br>
+✔ 2. presque nulle contrairement à leurs limites<br>
+✔ 3. des dorsales
 </div>
 
-</form>
+</div>
 
-<button onclick="corrigerExo1()">Valider</button>
-
-<div id="correction1" class="correction">
 <hr>
+
+<!-- ================= EXERCICE 3 ================= -->
+
+<div class="exo">
+
+<h3>🟨 Exercice n°3 — Rédaction</h3>
+
+<p><strong>Construisez une phrase avec les mots suivants :</strong></p>
+
+<p>1. Plaques lithosphériques, dorsales, fosses océaniques.</p>
+<textarea rows="3" style="width:100%;"></textarea>
+
+<p>2. Dorsale, divergence, volcanisme effusif.</p>
+<textarea rows="3" style="width:100%;"></textarea>
+
+<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
+
+<div class="correction">
 <p><strong>Correction :</strong></p>
+
 <p>
-1. ✔ découpée en plaques.<br>
-2. ✔ presque nulle contrairement à leurs limites.<br>
-3. ✔ des dorsales.
+Les plaques lithosphériques convergent (se rapprochent) au niveau des fosses océaniques et divergent (s'écartent) au niveau des dorsales.
 </p>
+
+<p>
+Les dorsales sont des frontières de divergence des plaques où le volcanisme est effusif.
+</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<!-- ================= EXERCICE 4 ================= -->
+
+<div class="exo">
+
+<h3>🟥 Exercice n°4 — Complétez</h3>
+
+<p><strong>Complétez les phrases suivantes :</strong></p>
+
+<p>
+1. En Islande, la forte dissipation d'énergie thermique au niveau des <input type="text"> permet l'utilisation de la géothermie comme source d'énergie propre.
+</p>
+
+<p>
+2. La <input type="text"> se déplace sur l'<input type="text"> grâce à des mouvements de convection.
+</p>
+
+<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
+
+<div class="correction">
+<p><strong>Correction :</strong></p>
+
+<p>1. dorsales</p>
+
+<p>2. lithosphère et asthénosphère</p>
+
 </div>
 
 </div>
 
-<script>
-
-function corrigerExo1() {
-
-  let bonnes = {
-    q1: "3",
-    q2: "3",
-    q3: "2"
-  };
-
-  let inputs = document.querySelectorAll("#exo1 input");
-
-  inputs.forEach(input => {
-    let label = input.parentElement;
-    label.classList.remove("correct","incorrect");
-
-    let question = input.name;
-
-    if (input.value === bonnes[question]) {
-      label.classList.add("correct");
-    } else if (input.checked) {
-      label.classList.add("incorrect");
-    }
-  });
-
-  document.getElementById("correction1").style.display = "block";
-}
-
-</script>
-
-</body>
-</html>
+</div>
