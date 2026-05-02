@@ -5,59 +5,119 @@
 <title>SVT - Cycle de l'eau</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  padding: 20px;
+  background: linear-gradient(135deg,#eef2f7,#f8fbff);
+  padding:20px;
 }
 
 .container {
-  max-width: 800px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
+  max-width:900px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.exo {
+  margin-bottom:30px;
+  padding:20px;
+  border-radius:12px;
+  background:#f9fbfd;
+  border-left:6px solid #4CAF50;
 }
 
 h3 {
-  color: #2c3e50;
+  background:#e8f5e9;
+  padding:6px 12px;
+  border-radius:8px;
+  display:inline-block;
 }
 
-.reponse {
-  display: block;
-  margin: 10px 0;
+.question {
+  font-weight:bold;
+  margin-top:15px;
+  color:#2c3e50;
 }
 
-label {
-  margin-right: 15px;
-  padding: 5px;
+/* 🔥 FIX SUPERPOSITION */
+.ligne {
+  display:block;
+  width:100%;
+  margin:12px 0;
+  padding:12px;
+  border-radius:10px;
+  transition:0.2s;
 }
 
-/* BONNES REPONSES */
+.ligne:hover {
+  background:#eef7ff;
+}
+
+/* 🔥 réponses en colonne propre */
+#exo2 {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+label.ligne {
+  display:block;
+  width:100%;
+  cursor:pointer;
+}
+
+/* radios alignés proprement */
+.ligne input {
+  margin-right:8px;
+}
+
 .correct {
-  border: 2px solid #4CAF50;
-  background-color: #eaf7ea;
-  border-radius: 5px;
+  background:#eaf7ea;
+  border:2px solid #4CAF50;
 }
 
-/* mauvaises cochées */
 .incorrect {
-  opacity: 0.4;
+  background:#fdeaea;
+  border:2px solid #e74c3c;
 }
 
 button {
-  margin-top: 15px;
-  padding: 8px 12px;
-  background: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  margin-top:15px;
+  padding:10px 18px;
+  background:linear-gradient(135deg,#4CAF50,#43a047);
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.2s;
+  align-self:flex-start;
+}
+
+button:hover {
+  transform:scale(1.05);
 }
 
 .correction {
-  margin-top: 20px;
-  display: none;
+  margin-top:20px;
+  display:none;
+  background:#f1f1f1;
+  padding:15px;
+  border-radius:10px;
+  border-left:5px solid #4CAF50;
+}
+
+.bilan {
+  margin-top:10px;
+  padding:10px;
+  background:#e8f5e9;
+  border-radius:8px;
 }
 </style>
 
@@ -67,92 +127,100 @@ button {
 
 <div class="container">
 
-<!-- ================= EXERCICE 1 ================= -->
+<!-- EXERCICE 1 -->
+
+<div class="exo" id="exo1">
 
 <h3>🟦 Exercice n°1 — Vrai ou Faux</h3>
 
-<p>Coche puis vérifie :</p>
+<p class="question">Coche puis vérifie :</p>
 
-<div class="reponse">
-<p>1. L'eau s'évapore grâce à la chaleur.</p>
+<div class="ligne">
+<p class="question">1. L'eau s'évapore grâce à la chaleur.</p>
 <label><input type="radio" name="q1" value="true"> Vrai</label>
 <label><input type="radio" name="q1" value="false"> Faux</label>
 </div>
 
-<div class="reponse">
-<p>2. Il y a précipitation lorsqu’il fait chaud.</p>
+<div class="ligne">
+<p class="question">2. Il y a précipitation lorsqu’il fait chaud.</p>
 <label><input type="radio" name="q2" value="true"> Vrai</label>
 <label><input type="radio" name="q2" value="false"> Faux</label>
 </div>
 
-<div class="reponse">
-<p>3. La vapeur d'eau se condense et forme un nuage.</p>
+<div class="ligne">
+<p class="question">3. La vapeur d'eau se condense et forme un nuage.</p>
 <label><input type="radio" name="q3" value="true"> Vrai</label>
 <label><input type="radio" name="q3" value="false"> Faux</label>
 </div>
 
 <button onclick="corrigerExo1()">Valider</button>
 
-<div id="correction1" class="correction">
-<hr>
+<div class="correction">
 <p><strong>Correction :</strong></p>
-<p>
-1. ✔ Vrai<br>
-2. ❌ Faux<br>
-3. ✔ Vrai<br><br>
-L'évaporation a lieu grâce à la chaleur. La vapeur d'eau se condense et crée un nuage.  
-Il y a précipitation lorsque la température, plus basse, ne permet plus à l'eau de rester sous forme de vapeur.
-</p>
+
+<p>1. Vrai — L’évaporation est provoquée par la chaleur qui transforme l’eau liquide en vapeur.</p>
+<p>2. Faux — La précipitation se produit lorsque l’air refroidit et que la vapeur d’eau redevient liquide.</p>
+<p>3. Vrai — La condensation de la vapeur d’eau forme des gouttelettes qui constituent les nuages.</p>
+
+<div class="bilan">
+✔ À retenir : Le cycle de l’eau repose sur l’évaporation, la condensation et les précipitations.
 </div>
 
-<hr>
+</div>
 
-<!-- ================= EXERCICE 2 ================= -->
+</div>
+
+<!-- EXERCICE 2 -->
+
+<div class="exo" id="exo2">
 
 <h3>🟩 Exercice n°2</h3>
 
-<p>
+<p class="question">
 Coche les affirmations correctes.<br>
 Cochez la (ou les) bonne(s) réponse(s).
 </p>
 
-<form id="exo2">
-
-<label class="reponse">
+<label class="ligne">
 <input type="checkbox" value="1"> Les mouvements des masses d'air sont à l'origine des vents.
 </label>
 
-<label class="reponse">
+<label class="ligne">
 <input type="checkbox" value="2"> L'air chaud est moins dense donc il descend à une altitude inférieure.
 </label>
 
-<label class="reponse">
+<label class="ligne">
 <input type="checkbox" value="3"> L'air chaud monte en altitude.
 </label>
 
-<label class="reponse">
+<label class="ligne">
 <input type="checkbox" value="4"> Les masses d'eau sont mises en mouvement par les vents.
 </label>
 
-<label class="reponse">
+<label class="ligne">
 <input type="checkbox" value="5"> Les masses d'air sont mises en mouvement par les courants.
 </label>
 
-<label class="reponse">
+<label class="ligne">
 <input type="checkbox" value="6"> L'eau chaude monte en surface.
 </label>
 
-</form>
-
 <button onclick="corrigerExo2()">Valider</button>
 
-<div id="correction2" class="correction">
-<hr>
+<div class="correction">
 <p><strong>Correction :</strong></p>
-<p>
-Les mouvements des masses d'air sont à l'origine des vents et les mouvements des masses d'eau à l'origine des courants.  
-Les masses d'air ou d'eau sont moins denses lorsqu'elles sont froides (donc elles descendent) et plus denses lorsqu'elles sont chaudes (donc elles montent).
-</p>
+
+<p>✔ Les vents sont provoqués par les déplacements des masses d’air.</p>
+<p>✔ L’air chaud monte car il est moins dense.</p>
+<p>✔ Les vents mettent en mouvement les masses d’eau en surface.</p>
+<p>✔ L’eau chaude remonte vers la surface.</p>
+
+<div class="bilan">
+✔ À retenir : Les différences de température créent des mouvements dans l’air et dans l’eau.
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -160,28 +228,61 @@ Les masses d'air ou d'eau sont moins denses lorsqu'elles sont froides (donc elle
 <script>
 
 // EXERCICE 1
-function corrigerExo1() {
-  document.getElementById("correction1").style.display = "block";
+function corrigerExo1(){
+
+const exo=document.getElementById("exo1");
+
+const bonnes = {
+  q1:"true",
+  q2:"false",
+  q3:"true"
+};
+
+Object.keys(bonnes).forEach(q=>{
+  let radios = exo.querySelectorAll("input[name='"+q+"']");
+  let ligne = radios[0].closest(".ligne");
+
+  ligne.classList.remove("correct","incorrect");
+
+  let checked = Array.from(radios).find(r=>r.checked);
+
+  if(!checked){
+    ligne.classList.add("incorrect");
+    return;
+  }
+
+  if(checked.value === bonnes[q]){
+    ligne.classList.add("correct");
+  } else {
+    ligne.classList.add("incorrect");
+  }
+});
+
+exo.querySelector(".correction").style.display="block";
+
 }
 
 // EXERCICE 2
-function corrigerExo2() {
+function corrigerExo2(){
 
-  let bonnes = ["1","3","4","6"];
-  let inputs = document.querySelectorAll("#exo2 input");
+const exo=document.getElementById("exo2");
 
-  inputs.forEach(input => {
-    let label = input.parentElement;
-    label.classList.remove("correct","incorrect");
+let bonnes = ["1","3","4","6"];
+let inputs = exo.querySelectorAll("input");
 
-    if (bonnes.includes(input.value)) {
-      label.classList.add("correct");
-    } else if (input.checked) {
-      label.classList.add("incorrect");
-    }
-  });
+inputs.forEach(input => {
+  let label = input.closest(".ligne");
+  label.classList.remove("correct","incorrect");
 
-  document.getElementById("correction2").style.display = "block";
+  if (bonnes.includes(input.value)) {
+    label.classList.add("correct");
+  } else if (input.checked) {
+    label.classList.add("incorrect");
+  }
+});
+
+exo.querySelector(".correction").style.display="block";
+
 }
 
 </script>
