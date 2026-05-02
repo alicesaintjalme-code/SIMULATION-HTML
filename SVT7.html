@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SVT Exercices</title>
+
+<style>
+
+body {
+  font-family: Arial;
+  background: linear-gradient(135deg, #eef2f7, #f8fbff);
+  padding:20px;
+}
+
+.container {
+  max-width:900px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.exo {
+  margin-bottom:30px;
+  padding:20px;
+  border-radius:12px;
+  background:#f9fbfd;
+  border-left:6px solid #4CAF50;
+}
+
+h3 {
+  color:#2c3e50;
+  background:#e8f5e9;
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:8px;
+}
+
+.question {
+  font-weight:bold;
+  color:#2c3e50;
+  margin-top:15px;
+}
+
+/* labels */
+label {
+  display:block;
+  margin:6px 0;
+  padding:6px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+label:hover {
+  background:#eef7ff;
+}
+
+label input {
+  margin-right:6px;
+}
+
+/* bonnes réponses */
+.correct {
+  background:#eaf7ea;
+  border:2px solid #4CAF50;
+}
+
+/* mauvaises */
+.incorrect {
+  background:#fdeaea;
+  border:2px solid #e74c3c;
+}
+
+/* bouton */
+button {
+  margin-top:15px;
+  padding:8px 16px;
+  background:linear-gradient(135deg,#4CAF50,#43a047);
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.2s;
+}
+
+button:hover {
+  transform:scale(1.05);
+}
+
+/* correction */
+.correction {
+  display:none;
+  margin-top:15px;
+  background:#f1f1f1;
+  padding:15px;
+  border-radius:10px;
+  border-left:5px solid #4CAF50;
+}
+
+/* texte */
+input[type="text"] {
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:8px;
+  border:2px solid #ddd;
+}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- EXERCICE 1 -->
+<div class="exo" id="exo1">
+<h3>1</h3>
+
+<p class="question">Pour chaque proposition, choisissez la bonne réponse</p>
+
+<p class="question">1. Les centres nerveux sont :</p>
+<label><input type="radio" name="q1"> a. Les organes de sens.</label>
+<label><input type="radio" name="q1"> b. Le cerveau et la moelle épinière.</label>
+<label><input type="radio" name="q1"> c. La moelle épinière et les nerfs.</label>
+<label><input type="radio" name="q1"> d. Les nerfs.</label>
+
+<p class="question">2. Au niveau d'une synapse, le message est :</p>
+<label><input type="radio" name="q2"> a. Chimique.</label>
+<label><input type="radio" name="q2"> b. Électrique.</label>
+<label><input type="radio" name="q2"> c. Sensoriel.</label>
+<label><input type="radio" name="q2"> d. À double sens.</label>
+
+<p class="question">3. Le cannabis :</p>
+<label><input type="radio" name="q3"> a. N'a aucune influence sur le cerveau.</label>
+<label><input type="radio" name="q3"> b. Perturbe le circuit de récompense.</label>
+<label><input type="radio" name="q3"> c. A des effets uniquement à court terme.</label>
+<label><input type="radio" name="q3"> d. Augmente les capacités cérébrales.</label>
+
+<button onclick="corriger1()">Valider</button>
+
+<div class="correction">
+1. Les centres nerveux sont : Le cerveau et la moelle épinière.<br>
+2. Au niveau d'une synapse, le message est : Chimique.<br>
+3. Le cannabis : Perturbe le circuit de récompense.
+</div>
+</div>
+
+<!-- EXERCICE 2 -->
+<div class="exo" id="exo2">
+<h3>2</h3>
+
+<p class="question">Construisez une phrase avec les mots suivants</p>
+
+<p>1. Système nerveux ; nerfs ; centres nerveux.</p>
+<input type="text" id="t1">
+
+<p>2. Synapse ; neurotransmetteur ; neurone ; cellule musculaire.</p>
+<input type="text" id="t2">
+
+<p>3. Cerveau ; stimulations sensorielles ; rôle intégrateur.</p>
+<input type="text" id="t3">
+
+<button onclick="corriger2()">Valider</button>
+
+<div class="correction">
+1. Le système nerveux est composé des centres nerveux et des nerfs.<br>
+2. Les neurotransmetteurs sont libérés dans la synapse, entre un neurone et une cellule musculaire (ou entre un neurone et un autre neurone).<br>
+3. Le cerveau a un rôle intégrateur des stimulations sensorielles.
+</div>
+</div>
+
+<!-- EXERCICE 3 -->
+<div class="exo" id="exo3">
+<h3>3</h3>
+
+<p class="question">Complétez les phrases suivantes en utilisant les mots  "nerveux", "électrique", "chimique", "centres", "diminue", "drogues", "système" et "influence"</p>
+
+<p>1. Les organes des sens sont à l'origine de messages <input type="text" id="c1"> en direction des <input type="text" id="c2"> nerveux.</p>
+
+<p>2. Les messages nerveux sont de nature <input type="text" id="c3"> au sein des neurones, et de nature <input type="text" id="c4"> entre eux.</p>
+
+<p>3. L'hygiène de vie <input type="text" id="c5"> le fonctionnement du <input type="text" id="c6"> nerveux. Par exemple, la consommation de <input type="text" id="c7"> perturbe le circuit de récompense et le manque de sommeil <input type="text" id="c8"> les performances du cerveau.</p>
+
+<button onclick="corriger3()">Valider</button>
+
+<div class="correction">
+1. Les organes des sens sont à l'origine de messages nerveux en direction des centres nerveux.<br>
+2. Les messages nerveux sont de nature électrique au sein des neurones, et de nature chimique entre eux.<br>
+3. L'hygiène de vie influence le fonctionnement du système nerveux. Par exemple, la consommation de drogues perturbe le circuit de récompense et le manque de sommeil diminue les performances du cerveau.
+</div>
+</div>
+
+</div>
+
+<script>
+
+function corriger1(){
+const exo=document.getElementById("exo1");
+let bonnes=["2","1","2"];
+
+["q1","q2","q3"].forEach((q,i)=>{
+exo.querySelectorAll("input[name='"+q+"']").forEach((r,index)=>{
+r.parentElement.classList.remove("correct","incorrect");
+
+if((index+1)==bonnes[i]) r.parentElement.classList.add("correct");
+else if(r.checked) r.parentElement.classList.add("incorrect");
+});
+});
+
+exo.querySelector(".correction").style.display="block";
+}
+
+function corriger2(){
+const exo=document.getElementById("exo2");
+
+["t1","t2","t3"].forEach(id=>{
+let el=document.getElementById(id);
+el.classList.remove("correct","incorrect");
+
+if(el.value.trim().length>10){
+el.classList.add("correct");
+}else{
+el.classList.add("incorrect");
+}
+});
+
+exo.querySelector(".correction").style.display="block";
+}
+
+function corriger3(){
+const exo=document.getElementById("exo3");
+
+["c1","c2","c3","c4","c5","c6","c7","c8"].forEach(id=>{
+let el=document.getElementById(id);
+el.classList.remove("correct","incorrect");
+
+if(el.value.trim().length>2){
+el.classList.add("correct");
+}else{
+el.classList.add("incorrect");
+}
+});
+
+exo.querySelector(".correction").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
