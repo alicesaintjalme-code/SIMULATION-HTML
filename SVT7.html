@@ -43,16 +43,22 @@ h3 {
   margin-top:15px;
 }
 
-label {
+.ligne {
   display:block;
-  margin:6px 0;
-  padding:6px 10px;
+  width:100%;
+  padding:8px;
+  margin-bottom:8px;
   border-radius:8px;
-  cursor:pointer;
+  transition:0.2s;
 }
 
-label:hover {
+.ligne:hover {
   background:#eef7ff;
+}
+
+label {
+  display:block;
+  cursor:pointer;
 }
 
 label input {
@@ -112,27 +118,27 @@ input[type="text"] {
 
 <!-- EXO 1 -->
 <div class="exo" id="exo1">
-<h3>1</h3>
+<h3>Exercice n°1</h3>
 
 <p class="question">Pour chaque proposition, choisissez la bonne réponse</p>
 
 <p class="question">1. Les centres nerveux sont :</p>
-<label><input type="radio" name="q1"> a. Les organes de sens.</label>
-<label><input type="radio" name="q1"> b. Le cerveau et la moelle épinière.</label>
-<label><input type="radio" name="q1"> c. La moelle épinière et les nerfs.</label>
-<label><input type="radio" name="q1"> d. Les nerfs.</label>
+<div class="ligne"><label><input type="radio" name="q1" value="1"> a. Les organes de sens.</label></div>
+<div class="ligne"><label><input type="radio" name="q1" value="2"> b. Le cerveau et la moelle épinière.</label></div>
+<div class="ligne"><label><input type="radio" name="q1" value="3"> c. La moelle épinière et les nerfs.</label></div>
+<div class="ligne"><label><input type="radio" name="q1" value="4"> d. Les nerfs.</label></div>
 
 <p class="question">2. Au niveau d'une synapse, le message est :</p>
-<label><input type="radio" name="q2"> a. Chimique.</label>
-<label><input type="radio" name="q2"> b. Électrique.</label>
-<label><input type="radio" name="q2"> c. Sensoriel.</label>
-<label><input type="radio" name="q2"> d. À double sens.</label>
+<div class="ligne"><label><input type="radio" name="q2" value="1"> a. Chimique.</label></div>
+<div class="ligne"><label><input type="radio" name="q2" value="2"> b. Électrique.</label></div>
+<div class="ligne"><label><input type="radio" name="q2" value="3"> c. Sensoriel.</label></div>
+<div class="ligne"><label><input type="radio" name="q2" value="4"> d. À double sens.</label></div>
 
 <p class="question">3. Le cannabis :</p>
-<label><input type="radio" name="q3"> a. N'a aucune influence sur le cerveau.</label>
-<label><input type="radio" name="q3"> b. Perturbe le circuit de récompense.</label>
-<label><input type="radio" name="q3"> c. A des effets uniquement à court terme.</label>
-<label><input type="radio" name="q3"> d. Augmente les capacités cérébrales.</label>
+<div class="ligne"><label><input type="radio" name="q3" value="1"> a. N'a aucune influence sur le cerveau.</label></div>
+<div class="ligne"><label><input type="radio" name="q3" value="2"> b. Perturbe le circuit de récompense.</label></div>
+<div class="ligne"><label><input type="radio" name="q3" value="3"> c. A des effets uniquement à court terme.</label></div>
+<div class="ligne"><label><input type="radio" name="q3" value="4"> d. Augmente les capacités cérébrales.</label></div>
 
 <button onclick="corriger1()">Valider</button>
 
@@ -145,7 +151,7 @@ input[type="text"] {
 
 <!-- EXO 2 -->
 <div class="exo" id="exo2">
-<h3>2</h3>
+<h3>Exercice n°2</h3>
 
 <p class="question">Construisez une phrase avec les mots suivants</p>
 
@@ -169,7 +175,7 @@ input[type="text"] {
 
 <!-- EXO 3 -->
 <div class="exo" id="exo3">
-<h3>3</h3>
+<h3>Exercice n°3</h3>
 
 <p class="question">Complétez les phrases suivantes en utilisant les mots  "nerveux", "électrique", "chimique", "centres", "diminue", "drogues", "système" et "influence"</p>
 
@@ -218,17 +224,31 @@ function normalize(str){
   return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
+/* ✅ CORRECTION QCM FIABLE */
 function corriger1(){
 const exo=document.getElementById("exo1");
-let bonnes=["2","1","2"];
 
-["q1","q2","q3"].forEach((q,i)=>{
-exo.querySelectorAll("input[name='"+q+"']").forEach((r,index)=>{
-r.parentElement.classList.remove("correct","incorrect");
+let bonnes={q1:"2", q2:"1", q3:"2"};
 
-if((index+1)==bonnes[i]) r.parentElement.classList.add("correct");
-else if(r.checked) r.parentElement.classList.add("incorrect");
-});
+Object.keys(bonnes).forEach(q=>{
+  let radios=exo.querySelectorAll("input[name='"+q+"']");
+  let checked=[...radios].find(r=>r.checked);
+
+  radios.forEach(r=>{
+    r.closest(".ligne").classList.remove("correct","incorrect");
+
+    if(r.value===bonnes[q]){
+      r.closest(".ligne").classList.add("correct");
+    }
+  });
+
+  if(checked && checked.value!==bonnes[q]){
+    checked.closest(".ligne").classList.add("incorrect");
+  }
+
+  if(!checked){
+    radios[0].closest(".ligne").classList.add("incorrect");
+  }
 });
 
 exo.querySelector(".correction").style.display="block";
@@ -262,6 +282,7 @@ Object.keys(mots).forEach(id=>{
 exo.querySelector(".correction").style.display="block";
 }
 
+/* ✅ CORRECTION EXO 3 */
 function corriger3(){
 const exo=document.getElementById("exo3");
 
