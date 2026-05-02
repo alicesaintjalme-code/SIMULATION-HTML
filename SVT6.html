@@ -106,18 +106,30 @@ button:hover {
   border-radius:8px;
 }
 
-input[type="text"] {
+/* INPUT INLINE CORRIGÉ */
+#exo2 input[type="text"] {
   display:inline-block;
-  width:120px;
+  width:240px;
+  max-width:100%;
   padding:6px;
-  margin:5px;
+  margin-left:10px;
   border-radius:8px;
   border:2px solid #ddd;
+  vertical-align:middle;
 }
 
-input[type="text"]:focus {
+#exo2 input[type="text"]:focus {
   border-color:#4CAF50;
   outline:none;
+}
+
+/* Responsive */
+@media (max-width:600px){
+  #exo2 input[type="text"]{
+    display:block;
+    width:100%;
+    margin-top:8px;
+  }
 }
 </style>
 </head>
