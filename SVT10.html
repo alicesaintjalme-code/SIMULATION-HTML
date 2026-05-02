@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SVT Exercices</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: linear-gradient(135deg, #eef2f7, #f8fbff);
+  padding:20px;
+}
+
+.container {
+  max-width:1000px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.exo {
+  margin-bottom:35px;
+  padding:20px;
+  border-radius:12px;
+  background:#f9fbfd;
+  border-left:6px solid #4CAF50;
+}
+
+h3 {
+  background:#e8f5e9;
+  padding:6px 12px;
+  border-radius:8px;
+  display:inline-block;
+}
+
+.question {
+  font-weight:bold;
+  color:#2c3e50;
+  margin-top:15px;
+}
+
+.ligne {
+  margin:12px 0;
+  padding:12px;
+  border-radius:10px;
+}
+
+.ligne:hover {
+  background:#eef7ff;
+}
+
+label {
+  display:inline-block;
+  margin:6px 10px 6px 0;
+  padding:6px 10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+label:hover {
+  background:#eef7ff;
+}
+
+.correct {
+  background:#eaf7ea;
+  border:2px solid #4CAF50;
+}
+
+.incorrect {
+  background:#fdeaea;
+  border:2px solid #e74c3c;
+}
+
+button {
+  margin-top:15px;
+  padding:10px 18px;
+  background:linear-gradient(135deg,#4CAF50,#43a047);
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+button:hover {
+  transform:scale(1.05);
+}
+
+.correction {
+  display:none;
+  margin-top:15px;
+  background:#f1f1f1;
+  padding:15px;
+  border-radius:10px;
+  border-left:5px solid #4CAF50;
+}
+
+.drag {
+  display:inline-block;
+  padding:6px 10px;
+  margin:5px;
+  border:2px solid #4CAF50;
+  border-radius:6px;
+  cursor:grab;
+  background:#eaf7ea;
+}
+
+.zone {
+  display:inline-block;
+  min-width:130px;
+  min-height:30px;
+  border:2px dashed #aaa;
+  margin:5px;
+  border-radius:6px;
+}
+
+input.inline {
+  display:inline-block;
+  width:90px;
+  margin:0 5px;
+  padding:5px;
+  border-radius:6px;
+  border:2px solid #ccc;
+}
+
+input.inline:focus {
+  border-color:#4CAF50;
+  outline:none;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- EXO 1 -->
+<div class="exo" id="exo1">
+<h3>Exercice n°1</h3>
+
+<p class="question">Complète le trajet des spermatozoïdes dans l'appareil reproducteur féminin après leur expulsion dans le vagin.</p>
+<p>Faites glisser les étiquettes dans les zones prévues à cet effet.</p>
+
+<div class="mots">
+<span class="drag" draggable="true">pavillon</span>
+<span class="drag" draggable="true">utérus</span>
+<span class="drag" draggable="true">col de l'utérus</span>
+<span class="drag" draggable="true">trompe utérine</span>
+</div>
+
+<p>
+spermatozoïdes expulsés dans le vagin →
+<span class="zone" data-expected="col de l'utérus"></span> →
+<span class="zone" data-expected="utérus"></span> →
+<span class="zone" data-expected="trompe utérine"></span> →
+<span class="zone" data-expected="pavillon"></span> →
+ovaire
+</p>
+
+<button onclick="corrigerDrag()">Valider</button>
+
+<div class="correction">
+
+<p><strong>Correction :</strong></p>
+
+<div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+<span class="correct">① col de l'utérus</span> ➡️
+<span class="correct">② utérus</span> ➡️
+<span class="correct">③ trompe utérine</span> ➡️
+<span class="correct">④ pavillon</span> ➡️
+<span class="correct">⑤ ovaire</span>
+</div>
+
+<div class="bilan">
+✔ À retenir : Les spermatozoïdes remontent du vagin vers l’ovaire en traversant successivement le col de l’utérus, l’utérus puis les trompes utérines.
+</div>
+
+</div>
+</div>
+
+<!-- EXO 2 -->
+<div class="exo" id="exo2">
+<h3>Exercice n°2</h3>
+
+<p class="question">Trouve les nombres correspondants dans les phrases.</p>
+
+<p>
+Un cycle menstruel dure 
+<input class="inline" id="c1"> jours. Le cycle utérin comprend 
+<input class="inline" id="c2"> phases dont la phase des règles qui dure plus ou moins 
+<input class="inline" id="c3"> jours. Le cycle ovarien comprend une phase folliculaire durant 
+<input class="inline" id="c4"> jours, l'ovulation et une phase lutéale de 
+<input class="inline" id="c5"> jours.
+</p>
+
+<button onclick="corriger2()">Valider</button>
+
+<div class="correction">
+<p><strong>Correction :</strong></p>
+<p>1. 28 — durée moyenne du cycle</p>
+<p>2. 2 — deux phases utérines</p>
+<p>3. 5 — durée moyenne des règles</p>
+<p>4. 14 — phase folliculaire</p>
+<p>5. 14 — phase lutéale</p>
+
+<div class="bilan">
+✔ À retenir : Le cycle menstruel dure en moyenne 28 jours et est organisé en phases régulières.
+</div>
+</div>
+</div>
+
+<!-- EXO 3 -->
+<div class="exo" id="exo3">
+<h3>Exercice n°3</h3>
+
+<p class="question">Associe chaque définition à la phase correspondante.</p>
+
+<div class="mots">
+<span class="drag" draggable="true">Phase préparant l'implantation d'un œuf fécondé.</span>
+<span class="drag" draggable="true">Phase pendant laquelle il y a régression de la muqueuse utérine.</span>
+<span class="drag" draggable="true">Phase pendant laquelle le follicule contenant l'ovule arrive à maturation.</span>
+<span class="drag" draggable="true">Phase pendant laquelle il y a présence d'un corps jaune.</span>
+</div>
+
+<div>
+<span class="zone" data-expected="Phase pendant laquelle il y a présence d'un corps jaune."></span> phase lutéale<br>
+<span class="zone" data-expected="Phase pendant laquelle il y a régression de la muqueuse utérine."></span> phase de règles<br>
+<span class="zone" data-expected="Phase pendant laquelle le follicule contenant l'ovule arrive à maturation."></span> phase folliculaire<br>
+<span class="zone" data-expected="Phase préparant l'implantation d'un œuf fécondé."></span> phase d'épaississement de la muqueuse utérine
+</div>
+
+<button onclick="corriger3()">Valider</button>
+
+<div class="correction">
+<p><strong>Correction :</strong></p>
+<p>✔ Phase lutéale — présence du corps jaune</p>
+<p>✔ Phase de règles — destruction de la muqueuse</p>
+<p>✔ Phase folliculaire — maturation de l’ovule</p>
+<p>✔ Phase d’épaississement — préparation à la nidation</p>
+
+<div class="bilan">
+✔ À retenir : Chaque phase du cycle a un rôle précis dans la reproduction.
+</div>
+</div>
+</div>
+
+<!-- EXO 4 -->
+<div class="exo" id="exo4">
+<h3>Exercice n°4</h3>
+
+<p class="question">La puberté est marquée chez la femme par :</p>
+
+<label class="ligne"><input type="checkbox" data-correct="false"> l'apparition des caractères sexuels primaires.</label>
+<label class="ligne"><input type="checkbox" data-correct="true"> des transformations physiques.</label>
+<label class="ligne"><input type="checkbox" data-correct="false"> la mue de la voix.</label>
+<label class="ligne"><input type="checkbox" data-correct="true"> l'apparition des poils.</label>
+<label class="ligne"><input type="checkbox" data-correct="false"> l'arrêt de la croissance.</label>
+<label class="ligne"><input type="checkbox" data-correct="true"> le développement des seins.</label>
+<label class="ligne"><input type="checkbox" data-correct="true"> le développement des organes reproducteurs.</label>
+<label class="ligne"><input type="checkbox" data-correct="true"> la production d'ovules.</label>
+
+<button onclick="corriger4()">Valider</button>
+
+<div class="correction">
+<p><strong>Correction :</strong></p>
+
+<p>✔ Transformations physiques — changements du corps à la puberté</p>
+<p>✔ Apparition des poils — caractère sexuel secondaire</p>
+<p>✔ Développement des seins — caractère sexuel secondaire</p>
+<p>✔ Développement des organes reproducteurs — maturation</p>
+<p>✔ Production d'ovules — début de la fonction reproductrice</p>
+
+<div class="bilan">
+✔ À retenir : La puberté correspond à l’apparition des caractères sexuels secondaires et à la capacité de reproduction.
+</div>
+</div>
+</div>
+
+</div>
+
+<script>
+
+let dragged = null;
+
+document.querySelectorAll(".drag").forEach(el=>{
+  el.addEventListener("dragstart",()=>{
+    dragged = el;
+  });
+});
+
+document.querySelectorAll(".zone").forEach(zone=>{
+  zone.addEventListener("dragover",e=>e.preventDefault());
+
+  zone.addEventListener("drop",function(){
+    if(this.firstChild){
+      this.parentElement.querySelector(".mots").appendChild(this.firstChild);
+    }
+    this.appendChild(dragged);
+  });
+});
+
+function corrigerDrag(){
+document.querySelectorAll("#exo1 .zone").forEach(z=>{
+  z.classList.remove("correct","incorrect");
+  if(z.firstChild && z.firstChild.textContent === z.dataset.expected){
+    z.classList.add("correct");
+  } else {
+    z.classList.add("incorrect");
+  }
+});
+document.querySelector("#exo1 .correction").style.display="block";
+}
+
+function corriger2(){
+const bonnes = ["28","2","5","14","14"];
+
+["c1","c2","c3","c4","c5"].forEach((id,i)=>{
+let el=document.getElementById(id);
+el.classList.remove("correct","incorrect");
+
+let val=el.value.trim();
+
+if(val===bonnes[i]) el.classList.add("correct");
+else el.classList.add("incorrect");
+});
+
+document.querySelector("#exo2 .correction").style.display="block";
+}
+
+function corriger3(){
+document.querySelectorAll("#exo3 .zone").forEach(z=>{
+  z.classList.remove("correct","incorrect");
+  if(z.firstChild && z.firstChild.textContent===z.dataset.expected){
+    z.classList.add("correct");
+  } else {
+    z.classList.add("incorrect");
+  }
+});
+document.querySelector("#exo3 .correction").style.display="block";
+}
+
+function corriger4(){
+document.querySelectorAll("#exo4 input").forEach(el=>{
+  el.parentElement.classList.remove("correct","incorrect");
+
+  if(el.checked && el.dataset.correct==="true"){
+    el.parentElement.classList.add("correct");
+  }
+  else if(el.checked){
+    el.parentElement.classList.add("incorrect");
+  }
+});
+document.querySelector("#exo4 .correction").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
