@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SVT Exercices</title>
+
+<style>
+body {font-family: Arial; background:#f4f6f8; padding:20px;}
+.container {max-width:900px; margin:auto; background:white; padding:20px; border-radius:10px;}
+h3 {color:#2c3e50;}
+
+.exo {margin-bottom:30px; padding:15px; border:1px solid #ddd; border-radius:8px;}
+
+label {display:block; margin:6px 0;}
+
+.correct {background:#eaf7ea; border:2px solid #4CAF50; border-radius:5px;}
+.incorrect {opacity:0.4;}
+
+input[type="text"] {padding:6px; margin:5px; border:2px solid #e0caa5; border-radius:5px; background:#fff8e8;}
+
+.zone {
+  display:inline-block;
+  min-width:140px;
+  min-height:28px;
+  border:2px dashed #aaa;
+  border-radius:6px;
+  margin:5px;
+  padding:4px;
+  background:#fff;
+}
+
+.drag {
+  display:inline-block;
+  padding:5px 10px;
+  margin:5px;
+  background:#eaf7ea;
+  border:2px solid #4CAF50;
+  border-radius:6px;
+  cursor:grab;
+}
+
+.mots {background:#f1f1f1; padding:10px; border-radius:8px; margin-bottom:10px;}
+
+.correction {display:none; margin-top:15px; background:#f1f1f1; padding:10px; border-radius:8px;}
+
+button {margin-top:10px; padding:8px 12px; background:#4CAF50; color:white; border:none; border-radius:5px; cursor:pointer;}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- EXO 1 -->
+<div class="exo" id="exo1">
+<h3>🟦 Exercice n°1</h3>
+<p>Quels éléments constituent la cellule végétale sans être présents dans la cellule animale ?</p>
+<p>Cochez la (ou les) bonne(s) réponse(s).</p>
+
+<label><input type="checkbox" value="1"> Paroi</label>
+<label><input type="checkbox" value="2"> Membrane plasmique</label>
+<label><input type="checkbox" value="3"> Noyau</label>
+<label><input type="checkbox" value="4"> Vacuole</label>
+<label><input type="checkbox" value="5"> Information génétique</label>
+<label><input type="checkbox" value="6"> Chloroplastes</label>
+
+<button onclick="corriger1()">Valider</button>
+
+<div class="correction">
+La cellule animale possède une membrane plasmique, un cytoplasme et un noyau contenant l'information génétique.
+</div>
+</div>
+
+<!-- EXO 2 -->
+<div class="exo" id="exo2">
+<h3>🟩 Exercice n°2</h3>
+
+<p>Reconstitue l'équation de la photosynthèse.</p>
+<p>Faites glisser les étiquettes dans les zones prévues à cet effet.</p>
+
+<div class="mots">
+<span class="drag" draggable="true" data-val="dioxyde de carbone">dioxyde de carbone</span>
+<span class="drag" draggable="true" data-val="dioxygène">dioxygène</span>
+</div>
+
+<div>
+<span class="zone" data-expected="dioxyde de carbone"></span> + eau → lumière → matière organique +
+<span class="zone" data-expected="dioxygène"></span>
+</div>
+
+<p><strong>Reconstitue l'équation de la photosynthèse.</strong></p>
+<p>Faites glisser les étiquettes dans les zones prévues à cet effet.</p>
+
+<button onclick="corrigerDrag('exo2')">Valider</button>
+
+<div class="correction">
+✔ dioxyde de carbone + eau → lumière → matière organique + ✔ dioxygène
+</div>
+</div>
+
+<!-- EXO 3 -->
+<div class="exo" id="exo3">
+<h3>🟨 Exercice n°3</h3>
+
+<p><strong>Complète les phrases.</strong></p>
+<p>Écrivez les réponses dans les zones colorées.</p>
+
+<p>
+La photosynthèse se déroule dans les <input id="c1"> des cellules chlorophylliennes. Elle s'effectue au niveau des <input id="c2"> de la plante en présence de <input id="c3">.
+</p>
+
+<p><strong>Complète les phrases.</strong></p>
+<p>Écrivez les réponses dans les zones colorées.</p>
+
+<button onclick="corriger3()">Valider</button>
+
+<div class="correction">
+La photosynthèse se déroule dans les chloroplastes des cellules chlorophylliennes. Elle s'effectue au niveau des feuilles de la plante en présence de lumière.
+</div>
+</div>
+
+<!-- EXO 4 -->
+<div class="exo" id="exo4">
+<h3>🟥 Exercice n°4</h3>
+
+<p><strong>Vrai ou faux ?</strong></p>
+
+<p>1. Les cellules chlorophylliennes ont besoin de dioxyde de carbone pour leur respiration.</p>
+<label><input type="radio" name="q1"> Vrai</label>
+<label><input type="radio" name="q1"> Faux</label>
+
+<p>2. Les gaz nécessaires à la respiration cellulaire entrent par des stomates, sur la surface des feuilles.</p>
+<label><input type="radio" name="q2"> Vrai</label>
+<label><input type="radio" name="q2"> Faux</label>
+
+<p>3. Les gaz nécessaires à la respiration cellulaire entrent dans les chloroplastes.</p>
+<label><input type="radio" name="q3"> Vrai</label>
+<label><input type="radio" name="q3"> Faux</label>
+
+<p>4. La respiration permet de produire de l'énergie.</p>
+<label><input type="radio" name="q4"> Vrai</label>
+<label><input type="radio" name="q4"> Faux</label>
+
+<p>5. L'énergie produite par la respiration permet la photosynthèse.</p>
+<label><input type="radio" name="q5"> Vrai</label>
+<label><input type="radio" name="q5"> Faux</label>
+
+<button onclick="corriger4()">Valider</button>
+
+<div class="correction">
+1. Les cellules chlorophylliennes ont besoin de dioxyde de carbone pour leur respiration. Faux<br>
+2. Les gaz nécessaires à la respiration cellulaire entrent par des stomates, sur la surface des feuilles. Vrai<br>
+3. Les gaz nécessaires à la respiration cellulaire entrent dans les chloroplastes. Faux<br>
+4. La respiration permet de produire de l'énergie. Vrai<br>
+5. L'énergie produite par la respiration permet la photosynthèse. Faux
+</div>
+</div>
+
+<!-- EXO 5 -->
+<div class="exo" id="exo5">
+<h3>🟪 Exercice n°5</h3>
+
+<p><strong>Complète les phrases.</strong></p>
+<p>Faites glisser les étiquettes dans les zones prévues à cet effet.</p>
+
+<div class="mots">
+<span class="drag" draggable="true" data-val="feuilles">feuilles</span>
+<span class="drag" draggable="true" data-val="chloroplastes">chloroplastes</span>
+<span class="drag" draggable="true" data-val="lumière">lumière</span>
+</div>
+
+<p>
+La photosynthèse se déroule dans les <span class="zone" data-expected="chloroplastes"></span> des cellules chlorophylliennes. Elle s'effectue au niveau des <span class="zone" data-expected="feuilles"></span> de la plante en présence de <span class="zone" data-expected="lumière"></span>.
+</p>
+
+<button onclick="corrigerDrag('exo5')">Valider</button>
+
+<div class="correction">
+La photosynthèse se déroule dans les chloroplastes des cellules chlorophylliennes. Elle s'effectue au niveau des feuilles de la plante en présence de lumière.
+</div>
+</div>
+
+</div>
+
+<script>
+
+let dragged = null;
+
+document.querySelectorAll('.drag').forEach(el=>{
+  el.addEventListener('dragstart', ()=>dragged=el);
+});
+
+document.querySelectorAll('.zone').forEach(zone=>{
+  zone.addEventListener('dragover', e=>e.preventDefault());
+
+  zone.addEventListener('drop', e=>{
+    e.preventDefault();
+    let exo = zone.closest('.exo');
+    let mots = exo.querySelector('.mots');
+
+    if(zone.firstChild){
+      mots.appendChild(zone.firstChild);
+    }
+    zone.appendChild(dragged);
+  });
+});
+
+function corrigerDrag(id){
+let exo=document.getElementById(id);
+exo.querySelectorAll('.zone').forEach(z=>{
+  z.classList.remove('correct','incorrect');
+  let el=z.firstChild;
+  if(el && el.dataset.val===z.dataset.expected) z.classList.add('correct');
+  else z.classList.add('incorrect');
+});
+exo.querySelector('.correction').style.display="block";
+}
+
+function corriger1(){
+let bonnes=["1","4","6"];
+document.querySelectorAll("#exo1 input").forEach(i=>{
+let l=i.parentElement;
+l.classList.remove("correct","incorrect");
+if(bonnes.includes(i.value)) l.classList.add("correct");
+else if(i.checked) l.classList.add("incorrect");
+});
+document.querySelector("#exo1 .correction").style.display="block";
+}
+
+function corriger3(){
+let bonnes=["chloroplastes","feuilles","lumière"];
+["c1","c2","c3"].forEach((id,i)=>{
+let el=document.getElementById(id);
+el.classList.remove("correct","incorrect");
+if(el.value.toLowerCase().includes(bonnes[i])) el.classList.add("correct");
+else el.classList.add("incorrect");
+});
+document.querySelector("#exo3 .correction").style.display="block";
+}
+
+function corriger4(){
+let bonnes=["2","1","2","1","2"];
+["q1","q2","q3","q4","q5"].forEach((q,i)=>{
+document.querySelectorAll("#exo4 input[name='"+q+"']").forEach((r,index)=>{
+r.parentElement.classList.remove("correct","incorrect");
+if((index+1)==bonnes[i]) r.parentElement.classList.add("correct");
+else if(r.checked) r.parentElement.classList.add("incorrect");
+});
+});
+document.querySelector("#exo4 .correction").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
