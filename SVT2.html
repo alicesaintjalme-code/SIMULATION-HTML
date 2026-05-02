@@ -22,52 +22,43 @@ input[type="text"] {
   margin-left: 10px;
 }
 
-.choix {
-  display: block;
-  margin: 5px 0;
-}
+textarea { width:100%; }
+
+.choix { display:block; margin:5px 0; }
 
 button {
-  margin-top: 15px;
-  padding: 8px 12px;
-  background: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  margin-top:15px;
+  padding:8px 12px;
+  background:#4CAF50;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
 }
 
-.correction {
-  display: none;
-  margin-top: 15px;
-}
+.correction { display:none; margin-top:15px; }
 
-.mots {
-  background:#f1f1f1;
-  padding:10px;
-  border-radius:8px;
-  margin-bottom:10px;
+.correct {
+  background:#e6f7e6;
+  border:2px solid #4CAF50;
 }
 </style>
-
-<div class="container">
 
 
 <p><strong>Associez (écris la lettre correspondante du schéma) :</strong></p>
 
 <ul>
-<li>Volcanisme : <input type="text"></li>
-<li>Lithosphère : <input type="text"></li>
-<li>Convergence : <input type="text"></li>
-<li>Asthénosphère : <input type="text"></li>
-<li>Séismes : <input type="text"></li>
-<li>Fosse océanique : <input type="text"></li>
+<li>Volcanisme : <input id="e1"></li>
+<li>Lithosphère : <input id="e2"></li>
+<li>Convergence : <input id="e3"></li>
+<li>Asthénosphère : <input id="e4"></li>
+<li>Séismes : <input id="e5"></li>
+<li>Fosse océanique : <input id="e6"></li>
 </ul>
 
-<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
+<button onclick="corriger1()">Valider</button>
 
-<div class="correction">
-<p><strong>Correction :</strong></p>
+<div class="correction" id="cor1">
 a. Convergence<br>
 b. Fosse océanique<br>
 c. Lithosphère<br>
@@ -75,109 +66,110 @@ d. Séismes<br>
 e. Asthénosphère<br>
 f. Volcanisme
 </div>
-
 </div>
 
 <hr>
 
-<!-- ================= EXERCICE 2 ================= -->
-
+<!-- EXERCICE 2 -->
 <div class="exo">
-
 <h3>🟩 Exercice n°2 — QCM</h3>
 
-<p>Pour chaque proposition, choisissez la bonne réponse :</p>
+<p><strong>Pour chaque proposition, choisissez la bonne réponse :</strong></p>
 
 <p>1. La lithosphère est :</p>
-<label class="choix"><input type="radio" name="q1"> épaisse de 600 kilomètres.</label>
-<label class="choix"><input type="radio" name="q1"> ductile.</label>
-<label class="choix"><input type="radio" name="q1"> découpée en plaques.</label>
-<label class="choix"><input type="radio" name="q1"> présente sous l'asthénosphère.</label>
+<label class="choix"><input type="radio" name="q1" value="0"> épaisse de 600 kilomètres.</label>
+<label class="choix"><input type="radio" name="q1" value="0"> ductile.</label>
+<label class="choix"><input type="radio" name="q1" value="1"> découpée en plaques.</label>
+<label class="choix"><input type="radio" name="q1" value="0"> présente sous l'asthénosphère.</label>
 
 <p>2. Au sein des plaques, l'activité tectonique (sismicité et volcanisme) est :</p>
-<label class="choix"><input type="radio" name="q2"> intense contrairement à leurs limites.</label>
-<label class="choix"><input type="radio" name="q2"> intense comme à leurs limites.</label>
-<label class="choix"><input type="radio" name="q2"> presque nulle contrairement à leurs limites.</label>
-<label class="choix"><input type="radio" name="q2"> absente comme à leurs limites.</label>
+<label class="choix"><input type="radio" name="q2" value="0"> intense contrairement à leurs limites.</label>
+<label class="choix"><input type="radio" name="q2" value="0"> intense comme à leurs limites.</label>
+<label class="choix"><input type="radio" name="q2" value="1"> presque nulle contrairement à leurs limites.</label>
+<label class="choix"><input type="radio" name="q2" value="0"> absente comme à leurs limites.</label>
 
 <p>3. Les éruptions effusives ont lieu au niveau :</p>
-<label class="choix"><input type="radio" name="q3"> de toutes les frontières de plaques.</label>
-<label class="choix"><input type="radio" name="q3"> des dorsales.</label>
-<label class="choix"><input type="radio" name="q3"> des chaines de montagnes.</label>
-<label class="choix"><input type="radio" name="q3"> des fosses océaniques.</label>
+<label class="choix"><input type="radio" name="q3" value="0"> de toutes les frontières de plaques.</label>
+<label class="choix"><input type="radio" name="q3" value="1"> des dorsales.</label>
+<label class="choix"><input type="radio" name="q3" value="0"> des chaines de montagnes.</label>
+<label class="choix"><input type="radio" name="q3" value="0"> des fosses océaniques.</label>
 
-<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
+<button onclick="corriger2()">Valider</button>
 
-<div class="correction">
-✔ 1. découpée en plaques<br>
-✔ 2. presque nulle contrairement à leurs limites<br>
-✔ 3. des dorsales
+<div class="correction" id="cor2">
+✔ réponses correctes
 </div>
-
 </div>
 
 <hr>
 
-<!-- ================= EXERCICE 3 ================= -->
-
+<!-- EXERCICE 3 -->
 <div class="exo">
-
 <h3>🟨 Exercice n°3 — Rédaction</h3>
 
 <p><strong>Construisez une phrase avec les mots suivants :</strong></p>
 
 <p>1. Plaques lithosphériques, dorsales, fosses océaniques.</p>
-<textarea rows="3" style="width:100%;"></textarea>
+<textarea rows="3"></textarea>
 
 <p>2. Dorsale, divergence, volcanisme effusif.</p>
-<textarea rows="3" style="width:100%;"></textarea>
+<textarea rows="3"></textarea>
 
-<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
+<button onclick="document.getElementById('cor3').style.display='block'">Valider</button>
 
-<div class="correction">
-<p><strong>Correction :</strong></p>
-
-<p>
-Les plaques lithosphériques convergent (se rapprochent) au niveau des fosses océaniques et divergent (s'écartent) au niveau des dorsales.
-</p>
-
-<p>
-Les dorsales sont des frontières de divergence des plaques où le volcanisme est effusif.
-</p>
-
+<div class="correction" id="cor3">
+Les plaques lithosphériques convergent au niveau des fosses océaniques et divergent au niveau des dorsales.<br><br>
+Les dorsales sont des frontières de divergence où le volcanisme est effusif.
 </div>
-
 </div>
 
 <hr>
 
-<!-- ================= EXERCICE 4 ================= -->
-
+<!-- EXERCICE 4 -->
 <div class="exo">
-
 <h3>🟥 Exercice n°4 — Complétez</h3>
 
-<p><strong>Complétez les phrases suivantes avec les mots "lithosphère", "dorsales", et "asthénosphère" :</strong></p>
+<p><strong>Complétez les phrases suivantes avec les mots "lithosphère", "dorsales", "asthénosphère" :</strong></p>
 
 <p>
-1. En Islande, la forte dissipation d'énergie thermique au niveau des <input type="text"> permet l'utilisation de la géothermie comme source d'énergie propre.
+1. En Islande, la forte dissipation d'énergie thermique au niveau des <input id="f1"> permet l'utilisation de la géothermie.
 </p>
 
 <p>
-2. La <input type="text"> se déplace sur l'<input type="text"> grâce à des mouvements de convection.
+2. La <input id="f2"> se déplace sur l'<input id="f3"> grâce à des mouvements de convection.
 </p>
 
-<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
+<button onclick="corriger4()">Valider</button>
 
-<div class="correction">
-<p><strong>Correction :</strong></p>
-
-<p>1. dorsales</p>
-
-<p>2. lithosphère et asthénosphère</p>
-
+<div class="correction" id="cor4">
+dorsales / lithosphère / asthénosphère
+</div>
 </div>
 
 </div>
 
-</div>
+<script>
+function corriger1(){
+  let bonnes=["f","c","a","e","d","b"];
+  let ids=["e1","e2","e3","e4","e5","e6"];
+  ids.forEach((id,i)=>{
+    let el=document.getElementById(id);
+    if(el.value.toLowerCase()==bonnes[i]) el.classList.add("correct");
+  });
+  document.getElementById("cor1").style.display="block";
+}
+
+function corriger2(){
+  document.querySelectorAll("input[type=radio]").forEach(r=>{
+    if(r.checked && r.value=="1") r.parentElement.classList.add("correct");
+  });
+  document.getElementById("cor2").style.display="block";
+}
+
+function corriger4(){
+  if(f1.value.toLowerCase()=="dorsales") f1.classList.add("correct");
+  if(f2.value.toLowerCase()=="lithosphère") f2.classList.add("correct");
+  if(f3.value.toLowerCase()=="asthénosphère") f3.classList.add("correct");
+  document.getElementById("cor4").style.display="block";
+}
+</script>
