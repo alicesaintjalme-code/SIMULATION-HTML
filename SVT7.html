@@ -43,14 +43,12 @@ h3 {
   margin-top:15px;
 }
 
-/* labels */
 label {
   display:block;
   margin:6px 0;
   padding:6px 10px;
   border-radius:8px;
   cursor:pointer;
-  transition:0.2s;
 }
 
 label:hover {
@@ -61,19 +59,16 @@ label input {
   margin-right:6px;
 }
 
-/* bonnes réponses */
 .correct {
   background:#eaf7ea;
   border:2px solid #4CAF50;
 }
 
-/* mauvaises */
 .incorrect {
   background:#fdeaea;
   border:2px solid #e74c3c;
 }
 
-/* bouton */
 button {
   margin-top:15px;
   padding:8px 16px;
@@ -83,14 +78,8 @@ button {
   border-radius:8px;
   cursor:pointer;
   font-weight:bold;
-  transition:0.2s;
 }
 
-button:hover {
-  transform:scale(1.05);
-}
-
-/* correction */
 .correction {
   display:none;
   margin-top:15px;
@@ -100,7 +89,6 @@ button:hover {
   border-left:5px solid #4CAF50;
 }
 
-/* champs texte généraux (exo2) */
 input[type="text"] {
   width:100%;
   padding:10px;
@@ -109,7 +97,6 @@ input[type="text"] {
   border:2px solid #ddd;
 }
 
-/* ⚡ correction inline EXO 3 */
 #exo3 input[type="text"] {
   width:120px;
   display:inline-block;
@@ -123,7 +110,7 @@ input[type="text"] {
 <body>
 <div class="container">
 
-<!-- EXERCICE 1 -->
+<!-- EXO 1 -->
 <div class="exo" id="exo1">
 <h3>1</h3>
 
@@ -156,7 +143,7 @@ input[type="text"] {
 </div>
 </div>
 
-<!-- EXERCICE 2 -->
+<!-- EXO 2 -->
 <div class="exo" id="exo2">
 <h3>2</h3>
 
@@ -180,7 +167,7 @@ input[type="text"] {
 </div>
 </div>
 
-<!-- EXERCICE 3 -->
+<!-- EXO 3 -->
 <div class="exo" id="exo3">
 <h3>3</h3>
 
@@ -227,6 +214,10 @@ les performances du cerveau.
 
 <script>
 
+function normalize(str){
+  return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 function corriger1(){
 const exo=document.getElementById("exo1");
 let bonnes=["2","1","2"];
@@ -243,18 +234,29 @@ else if(r.checked) r.parentElement.classList.add("incorrect");
 exo.querySelector(".correction").style.display="block";
 }
 
+/* 🔥 VALIDATION INTELLIGENTE EXO 2 */
 function corriger2(){
 const exo=document.getElementById("exo2");
 
-["t1","t2","t3"].forEach(id=>{
-let el=document.getElementById(id);
-el.classList.remove("correct","incorrect");
+const mots = {
+  t1:["systeme nerveux","centres nerveux","nerfs"],
+  t2:["synapse","neurotransmetteur","neurone","cellule musculaire"],
+  t3:["cerveau","stimulations sensorielles","role integrateur"]
+};
 
-if(el.value.trim().length>10){
-el.classList.add("correct");
-}else{
-el.classList.add("incorrect");
-}
+Object.keys(mots).forEach(id=>{
+  let el=document.getElementById(id);
+  let val = normalize(el.value);
+
+  el.classList.remove("correct","incorrect");
+
+  let ok = mots[id].every(m => val.includes(normalize(m)));
+
+  if(ok){
+    el.classList.add("correct");
+  } else {
+    el.classList.add("incorrect");
+  }
 });
 
 exo.querySelector(".correction").style.display="block";
@@ -263,15 +265,29 @@ exo.querySelector(".correction").style.display="block";
 function corriger3(){
 const exo=document.getElementById("exo3");
 
-["c1","c2","c3","c4","c5","c6","c7","c8"].forEach(id=>{
-let el=document.getElementById(id);
-el.classList.remove("correct","incorrect");
+const bonnes = {
+  c1:"nerveux",
+  c2:"centres",
+  c3:"électrique",
+  c4:"chimique",
+  c5:"influence",
+  c6:"système",
+  c7:"drogues",
+  c8:"diminue"
+};
 
-if(el.value.trim().length>2){
-el.classList.add("correct");
-}else{
-el.classList.add("incorrect");
-}
+Object.keys(bonnes).forEach(id=>{
+  let el=document.getElementById(id);
+  let val = normalize(el.value.trim());
+  let bon = normalize(bonnes[id]);
+
+  el.classList.remove("correct","incorrect");
+
+  if(val === bon){
+    el.classList.add("correct");
+  } else {
+    el.classList.add("incorrect");
+  }
 });
 
 exo.querySelector(".correction").style.display="block";
