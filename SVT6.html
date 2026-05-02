@@ -5,10 +5,9 @@
 <title>SVT Exercices</title>
 
 <style>
-
 body {
-  font-family: Arial;
-  background: linear-gradient(135deg, #eef2f7, #f8fbff);
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#eef2f7,#f8fbff);
   padding:20px;
 }
 
@@ -37,47 +36,48 @@ h3 {
   border-radius:8px;
 }
 
-/* QUESTIONS EN GRAS */
 .question {
   font-weight:bold;
   color:#2c3e50;
   margin-top:15px;
 }
 
-/* labels */
-label {
-  display:inline-block;
-  margin:8px 10px 8px 0;
-  padding:6px 10px;
+/* lignes réponses */
+.ligne {
+  display:block;
+  width:100%;
+  padding:8px;
+  margin-bottom:8px;
   border-radius:8px;
-  cursor:pointer;
   transition:0.2s;
 }
 
-label:hover {
+.ligne:hover {
   background:#eef7ff;
+}
+
+label {
+  cursor:pointer;
+  display:block;
 }
 
 label input {
   margin-right:6px;
 }
 
-/* bonnes réponses */
 .correct {
   background:#eaf7ea;
   border:2px solid #4CAF50;
 }
 
-/* mauvaises */
 .incorrect {
   background:#fdeaea;
   border:2px solid #e74c3c;
 }
 
-/* bouton */
 button {
   margin-top:15px;
-  padding:8px 16px;
+  padding:10px 16px;
   background:linear-gradient(135deg,#4CAF50,#43a047);
   color:white;
   border:none;
@@ -91,7 +91,6 @@ button:hover {
   transform:scale(1.05);
 }
 
-/* correction */
 .correction {
   display:none;
   margin-top:15px;
@@ -101,11 +100,19 @@ button:hover {
   border-left:5px solid #4CAF50;
 }
 
-/* champs texte */
-input[type="text"] {
-  width:100%;
+.bilan {
+  margin-top:10px;
   padding:10px;
-  margin:8px 0;
+  background:#e8f8ec;
+  border-radius:8px;
+}
+
+/* input inline */
+input[type="text"] {
+  display:inline-block;
+  width:120px;
+  padding:6px;
+  margin:5px;
   border-radius:8px;
   border:2px solid #ddd;
   transition:0.2s;
@@ -115,7 +122,6 @@ input[type="text"]:focus {
   border-color:#4CAF50;
   outline:none;
 }
-
 </style>
 </head>
 
@@ -128,31 +134,37 @@ input[type="text"]:focus {
 
 <p class="question">Pour respirer les cellules végétales ont toujours besoin :</p>
 
-<label><input type="radio" name="q1"> de lumière.</label>
-<label><input type="radio" name="q1"> de dioxyde de carbone.</label>
-<label><input type="radio" name="q1"> de dioxygène.</label>
-<label><input type="radio" name="q1"> d'eau.</label>
+<div class="ligne"><label><input type="radio" name="q1" value="1"> de lumière.</label></div>
+<div class="ligne"><label><input type="radio" name="q1" value="2"> de dioxyde de carbone.</label></div>
+<div class="ligne"><label><input type="radio" name="q1" value="3"> de dioxygène.</label></div>
+<div class="ligne"><label><input type="radio" name="q1" value="4"> d'eau.</label></div>
 
 <p class="question">2. Les microorganismes :</p>
 
-<label><input type="radio" name="q2"> ont un rôle bénéfique dans la nutrition des végétaux seulement.</label>
-<label><input type="radio" name="q2"> ont un rôle bénéfique dans la nutrition des animaux seulement.</label>
-<label><input type="radio" name="q2"> ont un rôle positif dans la nutrition des êtres vivants.</label>
-<label><input type="radio" name="q2"> ont un rôle négatif dans la nutrition des animaux et positif sur celle des végétaux.</label>
+<div class="ligne"><label><input type="radio" name="q2" value="1"> ont un rôle bénéfique dans la nutrition des végétaux seulement.</label></div>
+<div class="ligne"><label><input type="radio" name="q2" value="2"> ont un rôle bénéfique dans la nutrition des animaux seulement.</label></div>
+<div class="ligne"><label><input type="radio" name="q2" value="3"> ont un rôle positif dans la nutrition des êtres vivants.</label></div>
+<div class="ligne"><label><input type="radio" name="q2" value="4"> ont un rôle négatif dans la nutrition des animaux et positif sur celle des végétaux.</label></div>
 
 <p class="question">3. La photosynthèse permet la production :</p>
 
-<label><input type="radio" name="q3"> de matière organique.</label>
-<label><input type="radio" name="q3"> d'eau.</label>
-<label><input type="radio" name="q3"> de dioxyde de carbone.</label>
-<label><input type="radio" name="q3"> d'urée.</label>
+<div class="ligne"><label><input type="radio" name="q3" value="1"> de matière organique.</label></div>
+<div class="ligne"><label><input type="radio" name="q3" value="2"> d'eau.</label></div>
+<div class="ligne"><label><input type="radio" name="q3" value="3"> de dioxyde de carbone.</label></div>
+<div class="ligne"><label><input type="radio" name="q3" value="4"> d'urée.</label></div>
 
 <button onclick="corriger1()">Valider</button>
 
 <div class="correction">
-<p>1. Pour respirer les cellules végétales ont toujours besoin : de dioxygène.</p>
-<p>2. Les microorganismes : ont un rôle positif dans la nutrition des êtres vivants.</p>
-<p>3. La photosynthèse permet la production : de matière organique.</p>
+<p><strong>Correction :</strong></p>
+
+<p>1. de dioxygène — Les cellules utilisent le dioxygène pour respirer et produire de l’énergie.</p>
+<p>2. ont un rôle positif dans la nutrition des êtres vivants — Ils participent à la digestion et aux échanges utiles.</p>
+<p>3. de matière organique — La photosynthèse fabrique du sucre à partir de matière minérale.</p>
+
+<div class="bilan">
+✔ À retenir : La respiration consomme du dioxygène et la photosynthèse produit de la matière organique.
+</div>
 </div>
 </div>
 
@@ -160,23 +172,26 @@ input[type="text"]:focus {
 <div class="exo" id="exo2">
 <h3>2</h3>
 
-<p class="question"><strong>Construisez une phrase avec les mots suivants</strong></p>
+<p class="question">Construisez une phrase avec les mots suivants</p>
 
-<p>1. cellule animale ; dioxygène ; glucose ; dioxyde de carbone ; urée ; besoins ; déchets.</p>
-<input type="text" id="t1">
+<p>1. cellule animale ; dioxygène ; glucose ; dioxyde de carbone ; urée ; besoins ; déchets. <input type="text" id="t1"></p>
 
-<p>2. cellule végétale ; lumière ; dioxyde de carbone ; eau ; sucre.</p>
-<input type="text" id="t2">
+<p>2. cellule végétale ; lumière ; dioxyde de carbone ; eau ; sucre. <input type="text" id="t2"></p>
 
-<p>3. champignon ; nutrition ; mycorhize ; racine.</p>
-<input type="text" id="t3">
+<p>3. champignon ; nutrition ; mycorhize ; racine. <input type="text" id="t3"></p>
 
 <button onclick="corriger2()">Valider</button>
 
 <div class="correction">
+<p><strong>Correction :</strong></p>
+
 <p>1. Les besoins d'une cellule animale sont le dioxygène et le glucose et ses déchets sont le dioxyde de carbone et l'urée.</p>
 <p>2. La cellule végétale produit des sucres à partir de dioxyde de carbone et d'eau en présence de lumière.</p>
 <p>3. L'association d'un champignon avec une racine forme une mycorhize qui favorise la nutrition des végétaux.</p>
+
+<div class="bilan">
+✔ À retenir : Une phrase correcte doit contenir tous les mots-clés importants du mécanisme.
+</div>
 </div>
 </div>
 
@@ -187,29 +202,58 @@ input[type="text"]:focus {
 function corriger1(){
 const exo=document.getElementById("exo1");
 
-let bonnes=["3","3","1"];
+let bonnes={q1:"3", q2:"3", q3:"1"};
 
-["q1","q2","q3"].forEach((q,i)=>{
-exo.querySelectorAll("input[name='"+q+"']").forEach((r,index)=>{
-r.parentElement.classList.remove("correct","incorrect");
+Object.keys(bonnes).forEach(q=>{
+let radios=exo.querySelectorAll("input[name='"+q+"']");
+let checked=[...radios].find(r=>r.checked);
+let ligneParent;
 
-if((index+1)==bonnes[i]) r.parentElement.classList.add("correct");
-else if(r.checked) r.parentElement.classList.add("incorrect");
+radios.forEach(r=>{
+r.closest(".ligne").classList.remove("correct","incorrect");
 
+if(r.value===bonnes[q]){
+r.closest(".ligne").classList.add("correct");
+}
 });
+
+if(checked){
+ligneParent=checked.closest(".ligne");
+if(checked.value!==bonnes[q]){
+ligneParent.classList.add("incorrect");
+}
+}else{
+radios[0].closest(".ligne").classList.add("incorrect");
+}
 });
 
 exo.querySelector(".correction").style.display="block";
 }
 
+function normalize(str){
+return str.toLowerCase()
+.normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+.replace(/[^a-z ]/g,"");
+}
+
 function corriger2(){
 const exo=document.getElementById("exo2");
 
-["t1","t2","t3"].forEach(id=>{
+let checks={
+t1:["dioxygene","glucose","dioxyde de carbone","uree"],
+t2:["lumiere","dioxyde de carbone","eau","sucre"],
+t3:["champignon","racine","mycorhize","nutrition"]
+};
+
+Object.keys(checks).forEach(id=>{
 let el=document.getElementById(id);
 el.classList.remove("correct","incorrect");
 
-if(el.value.trim().length>10){
+let val=normalize(el.value);
+
+let ok=checks[id].every(mot=>val.includes(normalize(mot)));
+
+if(ok){
 el.classList.add("correct");
 }else{
 el.classList.add("incorrect");
