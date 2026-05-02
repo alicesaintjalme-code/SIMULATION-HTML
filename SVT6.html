@@ -37,7 +37,14 @@ h3 {
   border-radius:8px;
 }
 
-/* labels améliorés */
+/* QUESTIONS EN GRAS */
+.question {
+  font-weight:bold;
+  color:#2c3e50;
+  margin-top:15px;
+}
+
+/* labels */
 label {
   display:inline-block;
   margin:8px 10px 8px 0;
@@ -51,7 +58,6 @@ label:hover {
   background:#eef7ff;
 }
 
-/* radio style propre */
 label input {
   margin-right:6px;
 }
@@ -120,21 +126,21 @@ input[type="text"]:focus {
 <div class="exo" id="exo1">
 <h3>1.</h3>
 
-<p>Pour respirer les cellules végétales ont toujours besoin :</p>
+<p class="question">Pour respirer les cellules végétales ont toujours besoin :</p>
 
 <label><input type="radio" name="q1"> de lumière.</label>
 <label><input type="radio" name="q1"> de dioxyde de carbone.</label>
 <label><input type="radio" name="q1"> de dioxygène.</label>
 <label><input type="radio" name="q1"> d'eau.</label>
 
-<p>2. Les microorganismes :</p>
+<p class="question">2. Les microorganismes :</p>
 
 <label><input type="radio" name="q2"> ont un rôle bénéfique dans la nutrition des végétaux seulement.</label>
 <label><input type="radio" name="q2"> ont un rôle bénéfique dans la nutrition des animaux seulement.</label>
 <label><input type="radio" name="q2"> ont un rôle positif dans la nutrition des êtres vivants.</label>
 <label><input type="radio" name="q2"> ont un rôle négatif dans la nutrition des animaux et positif sur celle des végétaux.</label>
 
-<p>3. La photosynthèse permet la production :</p>
+<p class="question">3. La photosynthèse permet la production :</p>
 
 <label><input type="radio" name="q3"> de matière organique.</label>
 <label><input type="radio" name="q3"> d'eau.</label>
@@ -154,7 +160,7 @@ input[type="text"]:focus {
 <div class="exo" id="exo2">
 <h3>2</h3>
 
-<p><strong>Construisez une phrase avec les mots suivants</strong></p>
+<p class="question"><strong>Construisez une phrase avec les mots suivants</strong></p>
 
 <p>1. cellule animale ; dioxygène ; glucose ; dioxyde de carbone ; urée ; besoins ; déchets.</p>
 <input type="text" id="t1">
