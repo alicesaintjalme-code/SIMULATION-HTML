@@ -28,7 +28,7 @@ input, textarea {
 }
 
 .correct { background:#eaf7ea; border:2px solid green; }
-.incorrect { opacity:0.4; }
+.incorrect { background:#ffe5e5; }
 
 .mots {
   background:#f1f1f1;
@@ -40,29 +40,24 @@ input, textarea {
 
 <div class="container">
 
+<!-- ================= EXERCICE 1 ================= -->
 
-<p><strong>Associez (écris la lettre correspondante) :</strong></p>
+<p><strong>Associez (écris la lettre correspondante du schéma) :</strong></p>
 
 <ul>
-<li>Atmosphère : <input id="a"></li>
-<li>Rayonnement solaire reçu : <input id="b"></li>
-<li>Une partie du rayonnement est renvoyé : <input id="c"></li>
-<li>Rayonnement émis par la surface de la Terre : <input id="d"></li>
-<li>Absorption par les gaz à effet de serre : <input id="e"></li>
-<li>Conversion en énergie thermique : <input id="f"></li>
-<li>Hausse de la température de surface : <input id="g"></li>
+<li>Hausse de la température de surface : <input id="e1"></li>
+<li>Rayonnement solaire reçu : <input id="e2"></li>
+<li>Atmosphère : <input id="e3"></li>
+<li>Conversion en énergie thermique : <input id="e4"></li>
+<li>Rayonnement émis par la surface de la Terre : <input id="e5"></li>
+<li>Une partie du rayonnement est renvoyé : <input id="e6"></li>
+<li>Absorption par les gaz à effet de serre : <input id="e7"></li>
 </ul>
 
-<button onclick="corriger1()">Valider</button>
+<button onclick="corrigerMelange()">Valider</button>
 
-<div id="cor1" class="correction">
-✔ a. Atmosphère<br>
-✔ b. Rayonnement solaire reçu<br>
-✔ c. Une partie du rayonnement est renvoyé<br>
-✔ d. Rayonnement émis par la surface de la Terre<br>
-✔ e. Absorption par les gaz à effet de serre<br>
-✔ f. Conversion en énergie thermique<br>
-✔ g. Hausse de la température de surface
+<div id="corMelange" class="correction">
+✔ Corrigé affiché
 </div>
 
 <hr>
@@ -74,28 +69,23 @@ input, textarea {
 <form id="exo2">
 
 <p>1. Quel indice témoigne d'un climat chaud ?</p>
-<label><input type="radio" name="q1" value="4"> beaucoup de dioxyde de carbone.</label>
-<label><input type="radio" name="q1" value="0"> peu de dioxyde de carbone.</label>
-<label><input type="radio" name="q1" value="0"> fossiles de mammouths.</label>
-<label><input type="radio" name="q1" value="0"> moraines.</label>
+<label><input type="radio" name="qcm1" value="4"> beaucoup de dioxyde de carbone.</label>
+<label><input type="radio" name="qcm1" value="0"> peu de dioxyde de carbone.</label>
 
 <p>2. Gaz NON à effet de serre :</p>
-<label><input type="radio" name="q2" value="3"> dioxygène.</label>
-<label><input type="radio" name="q2" value="0"> méthane.</label>
-<label><input type="radio" name="q2" value="0"> CO₂.</label>
+<label><input type="radio" name="qcm2" value="3"> dioxygène.</label>
+<label><input type="radio" name="qcm2" value="0"> méthane.</label>
 
 <p>3. Les moraines sont :</p>
-<label><input type="radio" name="q3" value="2"> dépôts rocheux des glaciers.</label>
-<label><input type="radio" name="q3" value="0"> blocs de glace.</label>
+<label><input type="radio" name="qcm3" value="2"> dépôts rocheux.</label>
+<label><input type="radio" name="qcm3" value="0"> blocs de glace.</label>
 
 </form>
 
 <button onclick="corriger2()">Valider</button>
 
 <div id="cor2" class="correction">
-✔ 1. beaucoup de CO₂<br>
-✔ 2. dioxygène<br>
-✔ 3. dépôts rocheux
+✔ Correction affichée
 </div>
 
 <hr>
@@ -116,8 +106,7 @@ Les COP visent à réduire les émissions de <input> afin de réduire l’<input
 <button onclick="corriger3()">Valider</button>
 
 <div id="cor3" class="correction">
-Les activités humaines libèrent des gaz à effet de serre qui engendrent un réchauffement climatique.  
-Les COP visent à réduire les émissions de dioxyde de carbone afin de réduire l’effet de serre.
+Correction affichée
 </div>
 
 <hr>
@@ -126,28 +115,37 @@ Les COP visent à réduire les émissions de dioxyde de carbone afin de réduire
 
 <h3>🟥 Exercice n°4 — Rédaction</h3>
 
-<p>1. Activités humaines, réchauffement climatique, composition de l'atmosphère.</p>
-<textarea id="r1" rows="3" style="width:100%;"></textarea>
-
-<p>2. Effet de serre, phénomène naturel, activités humaines, amplification.</p>
-<textarea id="r2" rows="3" style="width:100%;"></textarea>
+<textarea rows="4" style="width:100%;"></textarea>
 
 <button onclick="corriger4()">Valider</button>
 
 <div id="cor4" class="correction">
-<p><strong>Exemples possibles :</strong></p>
-
-Les activités humaines entraînent un réchauffement climatique en modifiant la composition de l'atmosphère.<br><br>
-
-L'effet de serre est un phénomène naturel mais les activités humaines amplifient le réchauffement.
+Correction affichée
 </div>
 
 </div>
 
 <script>
 
-function corriger1(){
-  document.getElementById("cor1").style.display="block";
+function corrigerMelange(){
+
+  let bonnes = ["g","b","a","f","d","c","e"];
+  let ids = ["e1","e2","e3","e4","e5","e6","e7"];
+
+  ids.forEach((id,index)=>{
+    let input = document.getElementById(id);
+    let val = input.value.toLowerCase().trim();
+
+    input.classList.remove("correct","incorrect");
+
+    if(val === bonnes[index]){
+      input.classList.add("correct");
+    } else {
+      input.classList.add("incorrect");
+    }
+  });
+
+  document.getElementById("corMelange").style.display="block";
 }
 
 function corriger2(){
