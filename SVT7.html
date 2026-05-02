@@ -100,13 +100,21 @@ button:hover {
   border-left:5px solid #4CAF50;
 }
 
-/* texte */
+/* champs texte généraux (exo2) */
 input[type="text"] {
   width:100%;
   padding:10px;
   margin:8px 0;
   border-radius:8px;
   border:2px solid #ddd;
+}
+
+/* ⚡ correction inline EXO 3 */
+#exo3 input[type="text"] {
+  width:120px;
+  display:inline-block;
+  margin:0 5px;
+  padding:5px;
 }
 
 </style>
@@ -178,11 +186,33 @@ input[type="text"] {
 
 <p class="question">Complétez les phrases suivantes en utilisant les mots  "nerveux", "électrique", "chimique", "centres", "diminue", "drogues", "système" et "influence"</p>
 
-<p>1. Les organes des sens sont à l'origine de messages <input type="text" id="c1"> en direction des <input type="text" id="c2"> nerveux.</p>
+<p>
+1. Les organes des sens sont à l'origine de messages 
+<input type="text" id="c1"> 
+en direction des 
+<input type="text" id="c2"> 
+nerveux.
+</p>
 
-<p>2. Les messages nerveux sont de nature <input type="text" id="c3"> au sein des neurones, et de nature <input type="text" id="c4"> entre eux.</p>
+<p>
+2. Les messages nerveux sont de nature 
+<input type="text" id="c3"> 
+au sein des neurones, et de nature 
+<input type="text" id="c4"> 
+entre eux.
+</p>
 
-<p>3. L'hygiène de vie <input type="text" id="c5"> le fonctionnement du <input type="text" id="c6"> nerveux. Par exemple, la consommation de <input type="text" id="c7"> perturbe le circuit de récompense et le manque de sommeil <input type="text" id="c8"> les performances du cerveau.</p>
+<p>
+3. L'hygiène de vie 
+<input type="text" id="c5"> 
+le fonctionnement du 
+<input type="text" id="c6"> 
+nerveux. Par exemple, la consommation de 
+<input type="text" id="c7"> 
+perturbe le circuit de récompense et le manque de sommeil 
+<input type="text" id="c8"> 
+les performances du cerveau.
+</p>
 
 <button onclick="corriger3()">Valider</button>
 
