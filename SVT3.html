@@ -1,4 +1,66 @@
-<p>Associez les lettres :</p>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+h3 {
+  color: #2c3e50;
+}
+
+.reponse {
+  margin: 10px 0;
+}
+
+label {
+  display: block;
+  padding: 5px;
+}
+
+.correct {
+  border: 2px solid #4CAF50;
+  background-color: #eaf7ea;
+  border-radius: 5px;
+}
+
+.incorrect {
+  opacity: 0.4;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.correction {
+  margin-top: 20px;
+  display: none;
+}
+
+input[type="text"] {
+  padding: 6px;
+  width: 250px;
+  margin: 5px;
+}
+</style>
+
+<div class="container">
+
+
+<p><strong>Associez les lettres :</strong></p>
 
 <ul>
 <li>a : <input type="text"></li>
@@ -10,12 +72,11 @@
 <li>g : <input type="text"></li>
 </ul>
 
-<button onclick="corrigerExo1()">Valider</button>
+<button onclick="corriger1()">Valider</button>
 
-<div id="correction1" class="correction">
+<div id="cor1" class="correction">
 <hr>
 <p><strong>Correction :</strong></p>
-<p>
 a. Atmosphère<br>
 b. Rayonnement solaire reçu<br>
 c. Une partie du rayonnement est renvoyé<br>
@@ -23,11 +84,115 @@ d. Rayonnement émis par la surface de la Terre<br>
 e. Absorption en partie par les gaz à effet de serre<br>
 f. Conversion en énergie thermique<br>
 g. Hausse de la température de surface
+</div>
+
+<hr>
+
+<!-- ================= EXERCICE 2 ================= -->
+
+<h3>🟩 Exercice n°2 — Choisissez la bonne réponse</h3>
+
+<form id="exo2">
+
+<p>1. Quel indice témoigne d'un climat chaud ?</p>
+<label><input type="radio" name="q1" value="1"> peu de dioxyde de carbone.</label>
+<label><input type="radio" name="q1" value="2"> la présence de fossiles de mammouths.</label>
+<label><input type="radio" name="q1" value="3"> la présence de moraines.</label>
+<label><input type="radio" name="q1" value="4"> beaucoup de dioxyde de carbone.</label>
+
+<p>2. Lequel de ces gaz n'est pas un gaz à effet de serre ?</p>
+<label><input type="radio" name="q2" value="1"> le protoxyde d'azote.</label>
+<label><input type="radio" name="q2" value="2"> le méthane.</label>
+<label><input type="radio" name="q2" value="3"> le dioxygène.</label>
+<label><input type="radio" name="q2" value="4"> le dioxyde de carbone.</label>
+
+<p>3. Les moraines sont :</p>
+<label><input type="radio" name="q3" value="1"> une espèce de fossile.</label>
+<label><input type="radio" name="q3" value="2"> des dépôts rocheux caractéristiques des glaciers.</label>
+<label><input type="radio" name="q3" value="3"> des blocs de glace déposés par les glaciers.</label>
+<label><input type="radio" name="q3" value="4"> un impact du réchauffement climatique actuel.</label>
+
+</form>
+
+<button onclick="corriger2()">Valider</button>
+
+<div id="cor2" class="correction">
+<hr>
+<p><strong>Correction :</strong></p>
+1. ✔ beaucoup de dioxyde de carbone.<br>
+2. ✔ le dioxygène.<br>
+3. ✔ des dépôts rocheux caractéristiques des glaciers.
+</div>
+
+<hr>
+
+<!-- ================= EXERCICE 3 ================= -->
+
+<h3>🟨 Exercice n°3 — Complétez</h3>
+
+<p>
+Les <input type="text"> humaines libèrent des <input type="text"> à effet de serre qui engendrent un <input type="text"> climatique.  
+Les COP visent à réduire les émissions de <input type="text"> afin de réduire l'<input type="text">.
 </p>
+
+<button onclick="corriger3()">Valider</button>
+
+<div id="cor3" class="correction">
+<hr>
+<p><strong>Correction :</strong></p>
+Les activités humaines libèrent des gaz à effet de serre qui engendrent un réchauffement climatique.  
+Les COP visent à réduire les émissions de dioxyde de carbone afin de réduire l'effet de serre.
+</div>
+
+<hr>
+
+<!-- ================= EXERCICE 4 ================= -->
+
+<h3>🟥 Exercice n°4 — Construisez des phrases</h3>
+
+<p>1. Activités humaines, réchauffement climatique, composition de l'atmosphère.</p>
+<p>2. Effet de serre, phénomène naturel, activités humaines, amplification du réchauffement.</p>
+
+<button onclick="corriger4()">Valider</button>
+
+<div id="cor4" class="correction">
+<hr>
+<p><strong>Correction :</strong></p>
+1. Les activités humaines entraînent un réchauffement climatique en modifiant la composition de l'atmosphère.<br><br>
+2. L'effet de serre est un phénomène naturel réchauffant l'atmosphère mais les activités humaines entraînent une amplification du réchauffement.
+</div>
+
 </div>
 
 <script>
-function corrigerExo1() {
-  document.getElementById("correction1").style.display = "block";
+
+function corriger1() {
+  document.getElementById("cor1").style.display = "block";
 }
+
+function corriger2() {
+  let bonnes = { q1: "4", q2: "3", q3: "2" };
+
+  document.querySelectorAll("#exo2 input").forEach(input => {
+    let label = input.parentElement;
+    label.classList.remove("correct","incorrect");
+
+    if (input.value === bonnes[input.name]) {
+      label.classList.add("correct");
+    } else if (input.checked) {
+      label.classList.add("incorrect");
+    }
+  });
+
+  document.getElementById("cor2").style.display = "block";
+}
+
+function corriger3() {
+  document.getElementById("cor3").style.display = "block";
+}
+
+function corriger4() {
+  document.getElementById("cor4").style.display = "block";
+}
+
 </script>
