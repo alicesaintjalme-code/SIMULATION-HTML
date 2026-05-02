@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Exercice SVT</title>
+<title>SVT - Cycle de l'eau</title>
 
 <style>
 body {
@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-  max-width: 700px;
+  max-width: 800px;
   margin: auto;
   background: white;
   padding: 20px;
@@ -37,10 +37,10 @@ label {
 /* BONNES REPONSES */
 .correct {
   border: 2px solid #4CAF50;
-  background-color: #f0fff0;
+  background-color: #eaf7ea;
 }
 
-/* mauvaises réponses cochées */
+/* mauvaises cochées */
 .incorrect {
   opacity: 0.4;
 }
@@ -55,7 +55,7 @@ button {
   cursor: pointer;
 }
 
-#correction {
+.correction {
   margin-top: 20px;
   display: none;
 }
@@ -67,12 +67,50 @@ button {
 
 <div class="container">
 
+<!-- ================= EXERCICE 1 ================= -->
+
+<h3>🟦 Exercice n°1 — Vrai ou Faux</h3>
+
+<p>Coche puis vérifie :</p>
+
+<div class="reponse">
+<label><input type="radio" name="q1" value="true"> L'eau s'évapore grâce à la chaleur.</label>
+</div>
+
+<div class="reponse">
+<label><input type="radio" name="q2" value="false"> Il y a précipitation lorsqu’il fait chaud.</label>
+</div>
+
+<div class="reponse">
+<label><input type="radio" name="q3" value="true"> La vapeur d'eau se condense et forme un nuage.</label>
+</div>
+
+<button onclick="corrigerExo1()">Valider</button>
+
+<div id="correction1" class="correction">
+<hr>
+<p><strong>Correction :</strong></p>
+<p>
+1. Vrai<br>
+2. Faux<br>
+3. Vrai<br><br>
+L'évaporation a lieu grâce à la chaleur. La vapeur d'eau se condense et crée un nuage.  
+Il y a précipitation lorsque la température, plus basse, ne permet plus à l'eau de rester sous forme de vapeur.
+</p>
+</div>
+
+<hr>
+
+<!-- ================= EXERCICE 2 ================= -->
+
 <h3>🟩 Exercice n°2</h3>
 
-<p><strong>Coche les affirmations correctes.</strong><br>
-Cochez la (ou les) bonne(s) réponse(s).</p>
+<p>
+Coche les affirmations correctes.<br>
+Cochez la (ou les) bonne(s) réponse(s).
+</p>
 
-<form id="quiz">
+<form id="exo2">
 
 <label class="reponse">
 <input type="checkbox" value="1"> Les mouvements des masses d'air sont à l'origine des vents.
@@ -100,26 +138,31 @@ Cochez la (ou les) bonne(s) réponse(s).</p>
 
 </form>
 
-<button onclick="corriger()">Valider</button>
+<button onclick="corrigerExo2()">Valider</button>
 
-<div id="correction">
+<div id="correction2" class="correction">
 <hr>
 <p><strong>Correction :</strong></p>
 <p>
-Les mouvements des masses d'air sont à l'origine des vents et les mouvements
-des masses d'eau à l'origine des courants. Les masses d'air ou d'eau sont moins
-denses lorsqu'elles sont froides (donc elles descendent) et plus denses
-lorsqu'elles sont chaudes (donc elles montent).
+Les mouvements des masses d'air sont à l'origine des vents et les mouvements des masses d'eau à l'origine des courants.  
+Les masses d'air ou d'eau sont moins denses lorsqu'elles sont froides (donc elles descendent) et plus denses lorsqu'elles sont chaudes (donc elles montent).
 </p>
 </div>
 
 </div>
 
 <script>
-function corriger() {
+
+// EXO 1
+function corrigerExo1() {
+  document.getElementById("correction1").style.display = "block";
+}
+
+// EXO 2
+function corrigerExo2() {
 
   let bonnes = ["1","3","4","6"];
-  let inputs = document.querySelectorAll("input");
+  let inputs = document.querySelectorAll("#exo2 input");
 
   inputs.forEach(input => {
     let label = input.parentElement;
@@ -132,8 +175,9 @@ function corriger() {
     }
   });
 
-  document.getElementById("correction").style.display = "block";
+  document.getElementById("correction2").style.display = "block";
 }
+
 </script>
 
 </body>
