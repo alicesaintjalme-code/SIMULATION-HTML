@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SVT Exercices</title>
+
+<style>
+body {font-family: Arial; background:#f4f6f8; padding:20px;}
+.container {max-width:900px; margin:auto; background:white; padding:20px; border-radius:10px;}
+.exo {margin-bottom:30px; padding:15px; border:1px solid #ddd; border-radius:8px;}
+h3 {color:#2c3e50;}
+
+.correct {background:#eaf7ea; border:2px solid #4CAF50; border-radius:5px;}
+.incorrect {background:#fdeaea; border:2px solid #e74c3c; border-radius:5px;}
+
+button {margin-top:10px; padding:8px 12px; background:#4CAF50; color:white; border:none; border-radius:5px; cursor:pointer;}
+button:hover {background:#3e9442;}
+
+.correction {display:none; margin-top:15px; background:#f1f1f1; padding:10px; border-radius:8px;}
+
+input[type="text"]{
+width:100%;
+padding:8px;
+margin:6px 0;
+border:2px solid #ccc;
+border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- EXERCICE 1 -->
+<div class="exo" id="exo1">
+<h3>1.</h3>
+
+<p>Pour respirer les cellules végétales ont toujours besoin :</p>
+
+<label><input type="radio" name="q1"> de lumière.</label>
+<label><input type="radio" name="q1"> de dioxyde de carbone.</label>
+<label><input type="radio" name="q1"> de dioxygène.</label>
+<label><input type="radio" name="q1"> d'eau.</label>
+
+<p>2. Les microorganismes :</p>
+
+<label><input type="radio" name="q2"> ont un rôle bénéfique dans la nutrition des végétaux seulement.</label>
+<label><input type="radio" name="q2"> ont un rôle bénéfique dans la nutrition des animaux seulement.</label>
+<label><input type="radio" name="q2"> ont un rôle positif dans la nutrition des êtres vivants.</label>
+<label><input type="radio" name="q2"> ont un rôle négatif dans la nutrition des animaux et positif sur celle des végétaux.</label>
+
+<p>3. La photosynthèse permet la production :</p>
+
+<label><input type="radio" name="q3"> de matière organique.</label>
+<label><input type="radio" name="q3"> d'eau.</label>
+<label><input type="radio" name="q3"> de dioxyde de carbone.</label>
+<label><input type="radio" name="q3"> d'urée.</label>
+
+<button onclick="corriger1()">Valider</button>
+
+<div class="correction">
+<p>1. Pour respirer les cellules végétales ont toujours besoin : de dioxygène.</p>
+<p>2. Les microorganismes : ont un rôle positif dans la nutrition des êtres vivants.</p>
+<p>3. La photosynthèse permet la production : de matière organique.</p>
+</div>
+</div>
+
+<!-- EXERCICE 2 -->
+<div class="exo" id="exo2">
+<h3>2</h3>
+
+<p><strong>Construisez une phrase avec les mots suivants</strong></p>
+
+<p>1. cellule animale ; dioxygène ; glucose ; dioxyde de carbone ; urée ; besoins ; déchets.</p>
+<input type="text" id="t1">
+
+<p>2. cellule végétale ; lumière ; dioxyde de carbone ; eau ; sucre.</p>
+<input type="text" id="t2">
+
+<p>3. champignon ; nutrition ; mycorhize ; racine.</p>
+<input type="text" id="t3">
+
+<button onclick="corriger2()">Valider</button>
+
+<div class="correction">
+<p>1. Les besoins d'une cellule animale sont le dioxygène et le glucose et ses déchets sont le dioxyde de carbone et l'urée.</p>
+<p>2. La cellule végétale produit des sucres à partir de dioxyde de carbone et d'eau en présence de lumière.</p>
+<p>3. L'association d'un champignon avec une racine forme une mycorhize qui favorise la nutrition des végétaux.</p>
+</div>
+</div>
+
+</div>
+
+<script>
+
+function corriger1(){
+const exo=document.getElementById("exo1");
+
+let bonnes=["3","3","1"];
+
+["q1","q2","q3"].forEach((q,i)=>{
+exo.querySelectorAll("input[name='"+q+"']").forEach((r,index)=>{
+r.parentElement.classList.remove("correct","incorrect");
+
+if((index+1)==bonnes[i]) r.parentElement.classList.add("correct");
+else if(r.checked) r.parentElement.classList.add("incorrect");
+
+});
+});
+
+exo.querySelector(".correction").style.display="block";
+}
+
+function corriger2(){
+const exo=document.getElementById("exo2");
+
+["t1","t2","t3"].forEach(id=>{
+let el=document.getElementById(id);
+el.classList.remove("correct","incorrect");
+
+if(el.value.trim().length>10){
+el.classList.add("correct");
+}else{
+el.classList.add("incorrect");
+}
+});
+
+exo.querySelector(".correction").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
