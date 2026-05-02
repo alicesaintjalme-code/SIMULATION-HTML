@@ -33,12 +33,14 @@ label {
   padding: 5px;
 }
 
+/* BONNES REPONSES */
 .correct {
   border: 2px solid #4CAF50;
   background-color: #eaf7ea;
   border-radius: 5px;
 }
 
+/* mauvaises cochées */
 .incorrect {
   opacity: 0.4;
 }
@@ -67,11 +69,11 @@ button {
 
 <!-- ================= EXERCICE ================= -->
 
-<h3>🟦 Exercice — Choisissez la bonne réponse</h3>
+<h3>🟦 Exercice n°1 — Choisissez la bonne réponse</h3>
 
 <p>Pour chaque proposition, choisissez la bonne réponse :</p>
 
-<form id="exo">
+<form id="exo1">
 
 <div class="reponse">
 <p>1. La lithosphère est :</p>
@@ -102,9 +104,9 @@ button {
 
 </form>
 
-<button onclick="corriger()">Valider</button>
+<button onclick="corrigerExo1()">Valider</button>
 
-<div id="correction" class="correction">
+<div id="correction1" class="correction">
 <hr>
 <p><strong>Correction :</strong></p>
 <p>
@@ -118,7 +120,7 @@ button {
 
 <script>
 
-function corriger() {
+function corrigerExo1() {
 
   let bonnes = {
     q1: "3",
@@ -126,22 +128,22 @@ function corriger() {
     q3: "2"
   };
 
-  for (let q in bonnes) {
-    let inputs = document.querySelectorAll(`input[name="${q}"]`);
+  let inputs = document.querySelectorAll("#exo1 input");
 
-    inputs.forEach(input => {
-      let label = input.parentElement;
-      label.classList.remove("correct","incorrect");
+  inputs.forEach(input => {
+    let label = input.parentElement;
+    label.classList.remove("correct","incorrect");
 
-      if (input.value === bonnes[q]) {
-        label.classList.add("correct");
-      } else if (input.checked) {
-        label.classList.add("incorrect");
-      }
-    });
-  }
+    let question = input.name;
 
-  document.getElementById("correction").style.display = "block";
+    if (input.value === bonnes[question]) {
+      label.classList.add("correct");
+    } else if (input.checked) {
+      label.classList.add("incorrect");
+    }
+  });
+
+  document.getElementById("correction1").style.display = "block";
 }
 
 </script>
