@@ -5,28 +5,95 @@
 <title>SVT Exercices</title>
 
 <style>
-body {font-family: Arial; background:#f4f6f8; padding:20px;}
-.container {max-width:900px; margin:auto; background:white; padding:20px; border-radius:10px;}
-h3 {color:#2c3e50;}
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#e8f0ff,#f4f6f8);
+  padding:20px;
+}
 
-.exo {margin-bottom:30px; padding:15px; border:1px solid #ddd; border-radius:8px;}
+.container {
+  max-width:900px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
 
-label {display:block; margin:6px 0;}
+.exo {
+  margin-bottom:30px;
+  padding:20px;
+  border-radius:10px;
+  background:#ffffff;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
 
-.correct {background:#eaf7ea; border:2px solid #4CAF50; border-radius:5px;}
-.incorrect {opacity:0.4;}
+h3 {
+  background:#eef5ff;
+  padding:10px;
+  border-radius:8px;
+}
 
-input[type="text"] {padding:6px; margin:5px; border:2px solid #e0caa5; border-radius:5px; background:#fff8e8;}
+.question {
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.ligne {
+  display:block;
+  width:100%;
+  padding:8px;
+  border-radius:6px;
+  transition:0.2s;
+}
+
+.ligne:hover {
+  background:#f5f5f5;
+}
+
+.correct {
+  background:#e8f8ec !important;
+  border:2px solid #4CAF50;
+}
+
+.incorrect {
+  background:#ffecec !important;
+  border:2px solid #e74c3c;
+}
+
+button {
+  margin-top:15px;
+  padding:10px 15px;
+  background:linear-gradient(135deg,#4CAF50,#2ecc71);
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+button:hover {
+  transform:scale(1.05);
+}
+
+.correction {
+  display:none;
+  margin-top:15px;
+  background:#f8f8f8;
+  padding:15px;
+  border-left:5px solid #4CAF50;
+  border-radius:6px;
+}
 
 .zone {
   display:inline-block;
   min-width:140px;
-  min-height:28px;
+  min-height:30px;
   border:2px dashed #aaa;
   border-radius:6px;
   margin:5px;
-  padding:4px;
-  background:#fff;
+  padding:5px;
+  vertical-align:middle;
 }
 
 .drag {
@@ -39,11 +106,13 @@ input[type="text"] {padding:6px; margin:5px; border:2px solid #e0caa5; border-ra
   cursor:grab;
 }
 
-.mots {background:#f1f1f1; padding:10px; border-radius:8px; margin-bottom:10px;}
+.mots {
+  background:#f1f1f1;
+  padding:10px;
+  border-radius:8px;
+  margin-bottom:10px;
+}
 
-.correction {display:none; margin-top:15px; background:#f1f1f1; padding:10px; border-radius:8px;}
-
-button {margin-top:10px; padding:8px 12px; background:#4CAF50; color:white; border:none; border-radius:5px; cursor:pointer;}
 </style>
 </head>
 
@@ -53,20 +122,21 @@ button {margin-top:10px; padding:8px 12px; background:#4CAF50; color:white; bord
 <!-- EXO 1 -->
 <div class="exo" id="exo1">
 <h3>🟦 Exercice n°1</h3>
-<p>Quels éléments constituent la cellule végétale sans être présents dans la cellule animale ?</p>
+
+<p class="question">Quels éléments constituent la cellule végétale sans être présents dans la cellule animale ?</p>
 <p>Cochez la (ou les) bonne(s) réponse(s).</p>
 
-<label><input type="checkbox" value="1"> Paroi</label>
-<label><input type="checkbox" value="2"> Membrane plasmique</label>
-<label><input type="checkbox" value="3"> Noyau</label>
-<label><input type="checkbox" value="4"> Vacuole</label>
-<label><input type="checkbox" value="5"> Information génétique</label>
-<label><input type="checkbox" value="6"> Chloroplastes</label>
+<div class="ligne"><label><input type="checkbox" value="1"> Paroi</label></div>
+<div class="ligne"><label><input type="checkbox" value="2"> Membrane plasmique</label></div>
+<div class="ligne"><label><input type="checkbox" value="3"> Noyau</label></div>
+<div class="ligne"><label><input type="checkbox" value="4"> Vacuole</label></div>
+<div class="ligne"><label><input type="checkbox" value="5"> Information génétique</label></div>
+<div class="ligne"><label><input type="checkbox" value="6"> Chloroplastes</label></div>
 
 <button onclick="corriger1()">Valider</button>
 
 <div class="correction">
-La cellule animale possède une membrane plasmique, un cytoplasme et un noyau contenant l'information génétique.
+✔ À retenir : Les cellules végétales possèdent une paroi, une grande vacuole et des chloroplastes contrairement aux cellules animales.
 </div>
 </div>
 
@@ -74,7 +144,7 @@ La cellule animale possède une membrane plasmique, un cytoplasme et un noyau co
 <div class="exo" id="exo2">
 <h3>🟩 Exercice n°2</h3>
 
-<p>Reconstitue l'équation de la photosynthèse.</p>
+<p class="question">Reconstitue l'équation de la photosynthèse.</p>
 <p>Faites glisser les étiquettes dans les zones prévues à cet effet.</p>
 
 <div class="mots">
@@ -87,59 +157,74 @@ La cellule animale possède une membrane plasmique, un cytoplasme et un noyau co
 <span class="zone" data-expected="dioxygène"></span>
 </div>
 
-<p><strong>Reconstitue l'équation de la photosynthèse.</strong></p>
-<p>Faites glisser les étiquettes dans les zones prévues à cet effet.</p>
-
 <button onclick="corrigerDrag('exo2')">Valider</button>
 
 <div class="correction">
-✔ dioxyde de carbone + eau → lumière → matière organique + ✔ dioxygène
+<p><strong>Correction :</strong></p>
+① dioxyde de carbone ➡️ ② eau ➡️ ③ lumière ➡️ ④ matière organique ➡️ ⑤ dioxygène
+<div class="bilan">
+✔ À retenir : La photosynthèse utilise le dioxyde de carbone et produit du dioxygène grâce à la lumière.
 </div>
 </div>
-
+</div>
 
 <!-- EXO 3 -->
-<div class="exo" id="exo4">
-<h3>🟥 Exercice n°4</h3>
+<div class="exo" id="exo3">
+<h3>🟥 Exercice n°3</h3>
 
-<p><strong>Vrai ou faux ?</strong></p>
+<p class="question">Vrai ou faux ?</p>
 
+<div class="ligne">
 <p>1. Les cellules chlorophylliennes ont besoin de dioxyde de carbone pour leur respiration.</p>
-<label><input type="radio" name="q1"> Vrai</label>
-<label><input type="radio" name="q1"> Faux</label>
+<label><input type="radio" name="q1" value="true"> Vrai</label>
+<label><input type="radio" name="q1" value="false"> Faux</label>
+</div>
 
+<div class="ligne">
 <p>2. Les gaz nécessaires à la respiration cellulaire entrent par des stomates, sur la surface des feuilles.</p>
-<label><input type="radio" name="q2"> Vrai</label>
-<label><input type="radio" name="q2"> Faux</label>
+<label><input type="radio" name="q2" value="true"> Vrai</label>
+<label><input type="radio" name="q2" value="false"> Faux</label>
+</div>
 
+<div class="ligne">
 <p>3. Les gaz nécessaires à la respiration cellulaire entrent dans les chloroplastes.</p>
-<label><input type="radio" name="q3"> Vrai</label>
-<label><input type="radio" name="q3"> Faux</label>
+<label><input type="radio" name="q3" value="true"> Vrai</label>
+<label><input type="radio" name="q3" value="false"> Faux</label>
+</div>
 
+<div class="ligne">
 <p>4. La respiration permet de produire de l'énergie.</p>
-<label><input type="radio" name="q4"> Vrai</label>
-<label><input type="radio" name="q4"> Faux</label>
+<label><input type="radio" name="q4" value="true"> Vrai</label>
+<label><input type="radio" name="q4" value="false"> Faux</label>
+</div>
 
+<div class="ligne">
 <p>5. L'énergie produite par la respiration permet la photosynthèse.</p>
-<label><input type="radio" name="q5"> Vrai</label>
-<label><input type="radio" name="q5"> Faux</label>
+<label><input type="radio" name="q5" value="true"> Vrai</label>
+<label><input type="radio" name="q5" value="false"> Faux</label>
+</div>
 
-<button onclick="corriger4()">Valider</button>
+<button onclick="corrigerVF()">Valider</button>
 
 <div class="correction">
-1. Les cellules chlorophylliennes ont besoin de dioxyde de carbone pour leur respiration. Faux<br>
-2. Les gaz nécessaires à la respiration cellulaire entrent par des stomates, sur la surface des feuilles. Vrai<br>
-3. Les gaz nécessaires à la respiration cellulaire entrent dans les chloroplastes. Faux<br>
-4. La respiration permet de produire de l'énergie. Vrai<br>
-5. L'énergie produite par la respiration permet la photosynthèse. Faux
+<p><strong>Correction :</strong></p>
+<p>1. Faux — La respiration utilise le dioxygène et non le dioxyde de carbone.</p>
+<p>2. Vrai — Les stomates permettent les échanges gazeux.</p>
+<p>3. Faux — Les échanges se font dans toute la cellule, pas uniquement dans les chloroplastes.</p>
+<p>4. Vrai — La respiration produit de l'énergie.</p>
+<p>5. Faux — La photosynthèse produit de l'énergie, elle n'en dépend pas directement.</p>
+
+<div class="bilan">
+✔ À retenir : La respiration consomme du dioxygène et produit de l'énergie.
+</div>
 </div>
 </div>
 
 <!-- EXO 4 -->
-<div class="exo" id="exo5">
-<h3>🟪 Exercice n°5</h3>
+<div class="exo" id="exo4">
+<h3>🟪 Exercice n°4</h3>
 
-<p><strong>Complète les phrases.</strong></p>
+<p class="question">Complète les phrases.</p>
 <p>Faites glisser les étiquettes dans les zones prévues à cet effet.</p>
 
 <div class="mots">
@@ -152,10 +237,10 @@ La cellule animale possède une membrane plasmique, un cytoplasme et un noyau co
 La photosynthèse se déroule dans les <span class="zone" data-expected="chloroplastes"></span> des cellules chlorophylliennes. Elle s'effectue au niveau des <span class="zone" data-expected="feuilles"></span> de la plante en présence de <span class="zone" data-expected="lumière"></span>.
 </p>
 
-<button onclick="corrigerDrag('exo5')">Valider</button>
+<button onclick="corrigerDrag('exo4')">Valider</button>
 
 <div class="correction">
-La photosynthèse se déroule dans les chloroplastes des cellules chlorophylliennes. Elle s'effectue au niveau des feuilles de la plante en présence de lumière.
+✔ La photosynthèse se déroule dans les chloroplastes des cellules chlorophylliennes. Elle s'effectue au niveau des feuilles de la plante en présence de lumière.
 </div>
 </div>
 
@@ -166,6 +251,7 @@ La photosynthèse se déroule dans les chloroplastes des cellules chlorophyllien
 let dragged = null;
 
 document.querySelectorAll('.drag').forEach(el=>{
+  el.dataset.origin = el.parentElement;
   el.addEventListener('dragstart', ()=>dragged=el);
 });
 
@@ -174,12 +260,16 @@ document.querySelectorAll('.zone').forEach(zone=>{
 
   zone.addEventListener('drop', e=>{
     e.preventDefault();
+    if(!dragged) return;
+
     let exo = zone.closest('.exo');
     let mots = exo.querySelector('.mots');
 
     if(zone.firstChild){
-      mots.appendChild(zone.firstChild);
+      let old = zone.firstChild;
+      mots.appendChild(old);
     }
+
     zone.appendChild(dragged);
   });
 });
@@ -197,36 +287,50 @@ exo.querySelector('.correction').style.display="block";
 
 function corriger1(){
 let bonnes=["1","4","6"];
-document.querySelectorAll("#exo1 input").forEach(i=>{
-let l=i.parentElement;
-l.classList.remove("correct","incorrect");
-if(bonnes.includes(i.value)) l.classList.add("correct");
-else if(i.checked) l.classList.add("incorrect");
+let exo=document.getElementById("exo1");
+
+exo.querySelectorAll("input").forEach(i=>{
+let ligne=i.closest(".ligne");
+ligne.classList.remove("correct","incorrect");
+
+if(bonnes.includes(i.value)) ligne.classList.add("correct");
+else if(i.checked) ligne.classList.add("incorrect");
 });
-document.querySelector("#exo1 .correction").style.display="block";
+
+exo.querySelector(".correction").style.display="block";
 }
 
-function corriger3(){
-let bonnes=["chloroplastes","feuilles","lumière"];
-["c1","c2","c3"].forEach((id,i)=>{
-let el=document.getElementById(id);
-el.classList.remove("correct","incorrect");
-if(el.value.toLowerCase().includes(bonnes[i])) el.classList.add("correct");
-else el.classList.add("incorrect");
-});
-document.querySelector("#exo3 .correction").style.display="block";
+function corrigerVF(){
+let bonnes={
+q1:"false",
+q2:"true",
+q3:"false",
+q4:"true",
+q5:"false"
+};
+
+let exo=document.getElementById("exo3");
+
+Object.keys(bonnes).forEach(q=>{
+let radios=exo.querySelectorAll("input[name='"+q+"']");
+let checked=[...radios].find(r=>r.checked);
+let ligne=radios[0].closest(".ligne");
+
+ligne.classList.remove("correct","incorrect");
+
+if(!checked){
+ligne.classList.add("incorrect");
+return;
 }
 
-function corriger4(){
-let bonnes=["2","1","2","1","2"];
-["q1","q2","q3","q4","q5"].forEach((q,i)=>{
-document.querySelectorAll("#exo4 input[name='"+q+"']").forEach((r,index)=>{
-r.parentElement.classList.remove("correct","incorrect");
-if((index+1)==bonnes[i]) r.parentElement.classList.add("correct");
-else if(r.checked) r.parentElement.classList.add("incorrect");
+if(checked.value===bonnes[q]){
+ligne.classList.add("correct");
+}else{
+ligne.classList.add("incorrect");
+}
 });
-});
-document.querySelector("#exo4 .correction").style.display="block";
+
+exo.querySelector(".correction").style.display="block";
 }
 
 </script>
