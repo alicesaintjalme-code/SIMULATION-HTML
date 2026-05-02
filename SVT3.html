@@ -1,48 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>SVT - Effet de serre</title>
+
 <style>
-.container {
-  max-width: 900px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
+*{box-sizing:border-box}
+
+body{
   font-family: Arial;
+  background: linear-gradient(135deg,#eef2f7,#f8fbff);
+  padding:20px;
 }
 
-.exo { margin-bottom: 30px; }
-
-h3 { color: #2c3e50; }
-
-ul { padding-left: 20px; }
-
-li { margin: 8px 0; }
-
-input[type="text"] {
-  width: 220px;
-  padding: 5px;
-  margin-left: 10px;
+.container{
+  max-width:950px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-.choix {
-  display: block;
-  margin: 5px 0;
+.exo{
+  margin-bottom:35px;
+  padding:20px;
+  border-radius:12px;
+  background:#f9fbfd;
+  border-left:6px solid #4CAF50;
 }
 
-button {
-  margin-top: 15px;
-  padding: 8px 12px;
-  background: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+h3{
+  background:#e8f5e9;
+  padding:6px 12px;
+  border-radius:8px;
+  display:inline-block;
 }
 
-.correction {
-  display: none;
-  margin-top: 15px;
+.question{
+  font-weight:bold;
+  margin-top:15px;
+  color:#2c3e50;
 }
 
-.mots {
+.ligne{
+  display:block;
+  width:100%;
+  margin:10px 0;
+  padding:10px;
+  border-radius:8px;
+}
+
+.ligne:hover{
+  background:#eef7ff;
+}
+
+.choix{
+  display:block;
+  width:100%;
+  margin:8px 0;
+  padding:8px;
+  border-radius:8px;
+}
+
+.correct{
+  background:#eaf7ea;
+  border:2px solid #4CAF50;
+}
+
+.incorrect{
+  background:#fdeaea;
+  border:2px solid #e74c3c;
+}
+
+input[type="text"]{
+  display:inline-block;
+  width:120px;
+  padding:6px;
+  margin:0 5px;
+  border-radius:6px;
+  border:2px solid #ccc;
+}
+
+textarea{
+  width:100%;
+  border-radius:8px;
+  padding:10px;
+  border:2px solid #ddd;
+}
+
+button{
+  margin-top:15px;
+  padding:10px 18px;
+  background:linear-gradient(135deg,#4CAF50,#43a047);
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.2s;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+.correction{
+  display:none;
+  margin-top:15px;
+  background:#f1f1f1;
+  padding:15px;
+  border-radius:10px;
+  border-left:5px solid #4CAF50;
+}
+
+.bilan{
+  margin-top:10px;
+  background:#e8f5e9;
+  padding:10px;
+  border-radius:8px;
+}
+
+.mots{
   background:#f1f1f1;
   padding:10px;
   border-radius:8px;
@@ -50,35 +129,28 @@ button {
 }
 </style>
 
+</head>
+
+<body>
+
 <div class="container">
 
-<!-- ================= EXERCICE 1 ================= -->
+<!-- EXERCICE 1 -->
+<div class="exo" id="exo1">
 
-<div class="exo">
+<p class="question"><strong>Associez (écris la lettre correspondante du schéma) :</strong></p>
 
-<h3>🟦 Exercice n°1 — Effet de serre</h3>
+<div class="ligne">Hausse de la température de surface : <input id="e1"></div>
+<div class="ligne">Rayonnement solaire reçu : <input id="e2"></div>
+<div class="ligne">Atmosphère : <input id="e3"></div>
+<div class="ligne">Conversion en énergie thermique : <input id="e4"></div>
+<div class="ligne">Rayonnement émis par la surface de la Terre : <input id="e5"></div>
+<div class="ligne">Une partie du rayonnement est renvoyé : <input id="e6"></div>
+<div class="ligne">Absorption par les gaz à effet de serre : <input id="e7"></div>
 
-<p><strong>Mots proposés :</strong></p>
+<button onclick="corriger1()">Valider</button>
 
-<div class="mots">
-Atmosphère — Rayonnement solaire reçu — Une partie du rayonnement est renvoyé — Rayonnement émis par la surface de la Terre — Absorption par les gaz à effet de serre — Conversion en énergie thermique — Hausse de la température de surface
-</div>
-
-<p><strong>Associez (écris la lettre correspondante du schéma) :</strong></p>
-
-<ul>
-<li>Hausse de la température de surface : <input type="text"></li>
-<li>Rayonnement solaire reçu : <input type="text"></li>
-<li>Atmosphère : <input type="text"></li>
-<li>Conversion en énergie thermique : <input type="text"></li>
-<li>Rayonnement émis par la surface de la Terre : <input type="text"></li>
-<li>Une partie du rayonnement est renvoyé : <input type="text"></li>
-<li>Absorption par les gaz à effet de serre : <input type="text"></li>
-</ul>
-
-<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
-
-<div class="correction">
+<div class="correction" id="cor1">
 <p><strong>Correction :</strong></p>
 a. Atmosphère<br>
 b. Rayonnement solaire reçu<br>
@@ -87,51 +159,54 @@ d. Rayonnement émis par la surface de la Terre<br>
 e. Absorption par les gaz à effet de serre<br>
 f. Conversion en énergie thermique<br>
 g. Hausse de la température de surface
+
+<div class="bilan">
+✔ À retenir : L’effet de serre dépend de l’absorption et de la réémission du rayonnement par l’atmosphère.
+</div>
 </div>
 
 </div>
 
-<hr>
-
-<!-- ================= EXERCICE 2 ================= -->
-
-<div class="exo">
+<!-- EXERCICE 2 -->
+<div class="exo" id="exo2">
 
 <h3>🟩 Exercice n°2 — QCM</h3>
 
-<p>1. Quel indice témoigne d'un climat chaud ?</p>
-<label class="choix"><input type="radio" name="q1"> peu de dioxyde de carbone.</label>
-<label class="choix"><input type="radio" name="q1"> la présence de fossiles de mammouths.</label>
-<label class="choix"><input type="radio" name="q1"> la présence de moraines.</label>
-<label class="choix"><input type="radio" name="q1"> beaucoup de dioxyde de carbone.</label>
+<p class="question">1. Quel indice témoigne d'un climat chaud ?</p>
+<label class="choix"><input type="radio" name="q1" value="1"> peu de dioxyde de carbone.</label>
+<label class="choix"><input type="radio" name="q1" value="2"> la présence de fossiles de mammouths.</label>
+<label class="choix"><input type="radio" name="q1" value="3"> la présence de moraines.</label>
+<label class="choix"><input type="radio" name="q1" value="4"> beaucoup de dioxyde de carbone.</label>
 
-<p>2. Lequel de ces gaz n'est pas un gaz à effet de serre ?</p>
-<label class="choix"><input type="radio" name="q2"> le protoxyde d'azote.</label>
-<label class="choix"><input type="radio" name="q2"> le méthane.</label>
-<label class="choix"><input type="radio" name="q2"> le dioxygène.</label>
-<label class="choix"><input type="radio" name="q2"> le dioxyde de carbone.</label>
+<p class="question">2. Lequel de ces gaz n'est pas un gaz à effet de serre ?</p>
+<label class="choix"><input type="radio" name="q2" value="1"> le protoxyde d'azote.</label>
+<label class="choix"><input type="radio" name="q2" value="2"> le méthane.</label>
+<label class="choix"><input type="radio" name="q2" value="3"> le dioxygène.</label>
+<label class="choix"><input type="radio" name="q2" value="4"> le dioxyde de carbone.</label>
 
-<p>3. Les moraines sont :</p>
-<label class="choix"><input type="radio" name="q3"> une espèce de fossile.</label>
-<label class="choix"><input type="radio" name="q3"> des dépôts rocheux caractéristiques des glaciers.</label>
-<label class="choix"><input type="radio" name="q3"> des blocs de glace déposés par les glaciers.</label>
-<label class="choix"><input type="radio" name="q3"> un impact du réchauffement climatique actuel.</label>
+<p class="question">3. Les moraines sont :</p>
+<label class="choix"><input type="radio" name="q3" value="1"> une espèce de fossile.</label>
+<label class="choix"><input type="radio" name="q3" value="2"> des dépôts rocheux caractéristiques des glaciers.</label>
+<label class="choix"><input type="radio" name="q3" value="3"> des blocs de glace déposés par les glaciers.</label>
+<label class="choix"><input type="radio" name="q3" value="4"> un impact du réchauffement climatique actuel.</label>
 
-<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
+<button onclick="corriger2()">Valider</button>
 
-<div class="correction">
+<div class="correction" id="cor2">
+<p><strong>Correction :</strong></p>
 ✔ 1. beaucoup de dioxyde de carbone<br>
 ✔ 2. le dioxygène<br>
 ✔ 3. des dépôts rocheux caractéristiques des glaciers
+
+<div class="bilan">
+✔ À retenir : Les gaz à effet de serre et les indices géologiques permettent d’étudier les climats.
+</div>
 </div>
 
 </div>
 
-<hr>
-
-<!-- ================= EXERCICE 3 ================= -->
-
-<div class="exo">
+<!-- EXERCICE 3 -->
+<div class="exo" id="exo3">
 
 <h3>🟨 Exercice n°3 — Complétez</h3>
 
@@ -140,45 +215,129 @@ Mots : activités — gaz — réchauffement — dioxyde de carbone — effet de
 </div>
 
 <p>
-Les <input type="text"> humaines libèrent des <input type="text"> à effet de serre qui engendrent un <input type="text"> climatique.  
-Les COP visent à réduire les émissions de <input type="text"> afin de réduire l’<input type="text">.
+Les <input id="c1"> humaines libèrent des <input id="c2"> à effet de serre qui engendrent un <input id="c3"> climatique.  
+Les COP visent à réduire les émissions de <input id="c4"> afin de réduire l’<input id="c5">.
 </p>
 
-<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
+<button onclick="corriger3()">Valider</button>
 
-<div class="correction">
+<div class="correction" id="cor3">
 Les activités humaines libèrent des gaz à effet de serre qui engendrent un réchauffement climatique.  
 Les COP visent à réduire les émissions de dioxyde de carbone afin de réduire l’effet de serre.
+
+<div class="bilan">
+✔ À retenir : Les activités humaines augmentent les gaz à effet de serre.
+</div>
 </div>
 
 </div>
 
-<hr>
-
-<!-- ================= EXERCICE 4 ================= -->
-
-<div class="exo">
+<!-- EXERCICE 4 -->
+<div class="exo" id="exo4">
 
 <h3>🟥 Exercice n°4 — Rédaction</h3>
 
-<p><strong>Construisez des phrases avec les mots suivants :</strong></p>
+<p class="question"><strong>Construisez des phrases avec les mots suivants :</strong></p>
 
 <p>1. Activités humaines, réchauffement climatique, composition de l'atmosphère.</p>
-<textarea rows="3" style="width:100%;"></textarea>
+<textarea rows="3"></textarea>
 
 <p>2. Effet de serre, phénomène naturel, activités humaines, amplification du réchauffement.</p>
-<textarea rows="3" style="width:100%;"></textarea>
+<textarea rows="3"></textarea>
 
-<button onclick="this.nextElementSibling.style.display='block'">Valider</button>
+<button onclick="document.getElementById('cor4').style.display='block'">Valider</button>
 
-<div class="correction">
+<div class="correction" id="cor4">
 <p><strong>Correction :</strong></p>
 
 1. Les activités humaines entraînent un réchauffement climatique en modifiant la composition de l'atmosphère.<br><br>
 
 2. L'effet de serre est un phénomène naturel réchauffant l'atmosphère mais les activités humaines entraînent une amplification du réchauffement.
+
+<div class="bilan">
+✔ À retenir : Le réchauffement climatique est amplifié par les activités humaines.
 </div>
 
 </div>
 
 </div>
+
+</div>
+
+<script>
+
+function normalize(str){
+return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
+}
+
+// EXO1
+function corriger1(){
+let bonnes=["g","b","a","f","d","c","e"];
+let ids=["e1","e2","e3","e4","e5","e6","e7"];
+
+ids.forEach((id,i)=>{
+let el=document.getElementById(id);
+el.classList.remove("correct","incorrect");
+
+if(normalize(el.value)===bonnes[i]){
+el.classList.add("correct");
+}else{
+el.classList.add("incorrect");
+}
+});
+
+document.getElementById("cor1").style.display="block";
+}
+
+// EXO2
+function corriger2(){
+const bonnes={
+q1:"4",
+q2:"3",
+q3:"2"
+};
+
+Object.keys(bonnes).forEach(q=>{
+let radios=document.querySelectorAll("input[name='"+q+"']");
+
+radios.forEach(r=>{
+r.parentElement.classList.remove("correct","incorrect");
+});
+
+let checked=Array.from(radios).find(r=>r.checked);
+
+if(checked){
+if(checked.value===bonnes[q]){
+checked.parentElement.classList.add("correct");
+}else{
+checked.parentElement.classList.add("incorrect");
+}
+}
+});
+
+document.getElementById("cor2").style.display="block";
+}
+
+// EXO3
+function corriger3(){
+let bonnes=["activites","gaz","rechauffement","dioxyde de carbone","effet de serre"];
+let ids=["c1","c2","c3","c4","c5"];
+
+ids.forEach((id,i)=>{
+let el=document.getElementById(id);
+el.classList.remove("correct","incorrect");
+
+if(normalize(el.value)===bonnes[i]){
+el.classList.add("correct");
+}else{
+el.classList.add("incorrect");
+}
+});
+
+document.getElementById("cor3").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
