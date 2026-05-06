@@ -107,6 +107,10 @@ button:hover{
     transition:0.4s;
 }
 
+#btnRecommencer{
+    display:none;
+}
+
 </style>
 </head>
 
@@ -140,6 +144,12 @@ button:hover{
 
 <button onclick="verifier()">Valider</button>
 
+<br>
+
+<button id="btnRecommencer" onclick="recommencer()">
+🔄 Recommencer
+</button>
+
 <div class="resultat" id="resultat"></div>
 
 <div class="score">
@@ -160,7 +170,7 @@ let score = 0;
 let vies = 3;
 let questions = 0;
 
-let temps = 60;
+let temps = 180;
 
 function nouvelleQuestion(){
 
@@ -253,6 +263,9 @@ function finJeu(message){
     document.getElementById("resultat").innerHTML = "";
 
     document.getElementById("progression").style.width = "100%";
+
+    document.getElementById("btnRecommencer").style.display =
+    "inline-block";
 }
 
 function compteARebours(){
@@ -271,6 +284,12 @@ function compteARebours(){
         }
 
     },1000);
+}
+
+function recommencer(){
+
+    location.reload();
+
 }
 
 afficherVies();
