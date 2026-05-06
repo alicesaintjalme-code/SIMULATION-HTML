@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Dictée aménagée 2</title>
+
+<style>
+body {
+  font-family: Arial;
+  max-width: 900px;
+  margin: auto;
+  line-height: 2.2;
+  font-size: 18px;
+}
+
+.bloc {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 6px;
+}
+
+.choix {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #1e90ff;
+  margin-bottom: 3px;
+  white-space: nowrap;
+}
+
+input {
+  width: 95px;
+  padding: 6px;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.correct { background-color: #c8f7c5; }
+.faux { background-color: #f7c5c5; }
+
+.solution {
+  font-size: 13px;
+  color: red;
+}
+
+h2 { text-align: center; }
+</style>
+</head>
+
+<body>
+
+<h2>✏️ Dictée aménagée n°2</h2>
+
+<p><b>Consigne :</b> Vous complèterez ce texte en recopiant un des mots proposés au-dessus de chaque ligne en écoutant le texte lu par le professeur.</p>
+
+<p><b>Le moustique et le lion</b></p>
+
+<p>
+
+Un moustique 
+<span class="bloc"><span class="choix">s’approcha / s’approchat / s’approchât</span><input id="q1"><span id="s1" class="solution"></span></span>
+d’un lion et lui dit : « Je n’ai pas peur de toi, et tu 
+<span class="bloc"><span class="choix">n’ai / n’es / nés</span><input id="q2"><span id="s2" class="solution"></span></span>
+pas plus puissant que moi.<br><br>
+
+Si tu veux, je te provoque même au combat. »<br><br>
+
+Et, sonnant de la trompe, le moustique fondit sur lui, mordant le 
+<span class="bloc"><span class="choix">musau / museau / muzot</span><input id="q3"><span id="s3" class="solution"></span></span>
+dépourvu de poil autour des narines.<br><br>
+
+<span class="bloc"><span class="choix">Quand / Quant / Qu’en</span><input id="q4"><span id="s4" class="solution"></span></span>
+au lion, il se déchirait de 
+<span class="bloc"><span class="choix">ses / ces / c’est</span><input id="q5"><span id="s5" class="solution"></span></span>
+propres griffes, 
+<span class="bloc"><span class="choix">jus qu’à / jusqua / jusqu’à</span><input id="q6"><span id="s6" class="solution"></span></span>
+ce qu’il renonce au combat.<br><br>
+
+Le moustique, ayant vaincu le lion, sonna de la trompe, entonna un chant de victoire et prit son envol.<br><br>
+
+Mais il 
+<span class="bloc"><span class="choix">s’empêtra / sempêtra / s’enpétra</span><input id="q7"><span id="s7" class="solution"></span></span>
+dans une toile d’araignée : tandis qu’elle le 
+<span class="bloc"><span class="choix">dévorai / dévoré / dévorait</span><input id="q8"><span id="s8" class="solution"></span></span>,
+il se lamentait d’être 
+<span class="bloc"><span class="choix">tuer / tué / tuée</span><input id="q9"><span id="s9" class="solution"></span></span>
+par un vulgaire animal, une araignée, lui qui avait 
+<span class="bloc"><span class="choix">combattut / combattus / combattu</span><input id="q10"><span id="s10" class="solution"></span></span>
+les plus puissants animaux.<br><br>
+
+<i>D’après Ésope, Fables, VIIe-VIe siècle avant J.-C.</i>
+
+</p>
+
+<button onclick="corriger()">Corriger</button>
+<button onclick="recommencer()">Recommencer</button>
+
+<h3 id="resultat"></h3>
+
+<script>
+
+let reponses = {
+  q1: "s’approcha",
+  q2: "n’es",
+  q3: "museau",
+  q4: "Quant",
+  q5: "ses",
+  q6: "jusqu’à",
+  q7: "s’empêtra",
+  q8: "dévorait",
+  q9: "tué",
+  q10: "combattu"
+};
+
+/* 🔥 NORMALISATION (clé du problème) */
+function nettoyer(txt) {
+  return txt
+    .toLowerCase()
+    .replace(/’/g, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function corriger() {
+  let score = 0;
+  let total = Object.keys(reponses).length;
+
+  for (let q in reponses) {
+    let input = document.getElementById(q);
+    let sol = document.getElementById("s" + q.substring(1));
+
+    let val = nettoyer(input.value);
+    let attendu = nettoyer(reponses[q]);
+
+    if (val === attendu) {
+      input.className = "correct";
+      sol.innerHTML = "";
+      score++;
+    } else {
+      input.className = "faux";
+      sol.innerHTML = "✔ " + reponses[q];
+    }
+  }
+
+  document.getElementById("resultat").innerHTML =
+    "📝 Score : " + score + " / " + total;
+}
+
+function recommencer() {
+  for (let q in reponses) {
+    document.getElementById(q).value = "";
+    document.getElementById(q).className = "";
+    document.getElementById("s" + q.substring(1)).innerHTML = "";
+  }
+  document.getElementById("resultat").innerHTML = "";
+}
+
+</script>
+
+</body>
+</html>
