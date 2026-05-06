@@ -9,7 +9,8 @@ body {
   font-family: Arial;
   max-width: 900px;
   margin: auto;
-  line-height: 2;
+  line-height: 2.2;
+  font-size: 18px;
 }
 
 .bloc {
@@ -21,7 +22,7 @@ body {
 
 .choix {
   display: block;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: bold;
   color: #1e90ff;
   margin-bottom: 3px;
@@ -29,18 +30,19 @@ body {
 }
 
 input {
-  width: 80px;
-  padding: 5px;
+  width: 90px;
+  padding: 6px;
   text-align: center;
   border-radius: 5px;
   border: 1px solid #ccc;
+  font-size: 16px;
 }
 
 .correct { background-color: #c8f7c5; }
 .faux { background-color: #f7c5c5; }
 
 .solution {
-  font-size: 12px;
+  font-size: 13px;
   color: red;
 }
 
@@ -51,31 +53,27 @@ h2 { text-align: center; }
 <body>
 
 <h2>✏️ Dictée aménagée n°1</h2>
-<p><b>Consigne :</b> Écris le bon mot en t’aidant des propositions.</p>
+
+<p><b>Consigne :</b> Vous compléterez ce texte avec un des mots proposés au-dessus de chaque ligne en écoutant le texte lu par le professeur.</p>
 
 <p>
 Au temps de ma petite enfance, 
 <span class="bloc"><span class="choix">dent / dans / d’en</span><input id="q1"><span id="s1" class="solution"></span></span>
 les années 1960, les villageois de mon âge 
-
 <span class="bloc"><span class="choix">avais / avait / avaient</span><input id="q2"><span id="s2" class="solution"></span></span>
 encore un air farouche et sauvage.<br><br>
 
 Ils vivaient dans ces fermes 
 <span class="bloc"><span class="choix">perdues / perdu / perdue</span><input id="q3"><span id="s3" class="solution"></span></span>
 et fréquentaient la classe unique de l’école communale 
-
 <span class="bloc"><span class="choix">où / ou / houx</span><input id="q4"><span id="s4" class="solution"></span></span>, 
 l’hiver, ils se 
-
 <span class="bloc"><span class="choix">rendait / rendaient / rendais</span><input id="q5"><span id="s5" class="solution"></span></span>
 à pied dans la neige.<br><br>
 
 Au 
 <span class="bloc"><span class="choix">court / cours / courre</span><input id="q6"><span id="s6" class="solution"></span></span>
-des années suivantes…<br><br>
-
-Le téléphone et la télévision sont 
+des années suivantes, en pleine période de « croissance », les routes se sont élargies, les supermarchés se sont implantés, le téléphone et la télévision sont 
 <span class="bloc"><span class="choix">arriver / arrivés / arrivées</span><input id="q7"><span id="s7" class="solution"></span></span>
 dans la vallée.<br><br>
 
@@ -83,12 +81,15 @@ Les enfants
 <span class="bloc"><span class="choix">on / ont / ons</span><input id="q8"><span id="s8" class="solution"></span></span>
 grandi et trouvé des emplois en ville.<br><br>
 
+Certains sont devenus ouvriers, d’autres ingénieurs.<br><br>
+
 Les exploitations agricoles ont 
 <span class="bloc"><span class="choix">dépéri / dépérit / dépéris</span><input id="q9"><span id="s9" class="solution"></span></span>
 avec 
-
 <span class="bloc"><span class="choix">leur / leurs / leurre</span><input id="q10"><span id="s10" class="solution"></span></span>
-vieux parents.
+vieux parents.<br><br>
+
+<i>Benoît Duteurtre, Livre pour adultes, 2016</i>
 </p>
 
 <button onclick="corriger()">Corriger</button>
@@ -97,7 +98,6 @@ vieux parents.
 <h3 id="resultat"></h3>
 
 <script>
-
 let reponses = {
   q1: "dans",
   q2: "avaient",
@@ -142,7 +142,6 @@ function recommencer() {
   }
   document.getElementById("resultat").innerHTML = "";
 }
-
 </script>
 
 </body>
