@@ -1,1 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Entraînement dictée</title>
 
+<style>
+body {
+  font-family: Arial;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  background: #f7f7f7;
+}
+
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+
+.correct {
+  background:#2ecc71;
+  color:white;
+  padding:2px 4px;
+  border-radius:4px;
+}
+
+.wrong {
+  background:#e74c3c;
+  color:white;
+  padding:2px 4px;
+  border-radius:4px;
+  font-weight:bold;
+}
+
+.categorie {
+  margin-top:10px;
+  padding:10px;
+  border-radius:8px;
+}
+
+.C { background:#ffe5e5; }
+.A { background:#e5f0ff; }
+.H { background:#fff4e5; }
+.L { background:#f0e5ff; }
+.P { background:#e5fff2; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>✏️ Entraînement dictée</h2>
+
+<textarea id="texte" placeholder="Colle ta dictée ici...SANS LE TITRE....commence directement par Un moustique ....."></textarea>
+
+<button onclick="analyser()">Analyser</button>
+
+<div id="resultat"></div>
+
+</div>
+
+<script>
+
+// 🔥 TEXTE OFFICIEL EXACT
+let texteOfficiel = `Le devoir de la comédie étant de corriger les hommes en les divertissant, j’ai cru que, dans l’emploi où je me trouve, je n’avais rien de mieux à faire que d’attaquer par des peintures ridicules les vices de mon siècle. Comme l’hypocrisie, sans doute, en est un des plus en usage, des plus incommodes et des plus dangereux, j’avais eu, Sire, la pensée que je ne rendrais pas un petit service à tous les honnêtes gens de votre royaume, si je faisais une comédie qui décrie les hypocrites, et mette en vue, comme il faut, toutes les grimaces étudiées de ces gens de bien à outrance, toutes les friponneries. D’après Molière, Premier placet au roi, sur la comédie du Tartuffe.`;
+
+// 🔥 REGEX accents + apostrophes
+const REGEX = /[\p{L}]+(?:['’][\p{L}]+)?|[.,;:!?]/gu;
+
+// 🔹 labels
+let labels = {
+  C: "Fautes de conjugaison",
+  A: "Fautes d’accord",
+  H: "Fautes d’homonymes",
+  L: "Fautes lexicales / orthographe",
+  P: "Fautes de ponctuation"
+};
+
+// 🔹 classification intelligente
+function classerErreurMessage(message) {
+  message = message.toLowerCase();
+
+  if (message.includes("verbe") || message.includes("participe")) return "C";
+  if (message.includes("accord")) return "A";
+  if (message.includes("homonyme")) return "H";
+  if (message.includes("ponctuation")) return "P";
+
+  return "L";
+}
+
+// 🔥 comparaison (NE PAS TOUCHER)
+function comparer(texteEleve, texteCorrect) {
+
+  const tokensCorrect = texteCorrect.match(REGEX) || [];
+  const tokensEleve = texteEleve.match(REGEX) || [];
+
+  let resultat = "";
+  let i = 0;
+  let j = 0;
+
+  while (i < tokensCorrect.length) {
+
+    let tC = tokensCorrect[i];
+    let tE = tokensEleve[j];
+
+    // ponctuation
+    if (/[.,;:!?]/.test(tC)) {
+      if (tE === tC) {
+        resultat += `<span class="correct">${tC}</span> `;
+        j++;
+      } else {
+        resultat += `<span class="wrong">${tC}</span> `;
+      }
+      i++;
+      continue;
+    }
+
+    // mots
+    if (tE && tE.toLowerCase() === tC.toLowerCase()) {
+      resultat += `<span class="correct">${tC}</span> `;
+      i++;
+      j++;
+    } else {
+      resultat += `<span class="wrong">${tC}</span> `;
+      i++;
+      if (tE) j++;
+    }
+  }
+
+  return resultat;
+}
+
+// 🔥 affichage final
+function afficherResultat(groupes, correction) {
+
+  let html = "<h3>📊 Détail des erreurs</h3>";
+
+  for (let type in groupes) {
+
+    if (groupes[type].length === 0) continue;
+
+    html += `<div class="categorie ${type}">
+    <b>${labels[type]}</b> (${groupes[type].length})<br><br>`;
+
+    groupes[type].forEach(e => {
+      html += `❌ ${e.texte}<br>➡️ ${e.message}<br><br>`;
+    });
+
+    html += "</div>";
+  }
+
+  html += `
+  <h3>🔁 Correction</h3>
+  <p style="line-height:1.8;">${correction}</p>
+  `;
+
+  document.getElementById("resultat").innerHTML = html;
+}
+
+// 🔥 analyse principale
+function analyser() {
+
+  let texte = document.getElementById("texte").value;
+
+  if (!texte.trim()) {
+    document.getElementById("resultat").innerHTML = "⚠️ Écris un texte avant d’analyser.";
+    return;
+  }
+
+  let correction = comparer(texte, texteOfficiel);
+
+  let groupes = {C:[], A:[], H:[], L:[], P:[]};
+
+  // 🔥 LanguageTool
+  fetch("https://api.languagetool.org/v2/check", {
+    method: "POST",
+    headers: {"Content-Type":"application/x-www-form-urlencoded"},
+    body: `text=${encodeURIComponent(texte)}&language=fr`
+  })
+  .then(res => res.json())
+  .then(data => {
+
+    data.matches.forEach(e => {
+
+      let extrait = e.context.text;
+
+      // 🔥 IGNORER FAUX POSITIFS (fin du texte)
+      if (
+        extrait.includes("Duteurtre") ||
+        extrait.includes("Livre") ||
+        extrait.includes("2016")
+      ) return;
+
+      let type = classerErreurMessage(e.message);
+
+      groupes[type].push({
+        texte: extrait,
+        message: e.message
+      });
+
+    });
+
+    afficherResultat(groupes, correction);
+
+  });
+}
+
+</script>
+
+</body>
+</html>
