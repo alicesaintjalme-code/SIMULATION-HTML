@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Dictée aménagée Molière</title>
+
+<style>
+body {
+  font-family: Arial;
+  max-width: 900px;
+  margin: auto;
+  line-height: 2.2;
+  font-size: 18px;
+}
+
+.bloc {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  margin: 0 6px;
+}
+
+.choix {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  color: #1e90ff;
+  margin-bottom: 3px;
+  white-space: nowrap;
+}
+
+input {
+  width: 95px;
+  padding: 6px;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.correct { background-color: #c8f7c5; }
+.faux { background-color: #f7c5c5; }
+
+.solution {
+  font-size: 13px;
+  color: red;
+  font-weight: bold;
+}
+
+h2 { text-align: center; }
+</style>
+</head>
+
+<body>
+
+<h2>✏️ Dictée aménagée</h2>
+
+<p>
+
+Le devoir de la comédie étant de 
+<span class="bloc"><span class="choix">corriger / corrigé / corrigée</span><input id="q1"><span id="s1" class="solution"></span></span>
+les hommes en les divertissant, j’ai 
+<span class="bloc"><span class="choix">crus / cru / crue</span><input id="q2"><span id="s2" class="solution"></span></span>
+que, dans l’
+<span class="bloc"><span class="choix">emplois / emploi / emploie</span><input id="q3"><span id="s3" class="solution"></span></span>
+où je me 
+<span class="bloc"><span class="choix">trouvent / trouve / trouves</span><input id="q4"><span id="s4" class="solution"></span></span>,
+je n’avais rien de mieux à faire que d’attaquer par des peintures ridicules les vices de mon siècle.<br><br>
+
+Comme l’hypocrisie, sans doute, en 
+<span class="bloc"><span class="choix">est / es / ai</span><input id="q5"><span id="s5" class="solution"></span></span>
+un des plus en usage, des plus incommodes et des plus dangereux, j’avais eu, Sire, la 
+<span class="bloc"><span class="choix">penser / pensé / pensée</span><input id="q6"><span id="s6" class="solution"></span></span>
+que je ne 
+<span class="bloc"><span class="choix">rendrais / rendrait / rendrai</span><input id="q7"><span id="s7" class="solution"></span></span>
+pas un petit service à tous les honnêtes gens de votre royaume,<br><br>
+
+si je faisais une comédie qui décrie les hypocrites, et mette en 
+<span class="bloc"><span class="choix">vue / vus / vu</span><input id="q8"><span id="s8" class="solution"></span></span>,
+comme il faut, toutes les grimaces 
+<span class="bloc"><span class="choix">étudiées / étudiés / étudié</span><input id="q9"><span id="s9" class="solution"></span></span>
+de 
+<span class="bloc"><span class="choix">c’est / ces / ses</span><input id="q10"><span id="s10" class="solution"></span></span>
+gens de bien à outrance, toutes les friponneries.<br><br>
+
+<i>D’après Molière</i>
+
+</p>
+
+<button onclick="corriger()">Corriger</button>
+<button onclick="recommencer()">Recommencer</button>
+
+<h3 id="resultat"></h3>
+
+<script>
+
+let reponses = {
+  q1: "corriger",
+  q2: "cru",
+  q3: "emploi",
+  q4: "trouve",
+  q5: "est",
+  q6: "pensée",
+  q7: "rendrais",
+  q8: "vue",
+  q9: "étudiées",
+  q10: "ces"
+};
+
+function nettoyer(txt) {
+  return txt.toLowerCase().replace(/’/g,"'").replace(/\s+/g," ").trim();
+}
+
+function corriger() {
+  let score = 0;
+  let total = Object.keys(reponses).length;
+
+  for (let q in reponses) {
+    let input = document.getElementById(q);
+    let sol = document.getElementById("s" + q.substring(1));
+
+    let val = nettoyer(input.value);
+    let attendu = nettoyer(reponses[q]);
+
+    if (val === attendu) {
+      input.className = "correct";
+      sol.innerHTML = "";
+      score++;
+    } else {
+      input.className = "faux";
+      sol.innerHTML = "<span style='color:red'>✔ " + reponses[q] + "</span>";
+    }
+  }
+
+  document.getElementById("resultat").innerHTML =
+    "📝 Score : " + score + " / " + total;
+}
+
+function recommencer() {
+  for (let q in reponses) {
+    document.getElementById(q).value = "";
+    document.getElementById(q).className = "";
+    document.getElementById("s" + q.substring(1)).innerHTML = "";
+  }
+  document.getElementById("resultat").innerHTML = "";
+}
+
+</script>
+
+</body>
+</html>
