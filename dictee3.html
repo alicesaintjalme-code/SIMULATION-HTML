@@ -82,9 +82,8 @@ button {
 <script>
 
 // 🔥 TEXTE OFFICIEL EXACT
-let texteOfficiel = `Le devoir de la comédie étant de corriger les hommes en les divertissant, j’ai cru que, dans l’emploi où je me trouve, je n’avais rien de mieux à faire que d’attaquer par des peintures ridicules les vices de mon siècle. Comme l’hypocrisie, sans doute, en est un des plus en usage, des plus incommodes et des plus dangereux, j’avais eu, Sire, la pensée que je ne rendrais pas un petit service à tous les honnêtes gens de votre royaume, si je faisais une comédie qui décrie les hypocrites, et mette en vue, comme il faut, toutes les grimaces étudiées de ces gens de bien à outrance, toutes les friponneries. D’après Molière, Premier placet au roi, sur la comédie du Tartuffe.`;
-
-// 🔥 REGEX accents + apostrophes
+let texteOfficiel = `Le devoir de la comédie étant de corriger les hommes en les divertissant, j’ai cru que, dans l’emploi où je me trouve, je n’avais rien de mieux à faire que d’attaquer par des peintures ridicules les vices de mon siècle. Comme l’hypocrisie, sans doute, en est un des plus en usage, des plus incommodes et des plus dangereux, j’avais eu, Sire, la pensée que je ne rendrais pas un petit service à tous les honnêtes gens de votre royaume, si je faisais une comédie qui décrie les hypocrites, et mette en vue, comme il faut, toutes les grimaces étudiées de ces gens de bien à outrance, toutes les friponneries. D’après Molière, Premier placet au roi, sur la comédie du Tartuffe.`;
+  // 🔥 REGEX accents + apostrophes
 const REGEX = /[\p{L}]+(?:['’][\p{L}]+)?|[.,;:!?]/gu;
 
 // 🔹 labels
