@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Défi Table de 3 - Abdallah Ouertani</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #74b9ff, #dfe6e9);
+    margin:0;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 0 15px rgba(0,0,0,0.15);
+}
+
+h1{
+    color:#2d3436;
+}
+
+.nom{
+    font-size:24px;
+    font-weight:bold;
+    color:#0984e3;
+    margin-bottom:15px;
+}
+
+.zone-question{
+    margin-top:30px;
+    font-size:40px;
+    font-weight:bold;
+    color:#2c3e50;
+}
+
+input{
+    margin-top:20px;
+    padding:12px;
+    width:120px;
+    font-size:28px;
+    text-align:center;
+    border-radius:10px;
+    border:2px solid #ccc;
+}
+
+button{
+    margin-top:20px;
+    padding:12px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:#00b894;
+    color:white;
+}
+
+button:hover{
+    background:#019875;
+}
+
+.resultat{
+    margin-top:20px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.score{
+    margin-top:20px;
+    font-size:22px;
+}
+
+.vies{
+    margin-top:15px;
+    font-size:30px;
+}
+
+.timer{
+    margin-top:15px;
+    font-size:24px;
+    color:#d63031;
+    font-weight:bold;
+}
+
+.fin{
+    margin-top:30px;
+    font-size:30px;
+    color:#0984e3;
+    font-weight:bold;
+}
+
+.barre{
+    width:100%;
+    background:#dfe6e9;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:20px;
+    height:25px;
+}
+
+.progression{
+    height:100%;
+    width:0%;
+    background:#00b894;
+    transition:0.4s;
+}
+
+#btnRecommencer{
+    display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🏆 Défi Table de 3</h1>
+
+<div class="nom">
+Abdallah Ouertani
+</div>
+
+<p>Réponds aux multiplications de la table de 3 avant la fin du temps !</p>
+
+<div class="timer">
+⏳ Temps : <span id="temps">180</span>s
+</div>
+
+<div class="vies" id="vies">
+❤️ ❤️ ❤️
+</div>
+
+<div class="barre">
+<div class="progression" id="progression"></div>
+</div>
+
+<div class="zone-question" id="question">
+3 × 4
+</div>
+
+<input type="number" id="reponse" placeholder="?">
+
+<br>
+
+<button onclick="verifier()">Valider</button>
+
+<br>
+
+<button id="btnRecommencer" onclick="recommencer()">
+Recommencer
+</button>
+
+<div class="resultat" id="resultat"></div>
+
+<div class="score">
+⭐ Score : <span id="score">0</span>
+</div>
+
+<div class="fin" id="fin"></div>
+
+</div>
+
+<script>
+
+let a;
+let bonneReponse;
+
+let score = 0;
+let vies = 3;
+let questions = 0;
+
+let temps = 180;
+
+function nouvelleQuestion(){
+
+    a = Math.floor(Math.random()*10)+1;
+
+    bonneReponse = 3 * a;
+
+    document.getElementById("question").innerHTML =
+    "3 × " + a;
+
+    document.getElementById("reponse").value = "";
+
+    let pourcentage = (questions/20)*100;
+
+    if(pourcentage > 100){
+        pourcentage = 100;
+    }
+
+    document.getElementById("progression").style.width =
+    pourcentage + "%";
+}
+
+function verifier(){
+
+    let rep = parseInt(document.getElementById("reponse").value);
+
+    if(isNaN(rep)){
+        return;
+    }
+
+    if(rep === bonneReponse){
+
+        document.getElementById("resultat").innerHTML =
+        "✅ Bravo !";
+
+        document.getElementById("resultat").style.color =
+        "green";
+
+        score++;
+
+    }else{
+
+        vies--;
+
+        document.getElementById("resultat").innerHTML =
+        "❌ Faux ! Réponse : " + bonneReponse;
+
+        document.getElementById("resultat").style.color =
+        "red";
+
+        afficherVies();
+    }
+
+    questions++;
+
+    document.getElementById("score").innerHTML = score;
+
+    if(vies <= 0){
+
+        finJeu("💀 Game Over !");
+        return;
+    }
+
+    nouvelleQuestion();
+}
+
+function afficherVies(){
+
+    let affichage = "";
+
+    for(let i=0;i<vies;i++){
+        affichage += "❤️ ";
+    }
+
+    for(let i=vies;i<3;i++){
+        affichage += "🖤 ";
+    }
+
+    document.getElementById("vies").innerHTML = affichage;
+}
+
+function finJeu(message){
+
+    document.getElementById("question").innerHTML = "";
+
+    document.getElementById("fin").innerHTML =
+    message + "<br>⭐ Score final : " + score;
+
+    document.getElementById("resultat").innerHTML = "";
+
+    document.getElementById("progression").style.width = "100%";
+
+    document.getElementById("btnRecommencer").style.display =
+    "inline-block";
+}
+
+function compteARebours(){
+
+    let chrono = setInterval(function(){
+
+        temps--;
+
+        document.getElementById("temps").innerHTML = temps;
+
+        if(temps <= 0){
+
+            clearInterval(chrono);
+
+            finJeu("⏰ Temps écoulé !");
+        }
+
+    },1000);
+}
+
+function recommencer(){
+
+    location.reload();
+
+}
+
+afficherVies();
+
+nouvelleQuestion();
+
+compteARebours();
+
+</script>
+
+</body>
+</html>
